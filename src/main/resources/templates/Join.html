@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="KIMAH"/>
+    <meta name="description" content="SpringBoot Thymeleaf">
+    <title>Spring Boot Test</title>
+</head>
+<body>
+<form action="hJoin" method="POST" enctype="multipart/form-data">
+
+    <table>
+        <caption>회원가입</caption>
+        <tr>
+            <th>이름</th>
+            <td><input type="text" name="Hname"/></td>
+        </tr>
+
+        <tr>
+            <th>아이디</th>
+            <td><input type="text" name="Hid" id="Hid" onkeyup="idOverlap()"/>
+                <span id="confirmId"></span></td>
+
+        </tr>
+
+
+        <tr>
+            <th>패스워드</th>
+            <td><input type="password" name="Hpw" id="Hpw" onkeyup="pwCheck()"/>
+                <span class="section_pw_check_text"></span>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>Password Confirm</th>
+            <td><input type="password" name="Hpw" required id="pwConfirm" onkeyup="pwEqual()">
+                <span class="section_pw_check_text"></span></td>
+        </tr>
+
+        <tr>
+            <th>이메일</th>
+            <td>
+                <input type="email" name="Hemail" id="Hemail"/>
+                <span id="emailConfirmText"><input type="button" value="인증" onclick="confirmEmail()"/></span>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>나이</th>
+            <td><input type="text" name="Hage"/></td>
+        </tr>
+
+        <tr>
+            <th>키</th>
+            <td><input type="text" name="Hheight"/></td>
+        </tr>
+
+        <tr>
+            <th>몸무게</th>
+            <td><input type="text" name="Hweight"/></td>
+        </tr>
+
+        <tr>
+            <th>성별</th>
+            <td>
+                <input type="radio" name="Hgender" value="m">남
+                <input type="radio" name="Hgender" value="w">여
+            </td>
+        </tr>
+
+        <tr>
+            <th>전화번호</th>
+            <td><input type="text" name="Hphone"/></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><input type="submit" value="가입"></td>
+        </tr>
+
+    </table>
+</form>
+
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+    //아이디 중복체크
+    function idOverlap() {
+        let idCheck = document.getElementById("Hid").value;
+        let confirmMId = document.getElementById("confirmMId");
+        let idPass = false;
+
+        $.ajax({
+            type: "POST",
+            url: "A_idOverlap",
+            data: {"Hid": idCheck},
+            async: false,
+            dataType: "text",
+            success: function (data) {
+                // 성공시
+                if (data == "OK") {
+                    confirmId.style.color = "#0000ff";
+                    confirmId.innerHTML = "사용 가능한 아이디";
+                    idPass = true;
+
+                } else {
+                    confirmId.style.color = "#ff0000";
+                    confirmId.innerHTML = "사용 불가능한 아이디";
+                    idPass = false;
+                }
+            },
+            error: function () {
+                // 실패시
+                alert("idOverlap함수 통신실패")
+            }
+        });
+        return idPass;
+    }
+
+    //비밀번호 정규식
+    let pw = document.getElementById("Hpw");
+    let pwTxt = document.getElementsByClassName("section_pw_check_text");
+
+
+    function pwCheck() {
+        let pw1 = pw.value;
+        let pattern1 = /[0-9]/;
+        let pattern2 = /[a-zA-Z]/;
+        let pattern3 = /[~!@\#$%<>^&*]/;
+        let pwSecurityCheck = false;
+
+        if (!pattern1.test(pw1) || !pattern2.test(pw1) || !pattern3.test(pw1) || pw1.length < 6) {
+            pwTxt[0].innerHTML = '영문, 숫자, 특수문자를 포함한 6자리이상의 비밀번호를 입력해 주세요';
+            pwTxt[0].style.color = 'red';
+            pwSecurityCheck = false;
+        } else {
+            pwTxt[0].innerHTML = '안전한 비밀번호 입니다';
+            pwTxt[0].style.color = 'green';
+            pwSecurityCheck = true;
+        }
+
+        return [pw1, pwSecurityCheck];
+    }
+
+
+    // 비밀번호 확인
+    let pwC = document.getElementById("pwConfirm");
+
+    function pwEqual() {
+        let pw1 = pw.value;
+        let pw2 = pwC.value;
+        let pwEqualCheck = false;
+
+        if (pw1 !== pw2 || pw2.length == 0) {
+            pwTxt[1].innerHTML = '비밀번호가 같지 않습니다';
+            pwTxt[1].style.color = 'red';
+            pwEqualCheck = false;
+        } else {
+            pwTxt[1].innerHTML = '비밀번호가 같습니다';
+            pwTxt[1].style.color = 'green';
+            pwEqualCheck = true;
+        }
+
+        return [pw2, pwEqualCheck];
+    }
+
+    function check() {
+        let [pw1, pwSecurityCheck] = pwCheck();
+        let [pw2, pwEqualCheck] = pwEqual();
+        console.log(`pw1`);
+        console.log(`pw2`);
+        if (pw1 === pw2) {
+            section_form_name.submit();
+        } else if (pwSecurityCheck == false) {
+            document.getElementById('pw').focus();
+        } else if (pwEqualCheck == false) {
+            document.getElementById('pwConfirm').focus();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+</script>
+
+</html>
