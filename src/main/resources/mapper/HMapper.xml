@@ -19,4 +19,8 @@
         SELECT * FROM HUMAN
     </select>
 
+    <select id="hView" parameterType="String" resultType="human">
+        SELECT * FROM HUMAN WHERE HID=#{Hid}
+    </select>
+
 </mapper>

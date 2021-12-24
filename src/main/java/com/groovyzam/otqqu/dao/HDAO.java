@@ -14,4 +14,6 @@ public interface HDAO {
     int hJoin(HDTO human);
 
     String idOverlap(String hid);
+
+    HDTO hView(String hid);
 }

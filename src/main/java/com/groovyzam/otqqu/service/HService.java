@@ -94,5 +94,15 @@ public class HService {
     }
 
 
+    public ModelAndView hView(String Hid) {
+        HDTO human = hdao.hView(Hid);
 
+        if(human !=null ){
+            mav.addObject("member",human);
+            mav.setViewName("Mview");
+        }else{
+            mav.setViewName("redirect:/hList");
+        }
+        return mav;
+    }
 }

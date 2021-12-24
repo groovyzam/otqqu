@@ -80,4 +80,11 @@ public class HController {
         return mav;
     }
 
+    // hView : 내 정보보기(회원)
+    @RequestMapping(value="hView", method = RequestMethod.GET)
+    public ModelAndView hView(@RequestParam("Hid") String Hid){
+        mav = hsvc.hView(Hid);
+        return mav;
+    }
+
 }
