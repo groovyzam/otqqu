@@ -16,5 +16,4 @@ public class HDTO {
     private String Hweight;
     private String Hgender;
     private String Hphone;
-
 }

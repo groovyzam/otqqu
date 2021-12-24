@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE-edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="inception"/>
+    <meta name="description" content="페이지 설명"/>
+    <title>회원목록</title>
+
+</head>
+<body>
+
+
+<table>
+    <caption>회원 목록</caption>
+    <thead>
+    <tr>
+        <th>회원번호</th>
+        <th>이름</th>
+        <th>아이디</th>
+        <th>이메일</th>
+        <th>삭제</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="list : ${humanList}">
+        <td th:text="${list.Hnum}">회원번호</td>
+        <td th:text="${list.Hname}">이름</td>
+        <td><a th:text="${list.Hid}" th:href="@{hView(Hid=${list.Hid}, hName=${list.Hname})}"></a></td>
+        <td th:text="${list.Hemail}">이메일</td>
+        <td><a th:href="@{hDelete(Hid=${list.Hid})}" th:text="X"></a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
