@@ -4,15 +4,15 @@
 
 <mapper namespace="com.groovyzam.otqqu.dao.HDAO">
     <insert id="hJoin" parameterType="human">
-        INSERT INTO HUMAN VALUES (HUMAN_SEQ.NEXTVAL,#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone})
+        INSERT INTO HUMAN VALUES (HUMAN_SEQ.NEXTVAL,#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},Null)
     </insert>
 
     <select id="idOverlap" parameterType="String" resultType="String" >
         SELECT HID FROM HUMAN WHERE HID = #{Hid}
     </select>
 
-    <select id="hLogin" parameterType="human" resultType="String">
-        SELECT HID FROM HUMAN WHERE HID=#{Hid} AND HPW=#{Hpw}
+    <select id="hLogin" parameterType="human" resultType="human">
+        SELECT * FROM HUMAN WHERE HID=#{Hid}
     </select>
 
     <select id="hList" resultType="human">

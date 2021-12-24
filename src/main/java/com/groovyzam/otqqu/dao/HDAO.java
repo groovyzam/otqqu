@@ -9,7 +9,7 @@ import java.util.List;
 public interface HDAO {
     List<HDTO> hList();
 
-    String hLogin(HDTO human);
+    HDTO hLogin(HDTO human);
 
     int hJoin(HDTO human);
 

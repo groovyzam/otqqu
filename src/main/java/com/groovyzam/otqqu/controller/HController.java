@@ -21,21 +21,21 @@ public class HController {
     private ModelAndView mav = new ModelAndView();
 
     // Main : 메인페이지
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Main() {
 
         return "Main";
     }
 
     // hjoinForm : 회원가입 페이지로 이동
-    @RequestMapping(value="hjoinForm", method = RequestMethod.GET)
+    @RequestMapping(value="/hjoinForm", method = RequestMethod.GET)
     public String hjoinForm(){
         return "Join";
     }
 
 
     // hJoin : 회원가입
-    @RequestMapping(value="hJoin", method = RequestMethod.POST)
+    @RequestMapping(value="/hJoin", method = RequestMethod.POST)
     public ModelAndView hJoin(@ModelAttribute HDTO human){
 
         mav = hsvc.hJoin(human);
@@ -54,7 +54,7 @@ public class HController {
     }
 
     // Hlogin : 로그인 페이지로 이동
-    @RequestMapping(value = "hLogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/hLoginForm", method = RequestMethod.GET)
     public String Hlogin() {
 
         return "Login";
@@ -62,7 +62,7 @@ public class HController {
     }
 
     // hLogin : 로그인
-    @RequestMapping(value = "hLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/hLogin", method = RequestMethod.POST)
     public ModelAndView mLogin(@ModelAttribute HDTO human) {
 
 
@@ -72,7 +72,7 @@ public class HController {
     }
 
     // hList : 관리자용 회원목록
-    @RequestMapping(value = "hList", method = RequestMethod.GET)
+    @RequestMapping(value = "/hList", method = RequestMethod.GET)
     public ModelAndView hList() {
 
         mav = hsvc.hList();
