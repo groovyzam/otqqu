@@ -65,5 +65,13 @@ public class HController {
 
         return result;
     }
+
+    // hList : 관리자용 회원목록
+    @RequestMapping(value = "hList", method = RequestMethod.GET)
+    public ModelAndView hList() {
+
+        return mav;
+    }
+
 }
 
