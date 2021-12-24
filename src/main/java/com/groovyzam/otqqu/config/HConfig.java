@@ -1,4 +1,4 @@
-package com.groovyzam.otqqu.controller.config;
+package com.groovyzam.otqqu.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class HConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public PasswordEncoder getPasswordEncoder(){
+    public PasswordEncoder getPasswordEncoder() {
+
         return new BCryptPasswordEncoder();
     }
 
