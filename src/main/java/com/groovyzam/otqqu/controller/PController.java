@@ -46,7 +46,6 @@ public class PController {
     @RequestMapping(value = "pUpload3", method = RequestMethod.POST)
     @ResponseBody
     public String pUpload2(ProductDTO productDTO) throws IOException {
-        System.out.println(productDTO.getList().get(0));
         return null;
     }
 
