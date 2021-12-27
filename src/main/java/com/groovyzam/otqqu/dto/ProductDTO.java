@@ -17,4 +17,5 @@ public class ProductDTO {
     private int Pprice;
     private MultipartFile PproductFile;
     private String PproductFileName;
+
 }
