@@ -8,6 +8,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,10 @@ import java.util.List;
 
 @Service
 public class HService {
+
+
+    private ModelAndView mav = new ModelAndView();
+
 
     @Autowired
     private HDAO hdao;
@@ -32,26 +38,23 @@ public class HService {
     @Autowired
     private JavaMailSender mailSender;
 
-    private ModelAndView mav = new ModelAndView();
-
 
     // 회원가입
     public ModelAndView hJoin(HDTO human) {
-        System.out.println("암호화전 비밀번호 : " + human.getHpw());
 
         human.setHpw(pwEnc.encode(human.getHpw()));
 
-        System.out.println("암호화 후 비밀번호 : " + human.getHpw());
 
         int result = hdao.hJoin(human);
 
         if(result>0){
             //성공
-            mav.setViewName("Main");
+            mav.setViewName("Login");
         }else{
             //실패
             mav.setViewName("Join");
         }
+
 
         return mav;
     }
@@ -72,17 +75,18 @@ public class HService {
 
     // 로그인
     public ModelAndView hLogin(HDTO human) {
-        String loginId = hdao.hLogin(human);
+        HDTO secu1 = hdao.hLogin(human);
+        // pwEnc.matches() 타입은 boolean => true or false
+        if(human.getHpw().equals(secu1.getHpw())){
+            System.out.println("비밀번호 일치!");
+            session.setAttribute("Hid", human.getHid());
 
-        if(loginId!=null) {
-            // 성공
-            session.setAttribute("loginId",loginId);
-            mav.setViewName("Main");
         } else {
-            // 실패
-            mav.setViewName("Login");
+            System.out.println("비밀번호 불일치");
+            System.out.println(human.getHpw());
+            System.out.println(secu1.getHpw());
         }
-
+        mav.setViewName("Main");
         return mav;
     }
 

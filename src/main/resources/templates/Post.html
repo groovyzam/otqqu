@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <title>test</title>
+</head>
+
+
+<body>
+
+<form action="pUpload2" method="POST" enctype="multipart/form-data">
+
+    <table>
+
+        <caption>게시글 등록</caption>
+
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="Ptitle" placeholder="제목"></td>
+        </tr>
+        <tr>
+            <td>내용</td>
+            <td><input type="text" name="Pcontent" placeholder="내용"></td>
+        </tr>
+
+        <tr>
+            <td>첨부 파일</td>
+            <td><input type="file" name="Pfile"></td>
+        </tr>
+        <tr>
+            <td>스타일</td>
+            <td><select name="Pstyle">
+                <option value="casual">캐주얼</option>
+                <option value="street">스트릿</option>
+                <option value="minimal">미니멀</option>
+                <option value="vintage">빈티지</option>
+                <option value="classic">클래식</option>
+                <option value="classic">클래식</option>
+                <option value="other">기타</option>
+
+            </select></td>
+        </tr>
+
+    </table>
+
+</form>
+
+<form action="pUpload3" method="POST">
+    <table id="mytable" border="1" cellspacing="0">
+        <thead>
+        <tr>
+            <th>상품 사진</th>
+            <th>카테고리</th>
+            <th>브랜드</th>
+            <th>상품명</th>
+            <th>상품 가격</th>
+            <th>상품 사진 업로드</th>
+
+        </tr>
+        </thead>
+        <tbody></tbody>
+
+        <tr>
+            <td>
+
+
+            </td>
+
+        </tr>
+
+    </table>
+    <input type="submit" value="등록">
+
+
+    <button id='btn-add-row'>+</button>
+    <button id='btn-delete-row'>-</button>
+</form>
+
+</body>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script type="text/javascript">
+
+
+    $('#btn-add-row').click(function () {
+
+
+        $('#mytable > tbody:last').append('<tr><td>' +
+            '  <div><img src="Cfile" width="100px;"></div> ' + '</td><td>' +
+            '<select name="Pcategory">\n' +
+            '            <option value="cap">모자</option>\n' +
+            '            <option value="outer">아우터</option>\n' +
+            '            <option value="top">상의</option>\n' +
+
+            '            <option value="bottom">하의</option>\n' +
+            '            <option value="shoes">신발</option>\n' +
+            '            <option value="accessories">악세서리</option>\n' +
+            '</td><td>' + '<input type="text" name="Pbrand" placeholder="브랜드">' + '</td>' +
+            '</td><td>' + '<input type="text" name="PproductName" placeholder="상품명">' + '</td>' +
+            '</td><td>' + '<input type="text" name="Pprice" placeholder="상품 가격">' + '</td>' +
+            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td></tr>' +
+            '');
+    });
+    $('#btn-delete-row').click(function () {
+        $('#mytable > tbody > tr:last').remove();
+
+    });
+
+
+</script>
+</html>
