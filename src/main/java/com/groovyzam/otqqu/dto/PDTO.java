@@ -20,11 +20,4 @@ public class PDTO {
     private String PfileName;
 
 
-    private String Pcategory;
-    private String Pbrand;
-    private String PproductName;
-    private int Pprice;
-    private MultipartFile PproductFile;
-    private String PproductFileName;
-
 }
