@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -22,9 +23,14 @@ public class PService {
 
     ModelAndView mav = new ModelAndView();
 
+    @Autowired
+    private HttpSession session;
+
 
     public ModelAndView pUpload(PDTO post, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<String> pprice, List<MultipartFile> pproductFile) throws IOException {
 
+
+        post.setHnum((Integer) session.getAttribute("loginHnum"));
         int result2 = 0;
 
         MultipartFile Pfile = post.getPfile();

@@ -79,13 +79,15 @@ public class HService {
 
         HDTO secu1 = hdao.hLogin(human);
 
+
+
         // pwEnc.matches() 타입은 boolean => true or false
         if(pwEnc.matches(human.getHpw(), secu1.getHpw())){
             System.out.println("비밀번호 일치!");
             mav.setViewName("Main");
 
-
-
+            session.setAttribute("loginId", secu1.getHid());
+            session.setAttribute("loginHnum", secu1.getHnum());
 
         } else {
             System.out.println("비밀번호 불일치");

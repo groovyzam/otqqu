@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +21,8 @@ public class PController {
 
     @Autowired
     private PService psvc;
+    @Autowired
+    private HttpSession session;
 
     //pUpload
 
@@ -33,6 +36,8 @@ public class PController {
             , @RequestParam(value = "PproductFile", required = true) List<MultipartFile> PproductFile
 
     ) throws IOException{
+
+
         mav=psvc.pUpload(pdto,Pcategory,Pbrand,PproductName,Pprice,PproductFile);
 
         return mav;
