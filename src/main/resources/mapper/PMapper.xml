@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.groovyzam.otqqu.dao.PDAO">
+
+
+    <insert id="PostUpload" parameterType="post">
+        INSERT INTO POST VALUES (POST_SEQ.NEXTVAL,1,#{Ptitle},#{Pcontent},#{Pstyle},#{Pup},#{PfileName})
+    </insert>
+
+    <insert id="ProductUpload" parameterType="product">
+        INSERT INTO ${Pcategory} VALUES (POST_SEQ.CURRVAL,#{Pbrand},#{PproductName},#{Pprice},#{PproductFileName})
+
+    </insert>
+
+</mapper>
