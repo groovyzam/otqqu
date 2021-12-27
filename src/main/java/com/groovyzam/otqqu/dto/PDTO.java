@@ -1,0 +1,30 @@
+package com.groovyzam.otqqu.dto;
+
+
+import lombok.Data;
+import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
+@Data
+@Alias("post")
+public class PDTO {
+    private int Pnum;
+    private int Hnum;
+    private String Ptitle;
+    private String Pcontent;
+    private String Pstyle;
+    private int Pup;
+    private MultipartFile Pfile;
+    private String PfileName;
+
+
+    private String Pcategory;
+    private String Pbrand;
+    private String PproductName;
+    private int Pprice;
+    private MultipartFile PproductFile;
+    private String PproductFileName;
+
+}

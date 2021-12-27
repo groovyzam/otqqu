@@ -1,6 +1,7 @@
 package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.HDTO;
+import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.service.HService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +32,12 @@ public class HController {
     @RequestMapping(value="/hjoinForm", method = RequestMethod.GET)
     public String hjoinForm(){
         return "Join";
+    }
+
+    // PostForm : 게시글 등록 페이지로 이동
+    @RequestMapping(value="/PostForm", method = RequestMethod.GET)
+    public String PostForm(){
+        return "Post";
     }
 
 
