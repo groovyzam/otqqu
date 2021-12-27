@@ -22,6 +22,7 @@ public class PController {
     private PService psvc;
 
     //pUpload
+
     @ResponseBody
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
     public ModelAndView pUpload(@ModelAttribute PDTO pdto,
@@ -32,7 +33,6 @@ public class PController {
             , @RequestParam(value = "PproductFile", required = true) List<MultipartFile> PproductFile
 
     ) throws IOException{
-        System.out.println("asdf");
         mav=psvc.pUpload(pdto,Pcategory,Pbrand,PproductName,Pprice,PproductFile);
 
         return mav;

@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -87,7 +88,6 @@ public class HController {
 
         return mav;
     }
-
 
     @RequestMapping(value = "img")
     public ModelAndView getImg(@RequestParam("PIMG") String PIMG){

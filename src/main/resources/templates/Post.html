@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Security & Java Mail Sender" />
     <title>test</title>
 </head>
 
+<style>
 
+.u_file{
+
+
+}
+
+</style>
 <body>
 
 <form action="pUpload" method="POST" enctype="multipart/form-data">
@@ -27,8 +35,16 @@
         </tr>
 
         <tr>
+
+        <div id="imgViewArea" style="margin-top:10px; display:none;">
+            <img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
+        </div>
+
+        </tr>
+
+        <tr>
             <td>첨부 파일</td>
-            <td><input type="file" name="Pfile"></td>
+            <td><input type="file" name="Pfile" id="u_file" accept="image/*"></td>
         </tr>
         <tr>
             <td>스타일</td>
@@ -105,5 +121,34 @@
         $('#mytable > tbody > tr:last').remove();
 
     });
+</script>
+
+
+<!-- 이미지 미리보기 영역 -->
+
+<script type="text/javascript">
+    // 콘텐츠 수정 :: 사진 수정 시 이미지 미리보기
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#imgArea').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(":input[name='Pfile']").change(function() {
+        if( $(":input[name='Pfile']").val() == '' ) {
+            $('#imgArea').attr('src' , '');
+        }
+        $('#imgViewArea').css({ 'display' : '' });
+        readURL(this);
+    });
+
+    // 이미지 에러 시 미리보기영역 미노출
+    function imgAreaError(){
+        $('#imgViewArea').css({ 'display' : 'none' });
+    }
 </script>
 </html>

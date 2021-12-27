@@ -9,6 +9,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -73,6 +74,9 @@ public class HService {
 
     // 로그인
     public ModelAndView hLogin(HDTO human) {
+
+        BCryptPasswordEncoder en = new BCryptPasswordEncoder();
+
         HDTO secu1 = hdao.hLogin(human);
 
         // pwEnc.matches() 타입은 boolean => true or false

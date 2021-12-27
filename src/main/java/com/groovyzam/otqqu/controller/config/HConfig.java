@@ -1,4 +1,4 @@
-package com.groovyzam.otqqu.config;
+package com.groovyzam.otqqu.controller.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
