@@ -21,17 +21,19 @@ public class PController {
     private PService psvc;
 
     //pUpload
+
     @ResponseBody
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
-    public ModelAndView pUpload(@ModelAttribute PDTO pdto, @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
+    public ModelAndView pUpload(@ModelAttribute PDTO pdto,
+              @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
             , @RequestParam(value = "Pprice", required = true) List<String> Pprice
             , @RequestParam(value = "PproductFile", required = true) List<MultipartFile> PproductFile
 
-    ) throws IOException {
-
+    ) throws IOException{
         mav=psvc.pUpload(pdto,Pcategory,Pbrand,PproductName,Pprice,PproductFile);
+
         return mav;
     }
 
