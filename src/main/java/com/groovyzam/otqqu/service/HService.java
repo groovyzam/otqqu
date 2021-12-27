@@ -2,6 +2,11 @@ package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.HDAO;
 import com.groovyzam.otqqu.dto.HDTO;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -94,5 +100,35 @@ public class HService {
     }
 
 
+    public ModelAndView PostProductImg(String PIMG) {
+        String URL = "https://www.google.com/search?q="+PIMG+"&source=lnms&tbm=isch";
 
+        Connection conn = Jsoup.connect(URL);
+
+        try {
+            Document html = conn.get();
+
+            System.out.println("Attribute 탐색");
+            Elements link = html.getElementsByTag("img");
+
+            int i=0,j=0;
+
+            for (Element e : link) {
+                if(e.attr("data-src") != ""){
+                    System.out.println(e.attr("data-src"));
+                    mav.addObject("Img"+j, e.attr("data-src"));
+                    j++;
+                }
+                i++;
+                if(j==3){
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        mav.setViewName("img");
+        return mav;
+    }
 }
