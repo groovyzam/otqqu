@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -20,11 +21,32 @@ public class PController {
 
     @Autowired
     private PService psvc;
+
     @Autowired
     private HttpSession session;
 
-    //pUpload
+    // PostForm : 게시글 등록 페이지로 이동
+    @RequestMapping(value="/PostForm", method = RequestMethod.GET)
+    public String PostForm(){
 
+
+
+        if(session.getAttribute("loginId") == null){
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("<script>");
+            sb.append("alert('로그인 후 이용');");
+            sb.append("history.back();");
+            sb.append("</script>");
+
+            return sb.toString();
+
+        }
+
+        return "Post";
+    }
+
+    //pUpload
     @ResponseBody
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
     public ModelAndView pUpload(@ModelAttribute PDTO pdto,
@@ -34,10 +56,14 @@ public class PController {
             , @RequestParam(value = "Pprice", required = true) List<String> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
 
-    ) throws IOException{
+
+    ) throws IOException {
+        pdto.setHid((String) session.getAttribute("loginId"));
 
 
-        mav=psvc.pUpload(pdto,Pcategory,Pbrand,PproductName,Pprice,PproductFile);
+
+        mav = psvc.pUpload(pdto, Pcategory, Pbrand, PproductName, Pprice, PproductFile);
+
 
         return mav;
     }

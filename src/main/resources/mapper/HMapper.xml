@@ -4,6 +4,7 @@
 
 <mapper namespace="com.groovyzam.otqqu.dao.HDAO">
 
+
     <!--회원가입-->
     <insert id="hJoin" parameterType="human">
         INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},#{Hfile})

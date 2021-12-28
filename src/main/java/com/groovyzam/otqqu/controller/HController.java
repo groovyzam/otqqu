@@ -4,7 +4,6 @@ import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.service.HService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +26,11 @@ public class HController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Main() {
 
+
+        if(session.getAttribute("loginId") == null){
+            return "Login";
+        }
+
         return "Main";
     }
 
@@ -36,11 +40,6 @@ public class HController {
         return "Join";
     }
 
-    // PostForm : 게시글 등록 페이지로 이동
-    @RequestMapping(value="/PostForm", method = RequestMethod.GET)
-    public String PostForm(){
-        return "Post";
-    }
 
 
     // hJoin : 회원가입
@@ -123,7 +122,7 @@ public class HController {
         return mav;
     }
 
-
+    //
     @RequestMapping(value = "img")
     public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
 
