@@ -29,7 +29,7 @@ public class PController {
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
             , @RequestParam(value = "Pprice", required = true) List<String> Pprice
-            , @RequestParam(value = "PproductFile", required = true) List<MultipartFile> PproductFile
+            , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
 
     ) throws IOException{
         mav=psvc.pUpload(pdto,Pcategory,Pbrand,PproductName,Pprice,PproductFile);

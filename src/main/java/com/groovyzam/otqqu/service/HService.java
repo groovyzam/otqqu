@@ -26,7 +26,6 @@ public class HService {
 
     private ModelAndView mav = new ModelAndView();
 
-
     @Autowired
     private HDAO hdao;
 

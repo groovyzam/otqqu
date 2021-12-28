@@ -11,10 +11,10 @@
 
 <style>
 
-.u_file{
+    .u_file{
 
 
-}
+    }
 
 </style>
 <body>
@@ -36,9 +36,9 @@
 
         <tr>
 
-        <div id="imgViewArea" style="margin-top:10px; display:none;">
-            <img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
-        </div>
+            <div id="imgViewArea" style="margin-top:10px; display:none;">
+                <img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
+            </div>
 
         </tr>
 
@@ -51,49 +51,44 @@
             <td><select name="Pstyle">
                 <option value="casual">캐주얼</option>
                 <option value="street">스트릿</option>
-                <option value="minimal">미니멀</option>
                 <option value="vintage">빈티지</option>
-                <option value="classic">클래식</option>
                 <option value="classic">클래식</option>
                 <option value="other">기타</option>
 
             </select></td>
         </tr>
 
-    </table>
 
-</form>
+        <table id="mytable" border="1" cellspacing="0">
+            <thead>
+            <tr>
+                <th>상품 사진</th>
+                <th>카테고리</th>
+                <th>브랜드</th>
+                <th>상품명</th>
+                <th>상품 가격</th>
+                <th>상품 사진 업로드</th>
 
-<form action="pUpload3" method="POST" enctype="multipart/form-data">
-    <table id="mytable" border="1" cellspacing="0">
-        <thead>
-        <tr>
-            <th>상품 사진</th>
-            <th>카테고리</th>
-            <th>브랜드</th>
-            <th>상품명</th>
-            <th>상품 가격</th>
-            <th>상품 사진 업로드</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
 
-        </tr>
-        </thead>
-        <tbody></tbody>
-
-        <tr>
-            <td>
+            <tr>
+                <td>
 
 
-            </td>
+                </td>
 
-        </tr>
-
+            </tr>
+        </table>
     </table>
     <input type="submit" value="등록">
 
-
-    <button id='btn-add-row'>+</button>
-    <button id='btn-delete-row'>-</button>
 </form>
+
+<button id='btn-add-row'>+</button>
+<button id='btn-delete-row'>-</button>
+
 
 </body>
 
@@ -101,13 +96,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
-
+    let imgNum = 0;
 
     $('#btn-add-row').click(function () {
-
+        ++imgNum;
 
         $('#mytable > tbody:last').append('<tr><td>' +
-            '  <div><img src="Cfile" width="100px;"></div> ' + '</td><td>' +
+            '  <div><img src="" width="100px;"></div> ' + '</td><td>' +
             '<select name="Pcategory">\n' +
             '            <option value="cap">모자</option>\n' +
             '            <option value="outer">아우터</option>\n' +
@@ -116,16 +111,26 @@
             '            <option value="bottom">하의</option>\n' +
             '            <option value="shoes">신발</option>\n' +
             '            <option value="accessories">악세서리</option>\n' +
-            '</td><td>' + '<input type="text" name="Pbrand" placeholder="브랜드">' + '</td>' +
-            '</td><td>' + '<input type="text" name="PproductName" placeholder="상품명">' + '</td>' +
+            '</td><td>' + '<input type="text" name="Pbrand" id="Pbrand'+imgNum+'" placeholder="브랜드">' + '</td>' +
+            '</td><td>' + '<input type="text" name="PproductName" id="Pproduct'+imgNum+'" placeholder="상품명">' + '</td>' +
             '</td><td>' + '<input type="text" name="Pprice" placeholder="상품 가격">' + '</td>' +
-            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td></tr>' +
+            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td>' +
+            '<td><button type="button" class="imgBtn" onclick="searchImg(imgNum)">이미지 검색</button></td>' +
+            '</tr>' +
             '');
     });
     $('#btn-delete-row').click(function () {
         $('#mytable > tbody > tr:last').remove();
-
+        imgNum--;
     });
+
+    function searchImg(imgBtnNum) {
+        let imgBtn = document.getElementsByClassName("imgBtn");
+        let Pbrand = document.getElementsByClassName("Pbrand");
+        let Pproduct = document.getElementsByClassName("Pproduct");
+        console.log(imgNum);
+        console.log(imgBtnNum);
+    }
 
 
 </script>
