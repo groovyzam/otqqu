@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="KIMAH"/>
+    <meta name="description" content="SpringBoot Thymeleaf">
+    <title>Img Test</title>
+</head>
+<body>
+    <input type="file" id="u_file" name="u_file" accept="image/*">
+
+    <div id="imgViewArea" style="margin-top:10px; display:none;">
+        <img id="imgArea" style="width:200px; height:100px;"/>
+    </div>
+
+</body>
+<script type="text/javascript" src="src/main/resources/static/js/jquery-3.6.0.js" charset="UTF-8"></script>
+<script type="text/javascript">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imgArea').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $(":input[name='u_file']").change(function() {
+            if( $(":input[name='u_file']").val() == '' ) {
+                $('#imgArea').attr('src' , '');
+            }
+            $('#imgViewArea').css({ 'display' : '' });
+            readURL(this);
+        });
+    </script>
+</html>

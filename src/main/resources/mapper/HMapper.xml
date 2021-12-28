@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.groovyzam.otqqu.dao.HDAO">
+
     <!--회원가입-->
     <insert id="hJoin" parameterType="human">
         INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},#{Hfile})
@@ -32,5 +33,6 @@
     <update id="uPdelete" parameterType="human">
         UPDATE HUMAN SET HFILE = #{Hfile} WHERE HID = #{Hid}
     </update>
+
 
 </mapper>

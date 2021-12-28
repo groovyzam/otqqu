@@ -7,7 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -33,6 +34,12 @@ public class HController {
     @RequestMapping(value="/hjoinForm", method = RequestMethod.GET)
     public String hjoinForm(){
         return "Join";
+    }
+
+    // PostForm : 게시글 등록 페이지로 이동
+    @RequestMapping(value="/PostForm", method = RequestMethod.GET)
+    public String PostForm(){
+        return "Post";
     }
 
 
@@ -72,6 +79,14 @@ public class HController {
 
         return mav;
     }
+    // hLogout : 로그아웃
+    @RequestMapping(value="hLogout", method = RequestMethod.GET)
+    public String hLogout(){
+
+        session.invalidate();
+        return "Main";
+    }
+
 
     // hList : 관리자용 회원목록
     @RequestMapping(value = "/hList", method = RequestMethod.GET)
@@ -104,6 +119,15 @@ public class HController {
     public ModelAndView uPdelete(@ModelAttribute HDTO human) throws IOException {
 
         mav = hsvc.uPdelete(human);
+
+        return mav;
+    }
+
+
+    @RequestMapping(value = "img")
+    public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
+
+        mav = hsvc.PostProductImg(PIMG);
 
         return mav;
     }
