@@ -77,6 +77,14 @@ public class HController {
 
         return mav;
     }
+    // hLogout : 로그아웃
+    @RequestMapping(value="hLogout", method = RequestMethod.GET)
+    public String hLogout(){
+
+        session.invalidate();
+        return "Main";
+    }
+
 
     // hList : 관리자용 회원목록
     @RequestMapping(value = "/hList", method = RequestMethod.GET)

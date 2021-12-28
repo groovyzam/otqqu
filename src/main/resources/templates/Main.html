@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>Main</title>
@@ -7,7 +8,11 @@
 <body>
 <button onclick="location.href='hjoinForm'" value="회원가입">회원가입</button>
 
-<button onclick="location.href='hLoginForm'" value="로그인">로그인</button>
+
+<button th:if="${session.loginId eq null}" onclick="location.href='hLoginForm'" value="로그인">로그인</button>
+
+<button th:if="${session.loginId ne null}" onclick="location.href='hLogout'" value="로그아웃">로그아웃</button>
+
 
 <button onclick="location.href='hList'" value="회원목록">회원목록</button>
 
@@ -15,6 +20,14 @@
 
 <button onclick="location.href='img'" > 이미지</button>
 <button onclick="location.href='PostForm'" value="회원목록">게시글 작성</button>
+<<<<<<< HEAD
+=======
+
+
+
+</body>
+
+>>>>>>> 8548c070c358402e93a8a97c3d6f2bd8ed194acb
 
 </body>
 </html>

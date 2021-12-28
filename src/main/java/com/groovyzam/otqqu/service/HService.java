@@ -83,6 +83,10 @@ public class HService {
         if(human.getHpw().equals(secu1.getHpw())){
             System.out.println("비밀번호 일치!");
             session.setAttribute("Hid", human.getHid());
+            mav.setViewName("Main");
+
+            session.setAttribute("loginId", secu1.getHid());
+            session.setAttribute("loginHnum", secu1.getHnum());
 
         } else {
             System.out.println("비밀번호 불일치");

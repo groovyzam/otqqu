@@ -6,7 +6,7 @@
 
 
     <insert id="PostUpload" parameterType="post">
-        INSERT INTO POST VALUES (POST_SEQ.NEXTVAL,1,#{Ptitle},#{Pcontent},#{Pstyle},#{Pup},#{PfileName})
+        INSERT INTO POST VALUES (POST_SEQ.NEXTVAL,#{Hnum},#{Ptitle},#{Pcontent},#{Pstyle},#{Pup},#{PfileName})
     </insert>
 
     <insert id="ProductUpload" parameterType="product">
