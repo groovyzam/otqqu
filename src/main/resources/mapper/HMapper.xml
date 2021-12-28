@@ -4,7 +4,7 @@
 
 <mapper namespace="com.groovyzam.otqqu.dao.HDAO">
 <insert id="hJoin" parameterType="human">
-    INSERT INTO HUMAN VALUES (HUMAN_SEQ.NEXTVAL,#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},Null)
+    INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},Null)
 </insert>
 
 <select id="idOverlap" parameterType="String" resultType="String" >

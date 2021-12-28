@@ -4,6 +4,7 @@ import com.groovyzam.otqqu.dto.HDTO;
 
 import com.groovyzam.otqqu.service.HService;
 
+import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,9 @@ public class HController {
     private HService hsvc;
 
     @Autowired
+    private PService psvc;
+
+    @Autowired
     private HttpSession session;
 
     private ModelAndView mav = new ModelAndView();
@@ -26,6 +30,11 @@ public class HController {
     // Main : 메인페이지
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Main() {
+
+
+        if(session.getAttribute("loginId") == null){
+            return "Login";
+        }
 
         return "Main";
     }
@@ -36,11 +45,6 @@ public class HController {
         return "Join";
     }
 
-    // PostForm : 게시글 등록 페이지로 이동
-    @RequestMapping(value="/PostForm", method = RequestMethod.GET)
-    public String PostForm(){
-        return "Post";
-    }
 
 
     // hJoin : 회원가입

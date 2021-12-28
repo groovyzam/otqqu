@@ -30,7 +30,6 @@ public class PService {
     public ModelAndView pUpload(PDTO post, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<String> pprice, List<MultipartFile> pproductFile) throws IOException {
 
 
-        post.setHnum((Integer) session.getAttribute("loginHnum"));
         int result2 = 0;
 
         MultipartFile Pfile = post.getPfile();
@@ -38,13 +37,12 @@ public class PService {
 
         String uuid = UUID.randomUUID().toString().substring(1, 7);
 
-        // (4) 난수와 파일이름 합치기 : d8nd01_inchoriya.png
         String PfileName = uuid + "_" + originalFileName;
 
-        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo" + PfileName;
+        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
 
 
-        if (Pfile.isEmpty()) {
+        if (!Pfile.isEmpty()) {
             post.setPfileName(PfileName);
             Pfile.transferTo(new File(savePath));
         } else {
@@ -55,22 +53,28 @@ public class PService {
 
         int result1 = pdao.PostUpload(post);
 
+
+        List<MultipartFile> MultiFile = pproductFile;
+
         for (int i = 0; i < pcategory.size(); i++) {
+            
 
             ProductDTO productDTO = new ProductDTO();
 
-            MultipartFile Productfile = pproductFile.get(i);
-            String originalFileName2 = Productfile.getOriginalFilename();
 
-            String uuid2 = UUID.randomUUID().toString().substring(1, 7);
+            String originalFileName2 = MultiFile.get(i).getOriginalFilename();
+
+
+             String uuid2 = UUID.randomUUID().toString().substring(1, 7);
 
             String ProductfileName = uuid2 + "_" + originalFileName2;
 
-            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i) + PfileName;
+            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
 
-            if (Productfile.isEmpty()) {
+            if (!MultiFile.get(i).isEmpty()) {
                 productDTO.setPproductFileName(ProductfileName);
-                Productfile.transferTo(new File(savePath));
+                    MultiFile.get(i).transferTo(new File(savePath2));
+
             } else {
                 productDTO.setPproductFileName("default.png");
             }

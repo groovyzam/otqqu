@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -66,7 +67,7 @@
                 <th>카테고리</th>
                 <th>브랜드</th>
                 <th>상품명</th>
-                <th>상품 가격</th>
+                <th >상품 가격</th>
                 <th>상품 사진 업로드</th>
 
             </tr>
@@ -151,4 +152,10 @@
         $('#imgViewArea').css({ 'display' : 'none' });
     }
 </script>
+<script type="text/javascript">
+    var message = '${msg}';
+    alert(mag);
+</script>
+
+
 </html>
