@@ -98,7 +98,7 @@ public class HController {
         return mav;
 
     }
-    
+
     // uPdelete : 기본프로필로 변경
     @RequestMapping(value="/uPdelete", method = RequestMethod.POST)
     public ModelAndView uPdelete(@ModelAttribute HDTO human) throws IOException {
@@ -107,6 +107,5 @@ public class HController {
 
         return mav;
     }
-
 
 }
