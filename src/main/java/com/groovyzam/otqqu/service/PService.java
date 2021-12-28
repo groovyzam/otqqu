@@ -3,15 +3,24 @@ package com.groovyzam.otqqu.service;
 import com.groovyzam.otqqu.dao.PDAO;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -29,8 +38,6 @@ public class PService {
 
     public ModelAndView pUpload(PDTO post, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<String> pprice, List<MultipartFile> pproductFile) throws IOException {
 
-
-
         int result2 = 0;
 
         MultipartFile Pfile = post.getPfile();
@@ -38,13 +45,12 @@ public class PService {
 
         String uuid = UUID.randomUUID().toString().substring(1, 7);
 
-        // (4) 난수와 파일이름 합치기 : d8nd01_inchoriya.png
         String PfileName = uuid + "_" + originalFileName;
 
-        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo" + PfileName;
+        String savePath = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/photo/" + PfileName;
 
 
-        if (Pfile.isEmpty()) {
+        if (!Pfile.isEmpty()) {
             post.setPfileName(PfileName);
             Pfile.transferTo(new File(savePath));
         } else {
@@ -55,22 +61,28 @@ public class PService {
 
         int result1 = pdao.PostUpload(post);
 
+
+        List<MultipartFile> MultiFile = pproductFile;
+
         for (int i = 0; i < pcategory.size(); i++) {
+            
 
             ProductDTO productDTO = new ProductDTO();
 
-            MultipartFile Productfile = pproductFile.get(i);
-            String originalFileName2 = Productfile.getOriginalFilename();
 
-            String uuid2 = UUID.randomUUID().toString().substring(1, 7);
+            String originalFileName2 = MultiFile.get(i).getOriginalFilename();
+
+
+             String uuid2 = UUID.randomUUID().toString().substring(1, 7);
 
             String ProductfileName = uuid2 + "_" + originalFileName2;
 
-            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i) + PfileName;
+            String savePath2 = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
 
-            if (Productfile.isEmpty()) {
+            if (!MultiFile.get(i).isEmpty()) {
                 productDTO.setPproductFileName(ProductfileName);
-                Productfile.transferTo(new File(savePath));
+                    MultiFile.get(i).transferTo(new File(savePath2));
+
             } else {
                 productDTO.setPproductFileName("default.png");
             }
@@ -96,5 +108,45 @@ public class PService {
 
 
         return mav;
+    }
+
+    public ModelAndView PostProductImg(String PIMG) {
+        ModelAndView mv = new ModelAndView("jsonView");
+        Map map = new HashMap();
+
+        String URL = "https://www.google.com/search?q="+PIMG+"&source=lnms&tbm=isch";
+
+        Connection conn = Jsoup.connect(URL);
+
+        try {
+            Document html = conn.get();
+
+            System.out.println("Attribute 탐색");
+            Elements link = html.getElementsByTag("img");
+
+            int i=0,j=0;
+            String attrKey[] = new String[3];
+
+            for (Element e : link) {
+                if(e.attr("data-src") != ""){
+                    System.out.println(e.attr("data-src"));
+                    attrKey[j] = e.attr("data-src");
+                    map.put("Img"+j+"", attrKey[j]);
+                    j++;
+                }
+                i++;
+                if(j==3){
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        map.put("suc","성공");
+        mv.addAllObjects(map);
+        mv.setViewName("jsonView");
+
+        return mv;
     }
 }

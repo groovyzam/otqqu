@@ -76,15 +76,11 @@ public class HService {
     // 로그인
     public ModelAndView hLogin(HDTO human) {
 
-        BCryptPasswordEncoder en = new BCryptPasswordEncoder();
-
         HDTO secu1 = hdao.hLogin(human);
         // pwEnc.matches() 타입은 boolean => true or false
-        if(human.getHpw().equals(secu1.getHpw())){
+        if(pwEnc.matches(human.getHpw(),secu1.getHpw())){
             System.out.println("비밀번호 일치!");
-            session.setAttribute("Hid", human.getHid());
             mav.setViewName("Main");
-
             session.setAttribute("loginId", secu1.getHid());
 
         } else {
@@ -110,35 +106,5 @@ public class HService {
     }
 
 
-    public ModelAndView PostProductImg(String PIMG) {
-        String URL = "https://www.google.com/search?q="+PIMG+"&source=lnms&tbm=isch";
 
-        Connection conn = Jsoup.connect(URL);
-
-        try {
-            Document html = conn.get();
-
-            System.out.println("Attribute 탐색");
-            Elements link = html.getElementsByTag("img");
-
-            int i=0,j=0;
-
-            for (Element e : link) {
-                if(e.attr("data-src") != ""){
-                    System.out.println(e.attr("data-src"));
-                    mav.addObject("Img"+j, e.attr("data-src"));
-                    j++;
-                }
-                i++;
-                if(j==3){
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        mav.setViewName("img");
-        return mav;
-    }
 }
