@@ -86,7 +86,6 @@ public class HService {
             mav.setViewName("Main");
 
             session.setAttribute("loginId", secu1.getHid());
-            session.setAttribute("loginHnum", secu1.getHnum());
 
         } else {
             System.out.println("비밀번호 불일치");

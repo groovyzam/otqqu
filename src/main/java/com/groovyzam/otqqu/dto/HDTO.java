@@ -6,7 +6,6 @@ import org.apache.ibatis.type.Alias;
 @Data
 @Alias("human")
 public class HDTO {
-    private int Hnum;
     private String Hname;
     private String Hid;
     private String Hpw;

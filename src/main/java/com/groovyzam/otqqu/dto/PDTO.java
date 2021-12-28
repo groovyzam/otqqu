@@ -11,7 +11,7 @@ import java.util.List;
 @Alias("post")
 public class PDTO {
     private int Pnum;
-    private int Hnum;
+    private String Hid;
     private String Ptitle;
     private String Pcontent;
     private String Pstyle;

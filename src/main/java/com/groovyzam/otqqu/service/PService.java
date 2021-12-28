@@ -30,7 +30,7 @@ public class PService {
     public ModelAndView pUpload(PDTO post, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<String> pprice, List<MultipartFile> pproductFile) throws IOException {
 
 
-        post.setHnum((Integer) session.getAttribute("loginHnum"));
+
         int result2 = 0;
 
         MultipartFile Pfile = post.getPfile();
