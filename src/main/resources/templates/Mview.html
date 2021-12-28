@@ -36,18 +36,25 @@
     </tr>
 
     <tr>
-        <th>프로필 수정하기 </span> </th>
+        <th>프로필 수정하기</th>
         <td>
             <form method="POST" enctype="multipart/form-data" action="uPloadFile">
                 <input type="file"  name="HProfile"/>
                 <input type="hidden" name="Hid" th:value="${member.Hid}">
-                <input type="submit" value="Submit">
+                <input type="submit" value="수정하기">
             </form>
 
+            <form method="POST" enctype="multipart/form-data" action="uPdelete">
+                <input type="hidden" name="Hid" th:value="${member.Hid}">
+                <input type="hidden" name="Hfile" th:value="기본프로필.PNG">
+                <input type="submit" value="삭제하기">
+            </form>
         </td>
 
     </tr>
 </table>
+
+
 
 <div>
     <h2>이미지 미리보기</h2>
@@ -63,6 +70,7 @@
 
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <!--미리보기 script-->
 <!--<script>

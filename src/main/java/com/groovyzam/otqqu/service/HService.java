@@ -151,4 +151,23 @@ public class HService {
 
         return mav;
     }
+
+    // 기본프로필로 이동
+    public ModelAndView uPdelete(HDTO human) {
+        int result = hdao.uPdelete(human);
+
+
+        HDTO human1 = hdao.hView(human.getHid());
+        if (result > 0) {
+            //성공
+            mav.addObject("member",human1);
+            mav.setViewName("redirect:/hView?Hid="+human1.getHid());
+        } else {
+            //실패
+            mav.setViewName("Main");
+        }
+
+
+        return mav;
+    }
 }

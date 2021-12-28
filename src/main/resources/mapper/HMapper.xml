@@ -5,7 +5,7 @@
 <mapper namespace="com.groovyzam.otqqu.dao.HDAO">
     <!--회원가입-->
     <insert id="hJoin" parameterType="human">
-        INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},Null)
+        INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},#{Hfile})
     </insert>
     <!--아이디 중복 검사-->
     <select id="idOverlap" parameterType="String" resultType="String" >
@@ -25,6 +25,11 @@
     </select>
     <!--내 정보보기에서 파일 업로드-->
     <update id="hFileupload" parameterType="human">
+        UPDATE HUMAN SET HFILE = #{Hfile} WHERE HID = #{Hid}
+    </update>
+
+    <!--기본 프로필로 변경-->
+    <update id="uPdelete" parameterType="human">
         UPDATE HUMAN SET HFILE = #{Hfile} WHERE HID = #{Hid}
     </update>
 

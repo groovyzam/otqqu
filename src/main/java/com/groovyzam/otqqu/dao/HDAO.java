@@ -24,4 +24,6 @@ public interface HDAO {
 
     // 프로필 업데이트
     int hFileupload(HDTO human);
+    // 기본프로필로 이동
+    int uPdelete(HDTO human);
 }

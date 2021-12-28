@@ -96,6 +96,16 @@ public class HController {
         mav = hsvc.uploadFilea(human);
 
         return mav;
+
+    }
+    
+    // uPdelete : 기본프로필로 변경
+    @RequestMapping(value="/uPdelete", method = RequestMethod.POST)
+    public ModelAndView uPdelete(@ModelAttribute HDTO human) throws IOException {
+
+        mav = hsvc.uPdelete(human);
+
+        return mav;
     }
 
 
