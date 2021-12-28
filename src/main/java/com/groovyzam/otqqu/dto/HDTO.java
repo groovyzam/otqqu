@@ -2,11 +2,12 @@ package com.groovyzam.otqqu.dto;
 
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @Alias("human")
 public class HDTO {
-    private int Hnum;
+
     private String Hname;
     private String Hid;
     private String Hpw;
@@ -17,5 +18,6 @@ public class HDTO {
     private String Hgender;
     private String Hphone;
     private String Hfile;
+    MultipartFile HProfile;
 
 }

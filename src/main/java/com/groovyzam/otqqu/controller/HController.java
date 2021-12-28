@@ -4,10 +4,12 @@ import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.service.HService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 public class HController {
@@ -21,21 +23,21 @@ public class HController {
     private ModelAndView mav = new ModelAndView();
 
     // Main : 메인페이지
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Main() {
 
         return "Main";
     }
 
     // hjoinForm : 회원가입 페이지로 이동
-    @RequestMapping(value="hjoinForm", method = RequestMethod.GET)
+    @RequestMapping(value="/hjoinForm", method = RequestMethod.GET)
     public String hjoinForm(){
         return "Join";
     }
 
 
     // hJoin : 회원가입
-    @RequestMapping(value="hJoin", method = RequestMethod.POST)
+    @RequestMapping(value="/hJoin", method = RequestMethod.POST)
     public ModelAndView hJoin(@ModelAttribute HDTO human){
 
         mav = hsvc.hJoin(human);
@@ -54,7 +56,7 @@ public class HController {
     }
 
     // Hlogin : 로그인 페이지로 이동
-    @RequestMapping(value = "hLogin", method = RequestMethod.GET)
+    @RequestMapping(value = "/hLoginForm", method = RequestMethod.GET)
     public String Hlogin() {
 
         return "Login";
@@ -62,17 +64,17 @@ public class HController {
     }
 
     // hLogin : 로그인
-    @RequestMapping(value = "hLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/hLogin", method = RequestMethod.POST)
     public ModelAndView mLogin(@ModelAttribute HDTO human) {
-
-
+        System.out.println("hLoginhLoginhLoginhLoginhLoginhLoginhLoginhLoginhLoginhLoginhLogin");
+        System.out.println(human);
         mav = hsvc.hLogin(human);
 
         return mav;
     }
 
     // hList : 관리자용 회원목록
-    @RequestMapping(value = "hList", method = RequestMethod.GET)
+    @RequestMapping(value = "/hList", method = RequestMethod.GET)
     public ModelAndView hList() {
 
         mav = hsvc.hList();
@@ -86,5 +88,15 @@ public class HController {
         mav = hsvc.hView(Hid);
         return mav;
     }
+
+    // uPloadFile : 내 정보보기에서 프로필 수정
+    @RequestMapping(value="/uPloadFile", method = RequestMethod.POST)
+    public ModelAndView uPloadFile(@ModelAttribute HDTO human) throws IOException {
+
+        mav = hsvc.uploadFilea(human);
+
+        return mav;
+    }
+
 
 }

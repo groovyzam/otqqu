@@ -21,15 +21,16 @@
 
         <tr>
             <th>아이디</th>
-            <td><input type="text" name="Hid" id="Hid" onkeyup="idOverlap()"/>
+            <td>
+                <input type="text" name="Hid" id="Hid" onkeyup="idOverlap()"/>
                 <span id="confirmId"></span></td>
-
-        </tr>
+             </tr>
 
 
         <tr>
             <th>패스워드</th>
-            <td><input type="password" name="Hpw" id="Hpw" onkeyup="pwCheck()"/>
+            <td><input type="password" name="Hpw" id="Hpw" onkeyup="pwCheck()" />
+
                 <span class="section_pw_check_text"></span>
             </td>
         </tr>
@@ -37,7 +38,7 @@
 
         <tr>
             <th>Password Confirm</th>
-            <td><input type="password" name="Hpw" required id="pwConfirm" onkeyup="pwEqual()">
+            <td><input type="password" required id="pwConfirm" onkeyup="pwEqual()">
                 <span class="section_pw_check_text"></span></td>
         </tr>
 
@@ -88,7 +89,6 @@
 </body>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script type="text/javascript">
     //아이디 중복체크
     function idOverlap() {
@@ -184,15 +184,8 @@
         }
     }
 
-
-
-
-
-
-
-
-
-
 </script>
+
+
 
 </html>
