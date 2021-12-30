@@ -124,7 +124,7 @@ public class PService {
             System.out.println("Attribute 탐색");
             Elements link = html.getElementsByTag("img");
 
-            int i=0,j=0;
+            int j=0;
             String attrKey[] = new String[3];
 
             for (Element e : link) {
@@ -134,7 +134,6 @@ public class PService {
                     map.put("Img"+j+"", attrKey[j]);
                     j++;
                 }
-                i++;
                 if(j==3){
                     break;
                 }

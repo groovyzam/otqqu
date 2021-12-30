@@ -59,6 +59,7 @@ public class PController {
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
             , @RequestParam(value = "Pprice", required = true) List<String> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
+            , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
 
 
     ) throws IOException {
