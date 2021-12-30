@@ -197,6 +197,7 @@
         console.log(num-1);
         console.log(src);
         $(`.select_list:eq(${num-1})`).css('display','none');
+        $(`.selectedImg:eq(${num-1})`).css('display','block');
         $(`.selectedImg:eq(${num-1})`).attr('src',`${src}`);
         $(`.PproductFileImg:eq(${num-1})`).attr('value',`${src}`);
     }
