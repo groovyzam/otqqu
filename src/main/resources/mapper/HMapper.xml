@@ -35,5 +35,13 @@
         UPDATE HUMAN SET HFILE = #{Hfile} WHERE HID = #{Hid}
     </update>
 
+    <!--내 정보보기에서 게시글 불러오기 -->
+    <select id="pMylist" parameterType="String" resultType="post">
+        SELECT * FROM POST WHERE HID = #{Hid}
+    </select>
+
+
+
+
 
 </mapper>

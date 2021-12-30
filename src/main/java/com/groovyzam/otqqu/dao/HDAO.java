@@ -1,6 +1,7 @@
 package com.groovyzam.otqqu.dao;
 
 import com.groovyzam.otqqu.dto.HDTO;
+import com.groovyzam.otqqu.dto.PDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -24,6 +25,10 @@ public interface HDAO {
 
     // 프로필 업데이트
     int hFileupload(HDTO human);
+
     // 기본프로필로 이동
     int uPdelete(HDTO human);
+
+    // 내 게시글 보기
+    List<PDTO> pMylist(String Hid);
 }

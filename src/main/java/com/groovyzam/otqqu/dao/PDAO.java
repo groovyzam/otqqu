@@ -1,9 +1,12 @@
 package com.groovyzam.otqqu.dao;
 
 
+import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface PDAO {
@@ -12,4 +15,11 @@ public interface PDAO {
 
 
     int ProductUpload(ProductDTO product);
+
+
+    PDTO pView(int pnum);
+
+    List<COMMENT> cList(int Pnum);
+
+    int cWrite(COMMENT comment);
 }

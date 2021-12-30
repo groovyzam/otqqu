@@ -1,6 +1,8 @@
 package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
+import com.groovyzam.otqqu.dto.COMMENT;
+import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,7 @@ public class PService {
 
         }
 
+
         if (result1 > 0 && result2 > 0) {
 
             mav.setViewName("Main");
@@ -101,5 +104,41 @@ public class PService {
 
 
         return mav;
+    }
+
+
+    public ModelAndView pView(int Pnum) {
+        PDTO post = pdao.pView(Pnum);
+        System.out.println("post ============== "  + post);
+
+        if( post != null){
+            mav.addObject("post", post);
+            mav.setViewName("Pview");
+        }else{
+            mav.setViewName("Main");
+        }
+
+        return mav;
+    }
+
+    // 댓글
+    public List<COMMENT> cList(int Pnum) {
+        List<COMMENT> commentList = pdao.cList(Pnum);
+        System.out.println("commentlist : " + commentList ) ;
+        return commentList;
+    }
+
+    public List<COMMENT> cWirte(COMMENT Comment) {
+        List<COMMENT> commentList = null;
+
+        int result = pdao.cWrite(Comment);
+
+        if(result>0){
+            commentList = pdao.cList(Comment.getPnum());
+        }else{
+            commentList=null;
+        }
+
+        return commentList;
     }
 }

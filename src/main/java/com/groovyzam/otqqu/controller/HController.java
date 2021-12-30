@@ -1,6 +1,7 @@
 package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.HDTO;
+import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.service.HService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -72,10 +73,8 @@ public class HController {
     // hLogin : 로그인
     @RequestMapping(value = "/hLogin", method = RequestMethod.POST)
     public ModelAndView mLogin(@ModelAttribute HDTO human) {
-        System.out.println("hLoginhLoginhLoginhLoginhLoginhLoginhLoginhLoginhLoginhLoginhLogin");
-        System.out.println(human);
-        mav = hsvc.hLogin(human);
 
+        mav = hsvc.hLogin(human);
         return mav;
     }
     // hLogout : 로그아웃
@@ -100,6 +99,8 @@ public class HController {
     @RequestMapping(value="hView", method = RequestMethod.GET)
     public ModelAndView hView(@RequestParam("Hid") String Hid){
         mav = hsvc.hView(Hid);
+
+
         return mav;
     }
 
@@ -118,6 +119,7 @@ public class HController {
     public ModelAndView uPdelete(@ModelAttribute HDTO human) throws IOException {
 
         mav = hsvc.uPdelete(human);
+
 
         return mav;
     }

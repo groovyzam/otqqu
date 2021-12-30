@@ -2,6 +2,7 @@ package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.HDAO;
 import com.groovyzam.otqqu.dto.HDTO;
+import com.groovyzam.otqqu.dto.PDTO;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -81,6 +82,7 @@ public class HService {
         // pwEnc.matches() 타입은 boolean => true or false
 
         if (pwEnc.matches(human.getHpw(), secu.getHpw())) {
+
             mav.setViewName("Main");
             session.setAttribute("loginId", human.getHid());
         } else {
@@ -107,13 +109,20 @@ public class HService {
     // 내 정보보기
     public ModelAndView hView(String Hid) {
         HDTO human = hdao.hView(Hid);
+        List<PDTO> pmylist = hdao.pMylist(Hid);
+
+        System.out.println("pmylist : " + pmylist);
 
         if (human != null) {
+
+            mav.addObject("pmylist", pmylist);
             mav.addObject("member", human);
-            mav.setViewName("Mview");
+            mav.setViewName("Hview");
         } else {
             mav.setViewName("redirect:/hList");
         }
+
+
         return mav;
     }
 
@@ -156,6 +165,8 @@ public class HService {
 
     // 기본프로필로 이동
     public ModelAndView uPdelete(HDTO human) {
+
+
         int result = hdao.uPdelete(human);
 
 
@@ -172,8 +183,11 @@ public class HService {
     }
 
 
+
+
+        // 이미지 검색
         public ModelAndView PostProductImg (String PIMG){
-            String URL = "https://www.google.com/search?q=" + PIMG + "&source=lnms&tbm=isch";
+            String URL = "https://www.google.com/search?q="+ PIMG +"&source=lnms&tbm=isch";
 
             Connection conn = Jsoup.connect(URL);
 
@@ -204,5 +218,6 @@ public class HService {
 
             return mav;
         }
+
 
 }
