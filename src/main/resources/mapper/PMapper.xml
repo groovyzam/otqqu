@@ -14,4 +14,13 @@
 
     </insert>
 
+
+
+    <select id="mainPost" parameterType="int" resultType="post">
+
+        SELECT * FROM (SELECT ROWNUM AS ROWPNUM,PNUM,HID,PTITLE,PCONTENT,PSTYLE,PUP,PFILENAME FROM POST ORDER BY PNUM DESC)A WHERE A.ROWPNUM BETWEEN #{startPnum} AND #{lastPnum}
+
+
+    </select>
+
 </mapper>

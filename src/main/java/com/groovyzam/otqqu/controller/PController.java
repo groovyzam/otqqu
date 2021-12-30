@@ -3,7 +3,6 @@ package com.groovyzam.otqqu.controller;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import com.groovyzam.otqqu.service.PService;
-import org.apache.tomcat.util.http.parser.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,31 +31,19 @@ public class PController {
     public String PostForm(){
 
 
-
-        if(session.getAttribute("loginId") == null){
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("<script>");
-            sb.append("alert('로그인 후 이용');");
-            sb.append("history.back();");
-            sb.append("</script>");
-
-            return sb.toString();
-
-        }
-
         return "Post";
     }
 
     //pUpload
     @ResponseBody
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
+
     public ModelAndView pUpload(@ModelAttribute PDTO pdto,
               @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
             , @RequestParam(value = "Pprice", required = true) List<String> Pprice
-            , @RequestParam(value = "PproductFile", required = true) List<MultipartFile> PproductFile
+            , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
 
 
     ) throws IOException {
@@ -68,6 +55,19 @@ public class PController {
 
 
         return mav;
+    }
+    @RequestMapping(value="/mainPost", method = RequestMethod.GET)
+    public ModelAndView mainPost(){
+
+        mav=psvc.mainPost();
+
+        return mav;
+    }
+    @RequestMapping(value = "/ajaxPost", method = RequestMethod.POST)
+    public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page){
+
+        List<PDTO> list=psvc.ajaxPost(page);
+        return list;
     }
 
 

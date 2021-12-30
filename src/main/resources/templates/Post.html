@@ -12,10 +12,6 @@
 
 <style>
 
-.u_file{
-
-
-}
 
 </style>
 <body>
@@ -36,11 +32,11 @@
         </tr>
 
         <tr>
-
-        <div id="imgViewArea" style="margin-top:10px; display:none;">
-            <img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
-        </div>
-
+            <td>
+            <div id="imgViewArea" style="margin-top:10px; display:none;">
+                <img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
+            </div>
+            </td>
         </tr>
 
         <tr>
@@ -58,7 +54,13 @@
 
             </select></td>
         </tr>
+        <tr>
+            <td>
 
+
+            </td>
+
+        </tr>
 
         <table id="mytable" border="1" cellspacing="0">
             <thead>
@@ -97,13 +99,12 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script type="text/javascript">
-
+    let imgNum = 0;
 
     $('#btn-add-row').click(function () {
-
-
+        ++imgNum;
         $('#mytable > tbody:last').append('<tr><td>' +
-            '  <div><img src="Cfile" width="100px;"></div> ' + '</td><td>' +
+            '  <div><img src="" width="100px;"></div> ' + '</td><td>' +
             '<select name="Pcategory">\n' +
             '            <option value="cap">모자</option>\n' +
             '            <option value="outer">아우터</option>\n' +
@@ -112,16 +113,24 @@
             '            <option value="bottom">하의</option>\n' +
             '            <option value="shoes">신발</option>\n' +
             '            <option value="accessories">악세서리</option>\n' +
-            '</td><td>' + '<input type="text" name="Pbrand" placeholder="브랜드">' + '</td>' +
-            '</td><td>' + '<input type="text" name="PproductName" placeholder="상품명">' + '</td>' +
+            '</td><td>' + '<input type="text" name="Pbrand" id="Pbrand'+imgNum+'" placeholder="브랜드">' + '</td>' +
+            '</td><td>' + '<input type="text" name="PproductName" id="Pproduct'+imgNum+'" placeholder="상품명">' + '</td>' +
             '</td><td>' + '<input type="text" name="Pprice" placeholder="상품 가격">' + '</td>' +
-            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td></tr>' +
+            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td>' +
+            '<td><button type="button" class="imgBtn" onclick="searchImg() >이미지 검색</button></td>' +
+            '</tr>' +
             '');
     });
     $('#btn-delete-row').click(function () {
         $('#mytable > tbody > tr:last').remove();
-
+        imgNum--;
     });
+
+    function searchImg(Pbrand) {
+        console.log(Pbrand);
+    }
+
+
 </script>
 
 

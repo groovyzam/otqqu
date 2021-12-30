@@ -96,14 +96,11 @@
             <scope>test</scope>
         </dependency>
 
-
         <!-- Java Mail Sender Dependency 추가 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-
-
 
     </dependencies>
 

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -91,7 +92,7 @@ public class PService {
 
         if (result1 > 0 && result2 > 0) {
 
-            mav.setViewName("Main");
+            mav.setViewName("redirect:/");
             System.out.println("게시글 등록 성공");
         } else {
             mav.setViewName("Main");
@@ -100,5 +101,30 @@ public class PService {
 
 
         return mav;
+    }
+
+
+    public ModelAndView mainPost() {
+
+       int StartPnum = 1;
+       int LastPnum = 3;
+        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+
+        mav.addObject("postList", postList);
+        mav.setViewName("Main");
+
+        return mav;
+    }
+
+    public List<PDTO> ajaxPost(int page) {
+        int StartPnum = page;
+        int LastPnum = page;
+
+
+        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+
+
+        return postList;
+
     }
 }

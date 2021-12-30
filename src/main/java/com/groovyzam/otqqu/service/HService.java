@@ -9,7 +9,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +22,6 @@ public class HService {
 
 
     private ModelAndView mav = new ModelAndView();
-
 
     @Autowired
     private HDAO hdao;
@@ -75,27 +73,20 @@ public class HService {
     // 로그인
     public ModelAndView hLogin(HDTO human) {
 
-        BCryptPasswordEncoder en = new BCryptPasswordEncoder();
-
         HDTO secu1 = hdao.hLogin(human);
-
-
-
         // pwEnc.matches() 타입은 boolean => true or false
-        if(pwEnc.matches(human.getHpw(), secu1.getHpw())){
+        if(pwEnc.matches(human.getHpw(),secu1.getHpw())){
             System.out.println("비밀번호 일치!");
             mav.setViewName("Main");
-
             session.setAttribute("loginId", secu1.getHid());
 
         } else {
             System.out.println("비밀번호 불일치");
-            System.out.println(human.getHpw());
-            System.out.println(secu1.getHpw());
-            mav.setViewName("Main");
         }
+        mav.setViewName("redirect:/");
         return mav;
     }
+
 
 
     // 회원목록

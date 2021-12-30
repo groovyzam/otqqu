@@ -18,6 +18,4 @@ public class PDTO {
     private int Pup;
     private MultipartFile Pfile;
     private String PfileName;
-
-
 }
