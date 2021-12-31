@@ -3,6 +3,7 @@ package com.groovyzam.otqqu.controller;
 import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.service.HService;
+import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -125,12 +126,7 @@ public class HController {
     }
 
     //
-    @RequestMapping(value = "img")
-    public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
 
-        mav = hsvc.PostProductImg(PIMG);
 
-        return mav;
-    }
 
 }

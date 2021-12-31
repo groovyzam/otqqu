@@ -5,10 +5,12 @@ import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -26,6 +28,7 @@ public class PController {
 
     @Autowired
     private HttpSession session;
+
 
     // PostForm : 게시글 등록 페이지로 이동
     @RequestMapping(value="/PostForm", method = RequestMethod.GET)
@@ -57,6 +60,7 @@ public class PController {
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
             , @RequestParam(value = "Pprice", required = true) List<String> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
+            , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
 
 
     ) throws IOException {
@@ -69,6 +73,7 @@ public class PController {
 
         return mav;
     }
+
 
     // pView : 게시글 정보보기
     @RequestMapping(value = "pView", method = RequestMethod.GET)
@@ -108,5 +113,14 @@ public class PController {
 
 
 
+
+
+    @RequestMapping(value = "PostProductImg")
+    public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
+        ModelAndView mv = new ModelAndView("jsonView");
+        mv = psvc.PostProductImg(PIMG);
+
+        return mv;
+    }
 
 }
