@@ -46,21 +46,23 @@ public class PController {
               @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
-            , @RequestParam(value = "Pprice", required = true) List<String> Pprice
+            , @RequestParam(value = "Pprice", required = true) List<Integer> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
-            , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
-
-
+            ,@RequestParam(value = "PproductFileImg") List<String> PproductFileImg
     ) throws IOException {
         pdto.setHid((String) session.getAttribute("loginId"));
 
+        //List<MultipartFile> 비어있으면 isEmpty()
+        //List<String> 비어있으면 equals("")
 
+        System.out.println("1. 컨트롤러 : " + pdto.toString());
+        System.out.println(Pprice.toString());
 
-        mav = psvc.pUpload(pdto, Pcategory, Pbrand, PproductName, Pprice, PproductFile);
-
+        mav = psvc.pUpload(pdto, Pcategory, Pbrand, PproductName, Pprice, PproductFile,PproductFileImg);
 
         return mav;
     }
+
     @RequestMapping(value="/mainPost", method = RequestMethod.GET)
     public ModelAndView mainPost(){
 
@@ -110,12 +112,6 @@ public class PController {
         System.out.println("commnentsgfdsfg : " + comment );
         return commentList;
     }
-
-
-
-
-
-
 
 
     @RequestMapping(value = "PostProductImg")

@@ -112,29 +112,25 @@
     $('#btn-add-row').click(function () {
         ++imgNum;
         $('#mytable > tbody:last').append('<tr class="product_list"><td>' +
-            '  <div><img src="" width="100px;"></div> ' + '</td><td>' +
+            '  <div><img src=""  class="selectedImg" width="100px" height="100px"></div> ' + '</td><td>' +
             '<select name="Pcategory">\n' +
             '            <option value="cap">모자</option>\n' +
             '            <option value="outer">아우터</option>\n' +
             '            <option value="top">상의</option>\n' +
-
             '            <option value="bottom">하의</option>\n' +
             '            <option value="shoes">신발</option>\n' +
             '            <option value="accessories">악세서리</option>\n' +
             '</td><td>' + '<input type="text" name="Pbrand" id="Pbrand'+imgNum+'" placeholder="브랜드">' + '</td>' +
             '</td><td>' + '<input type="text" name="PproductName" id="Pproduct'+imgNum+'" placeholder="상품명">' + '</td>' +
             '</td><td>' + '<input type="text" name="Pprice" placeholder="상품 가격">' + '</td>' +
-            '</td><td>' + '<input type="file" id="ProductFile" name="PproductFile" placeholder="상품 사진">' +
-            '<img src=""  class="selectedImg" width="100px" height="100px">' + '</td>' +
+            '</td><td>' + '<input type="file" class="PproductFile" id="ProductFile" name="PproductFile" placeholder="상품 사진">' +
+            '' + '</td>' +
             '<td><button type="button" class="img_btn_class" id="imgBtn'+imgNum+'" onclick="searchImg(' +
             'function listNum(){return  ' + imgNum + ';})">이미지 검색</button>' +
             '<input type="hidden" value="" class="PproductFileImg" name="PproductFileImg"></td>' +
             '<td><div class="select_list"><img class="select_img" src="" width="100px" height="100px">' +
             '<img class="select_img" src="" width="100px" height="100px">' +
             '<img class="select_img" src="" width="100px" height="100px"></div></td>' +
-            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td>' +
-            '<td><button type="button" class="imgBtn" onclick="searchImg() >이미지 검색</button></td>' +
-            '</tr>' +
             '');
 
     });
