@@ -3,20 +3,45 @@
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.groovyzam.otqqu.dao.HDAO">
-<insert id="hJoin" parameterType="human">
-    INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},Null)
-</insert>
 
-<select id="idOverlap" parameterType="String" resultType="String" >
-    SELECT HID FROM HUMAN WHERE HID = #{Hid}
-</select>
 
-<select id="hLogin" parameterType="human" resultType="human">
-    SELECT * FROM HUMAN WHERE HID=#{Hid}
-</select>
+    <!--회원가입-->
+    <insert id="hJoin" parameterType="human">
+        INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},#{Hfile})
+    </insert>
+    <!--아이디 중복 검사-->
+    <select id="idOverlap" parameterType="String" resultType="String" >
+        SELECT HID FROM HUMAN WHERE HID = #{Hid}
+    </select>
+    <!--로그인-->
+    <select id="hLogin" parameterType="human" resultType="human">
+        SELECT * FROM HUMAN WHERE HID=#{Hid}
+    </select>
+    <!--회원목록-->
+    <select id="hList" resultType="human">
+        SELECT * FROM HUMAN
+    </select>
+    <!--내 정보보기-->
+    <select id="hView" parameterType="String" resultType="human">
+        SELECT * FROM HUMAN WHERE HID=#{Hid}
+    </select>
+    <!--내 정보보기에서 파일 업로드-->
+    <update id="hFileupload" parameterType="human">
+        UPDATE HUMAN SET HFILE = #{Hfile} WHERE HID = #{Hid}
+    </update>
 
-<select id="hList" resultType="human">
-    SELECT * FROM HUMAN
-</select>
+    <!--기본 프로필로 변경-->
+    <update id="uPdelete" parameterType="human">
+        UPDATE HUMAN SET HFILE = #{Hfile} WHERE HID = #{Hid}
+    </update>
+
+    <!--내 정보보기에서 게시글 불러오기 -->
+    <select id="pMylist" parameterType="String" resultType="post">
+        SELECT * FROM POST WHERE HID = #{Hid}
+    </select>
+
+
+
+
 
 </mapper>

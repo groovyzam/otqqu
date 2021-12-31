@@ -43,16 +43,19 @@
             <td>첨부 파일</td>
             <td><input type="file" name="Pfile" id="u_file" accept="image/*"></td>
         </tr>
+
         <tr>
             <td>스타일</td>
-            <td><select name="Pstyle">
+            <td>
+                <select name="Pstyle">
                 <option value="casual">캐주얼</option>
                 <option value="street">스트릿</option>
                 <option value="vintage">빈티지</option>
                 <option value="classic">클래식</option>
                 <option value="other">기타</option>
+                </select>
+            </td>
 
-            </select></td>
         </tr>
         <tr>
             <td>
@@ -69,9 +72,8 @@
                 <th>카테고리</th>
                 <th>브랜드</th>
                 <th>상품명</th>
-                <th >상품 가격</th>
+                <th>상품 가격</th>
                 <th>상품 사진 업로드</th>
-
             </tr>
             </thead>
             <tbody></tbody>
@@ -97,10 +99,9 @@
 
 </body>
 
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script type="text/javascript">
+
     let imgNum = 0;
     let TotNum = 0;
 
@@ -131,7 +132,9 @@
             '<img class="select_img" src="" width="100px" height="100px"></div></td>' +
             '</tr>' +
             '');
+
     });
+
     $('#btn-delete-row').click(function () {
         $('#mytable > tbody > tr:last').remove();
         imgNum--;
@@ -238,6 +241,7 @@
         $('#imgViewArea').css({ 'display' : 'none' });
     }
 </script>
+
 <script type="text/javascript">
     var message = '${msg}';
     alert(msg);

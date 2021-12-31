@@ -1,5 +1,6 @@
 package com.groovyzam.otqqu.controller;
 
+import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,8 +24,6 @@ public class PController {
 
     @Autowired
     private HttpSession session;
-
-
 
 
     // PostForm : 게시글 등록 페이지로 이동
@@ -65,10 +65,42 @@ public class PController {
         return mav;
     }
     @RequestMapping(value = "/ajaxPost", method = RequestMethod.POST)
-    public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page){
+    public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page) {
 
-        List<PDTO> list=psvc.ajaxPost(page);
+        List<PDTO> list = psvc.ajaxPost(page);
         return list;
+        // pView : 게시글 정보보기
+    }
+    @RequestMapping(value = "pView", method = RequestMethod.GET)
+    public ModelAndView pView(@RequestParam("Pnum") int Pnum){
+
+
+        mav = psvc.pView(Pnum);
+        return mav;
+    }
+
+
+    List<COMMENT> commentList = new ArrayList<COMMENT>();
+
+    // C_list : 댓글 리스트불러오기
+    @RequestMapping(value = "C_list", method = RequestMethod.POST)
+    public @ResponseBody List<COMMENT> cList(@RequestParam("Pnum") int Pnum){
+
+
+        System.out.println("========Cnum =======" + Pnum);
+
+        List<COMMENT> commentList = psvc.cList(Pnum);
+
+        return commentList;
+    }
+
+    // C_write
+    @RequestMapping(value = "C_write", method = RequestMethod.POST)
+    public @ResponseBody List<COMMENT> cWrite(@ModelAttribute COMMENT comment){
+
+        List<COMMENT>  commentList = psvc.cWirte(comment);
+        System.out.println("commnentsgfdsfg : " + comment );
+        return commentList;
     }
 
 
@@ -80,4 +112,6 @@ public class PController {
 
         return mv;
     }
+
+
 }

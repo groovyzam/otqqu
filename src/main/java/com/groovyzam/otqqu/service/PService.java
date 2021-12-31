@@ -1,6 +1,8 @@
 package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
+import com.groovyzam.otqqu.dto.COMMENT;
+import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import org.jsoup.Connection;
@@ -46,7 +48,7 @@ public class PService {
 
         String PfileName = uuid + "_" + originalFileName;
 
-        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
+        String savePath = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/photo/" + PfileName;
 
 
         if (!Pfile.isEmpty()) {
@@ -55,7 +57,6 @@ public class PService {
         } else {
             post.setPfileName("default.png");
         }
-
 
 
         int result1 = pdao.PostUpload(post);
@@ -76,7 +77,7 @@ public class PService {
 
             String ProductfileName = uuid2 + "_" + originalFileName2;
 
-            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
+            String savePath2 = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
 
             if (!MultiFile.get(i).isEmpty()) {
                 productDTO.setPproductFileName(ProductfileName);
@@ -96,6 +97,7 @@ public class PService {
 
         }
 
+
         if (result1 > 0 && result2 > 0) {
 
             mav.setViewName("redirect:/");
@@ -109,31 +111,62 @@ public class PService {
         return mav;
     }
 
-
     public ModelAndView mainPost() {
 
-       int StartPnum = 1;
-       int LastPnum = 3;
-        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+        int StartPnum = 1;
+        int LastPnum = 3;
+        List<PDTO> postList = pdao.mainPost(StartPnum, LastPnum);
 
         mav.addObject("postList", postList);
         mav.setViewName("Main");
 
+    }
+
+    public ModelAndView pView(int Pnum) {
+        PDTO post = pdao.pView(Pnum);
+        System.out.println("post ============== "  + post);
+
+        if( post != null){
+            mav.addObject("post", post);
+            mav.setViewName("Pview");
+        }else{
+            mav.setViewName("Main");
+        }
+
         return mav;
     }
 
-    public List<PDTO> ajaxPost(int page) {
-        int StartPnum = page;
-        int LastPnum = page;
+    public List<PDTO> ajaxPost(int page){
+            int StartPnum = page;
+            int LastPnum = page;
 
 
-        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+            List<PDTO> postList = pdao.mainPost(StartPnum, LastPnum);
 
 
-        return postList;
+            return postList;
 
+        }
+    // 댓글
+    public List<COMMENT> cList(int Pnum) {
+        List<COMMENT> commentList = pdao.cList(Pnum);
+        System.out.println("commentlist : " + commentList ) ;
+        return commentList;
+    }
 
-}
+    public List<COMMENT> cWirte(COMMENT Comment) {
+        List<COMMENT> commentList = null;
+
+        int result = pdao.cWrite(Comment);
+
+        if(result>0){
+            commentList = pdao.cList(Comment.getPnum());
+        }else{
+            commentList=null;
+        }
+
+        return commentList;
+    }
 
     public ModelAndView PostProductImg(String pimg) {
         ModelAndView mv = new ModelAndView("jsonView");

@@ -23,4 +23,16 @@
 
     </select>
 
+    <select id="pView" parameterType="int" resultType="post">
+        SELECT *FROM POST WHERE PNUM = #{Pnum}
+    </select>
+
+    <select id="cList" parameterType="int" resultType="comment">
+        SELECT *FROM PCOMMENT WHERE PNUM = #{Pnum} ORDER BY CNUM DESC
+    </select>
+
+    <insert id="cWrite" parameterType="comment">
+        INSERT INTO PCOMMENT VALUES (PCMT_SEQ,#{Cnum},#{Cwriter},#{Ccontent})
+    </insert>
+
 </mapper>
