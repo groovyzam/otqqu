@@ -1,7 +1,6 @@
 package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.PDTO;
-import com.groovyzam.otqqu.dto.ProductDTO;
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -21,8 +19,10 @@ public class PController {
 
     @Autowired
     private PService psvc;
+
     @Autowired
     private HttpSession session;
+
 
 
 
@@ -44,6 +44,7 @@ public class PController {
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
             , @RequestParam(value = "Pprice", required = true) List<String> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
+            , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
 
 
     ) throws IOException {
@@ -72,4 +73,11 @@ public class PController {
 
 
 
+    @RequestMapping(value = "PostProductImg")
+    public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
+        ModelAndView mv = new ModelAndView("jsonView");
+        mv = psvc.PostProductImg(PIMG);
+
+        return mv;
+    }
 }

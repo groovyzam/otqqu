@@ -85,6 +85,8 @@
             </tr>
         </table>
     </table>
+    <div id="imgResult">
+    </div>
     <input type="submit" value="등록">
 
 </form>
@@ -100,10 +102,11 @@
 
 <script type="text/javascript">
     let imgNum = 0;
+    let TotNum = 0;
 
     $('#btn-add-row').click(function () {
         ++imgNum;
-        $('#mytable > tbody:last').append('<tr><td>' +
+        $('#mytable > tbody:last').append('<tr class="product_list"><td>' +
             '  <div><img src="" width="100px;"></div> ' + '</td><td>' +
             '<select name="Pcategory">\n' +
             '            <option value="cap">모자</option>\n' +
@@ -118,6 +121,14 @@
             '</td><td>' + '<input type="text" name="Pprice" placeholder="상품 가격">' + '</td>' +
             '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td>' +
             '<td><button type="button" class="imgBtn" onclick="searchImg() >이미지 검색</button></td>' +
+            '</td><td>' + '<input type="file" id="ProductFile" name="PproductFile" placeholder="상품 사진">' +
+            '<img src=""  class="selectedImg" width="100px" height="100px">' + '</td>' +
+            '<td><button type="button" class="img_btn_class" id="imgBtn'+imgNum+'" onclick="searchImg(' +
+            'function listNum(){return  ' + imgNum + ';})">이미지 검색</button>' +
+            '<input type="hidden" value="" class="PproductFileImg" name="PproductFileImg"></td>' +
+            '<td><div class="select_list"><img class="select_img" src="" width="100px" height="100px">' +
+            '<img class="select_img" src="" width="100px" height="100px">' +
+            '<img class="select_img" src="" width="100px" height="100px"></div></td>' +
             '</tr>' +
             '');
     });
@@ -126,9 +137,75 @@
         imgNum--;
     });
 
-    function searchImg(Pbrand) {
-        console.log(Pbrand);
+    function searchImg(num) {
+        searchImgAjax(searchName(num()), num());
     }
+
+    function searchName(num) {
+        let Pbrand = document.getElementById(`Pbrand${num}`).value;
+        let Pproduct = document.getElementById(`Pproduct${num}`).value;
+
+        let PbrandArr = Pbrand.replace(" ","+");
+        let PproductArr = Pproduct.replace(" ","+");
+
+        console.log(PbrandArr);
+        console.log(PproductArr);
+
+        let Product = PbrandArr + '+' + PproductArr;
+        return Product;
+    }
+
+    function searchImgAjax(Product, num) {
+        let ListNum = num;
+        $.ajax({
+            type: "GET",
+            url: "PostProductImg",
+            data: {"PIMG": Product},
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                SelectImg(data.Img0,data.Img1,data.Img2,ListNum);
+            },
+            error: function () {
+                // 실패시
+                alert("잠시 후 시도해 주세요")
+            }
+        });
+    }
+
+    function SelectImg(Img0, Img1, Img2, num) {
+        let SelectList = document.getElementsByClassName("select_list");
+        let SelectImgList = document.getElementsByClassName("select_img");
+        let Img = [Img0,Img1,Img2];
+
+        SelectList[num-1].style.display = "block";
+
+        let i, j;
+        if(num === 1) {
+            i = 0;
+        }else{
+            i = (num-1) * 3;
+        }
+
+        j = 0;
+
+        for(i; i<i+3; i++) {
+            SelectImgList[i].src = Img[j];
+            console.log(Img[j]);
+            SelectImgList[i].setAttribute("onClick", `FinalSelectImg(\"${Img[j]}"\,\"${num}"\)`);
+            j++;
+        }
+    }
+
+    function FinalSelectImg(src,num){
+        console.log(num-1);
+        console.log(src);
+        $(`.select_list:eq(${num-1})`).css('display','none');
+        $(`.selectedImg:eq(${num-1})`).css('display','block');
+        $(`.selectedImg:eq(${num-1})`).attr('src',`${src}`);
+        $(`.PproductFileImg:eq(${num-1})`).attr('value',`${src}`);
+    }
+
 
 
 </script>
@@ -163,7 +240,7 @@
 </script>
 <script type="text/javascript">
     var message = '${msg}';
-    alert(mag);
+    alert(msg);
 </script>
 
 

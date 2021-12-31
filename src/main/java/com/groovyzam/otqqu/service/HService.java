@@ -102,35 +102,5 @@ public class HService {
     }
 
 
-    public ModelAndView PostProductImg(String PIMG) {
-        String URL = "https://www.google.com/search?q="+PIMG+"&source=lnms&tbm=isch";
 
-        Connection conn = Jsoup.connect(URL);
-
-        try {
-            Document html = conn.get();
-
-            System.out.println("Attribute 탐색");
-            Elements link = html.getElementsByTag("img");
-
-            int i=0,j=0;
-
-            for (Element e : link) {
-                if(e.attr("data-src") != ""){
-                    System.out.println(e.attr("data-src"));
-                    mav.addObject("Img"+j, e.attr("data-src"));
-                    j++;
-                }
-                i++;
-                if(j==3){
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        mav.setViewName("img");
-        return mav;
-    }
 }

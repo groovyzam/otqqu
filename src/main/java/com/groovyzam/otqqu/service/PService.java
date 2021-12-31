@@ -3,6 +3,11 @@ package com.groovyzam.otqqu.service;
 import com.groovyzam.otqqu.dao.PDAO;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,8 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -58,7 +64,7 @@ public class PService {
         List<MultipartFile> MultiFile = pproductFile;
 
         for (int i = 0; i < pcategory.size(); i++) {
-            
+
 
             ProductDTO productDTO = new ProductDTO();
 
@@ -126,5 +132,45 @@ public class PService {
 
         return postList;
 
-    }
+
 }
+
+    public ModelAndView PostProductImg(String pimg) {
+        ModelAndView mv = new ModelAndView("jsonView");
+        Map map = new HashMap();
+
+        String URL = "https://www.google.com/search?q="+pimg +"&source=lnms&tbm=isch";
+
+        Connection conn = Jsoup.connect(URL);
+
+        try {
+            Document html = conn.get();
+
+            System.out.println("Attribute 탐색");
+            Elements link = html.getElementsByTag("img");
+
+            int j=0;
+            String attrKey[] = new String[3];
+
+            for (Element e : link) {
+                if(e.attr("data-src") != ""){
+                    System.out.println(e.attr("data-src"));
+                    attrKey[j] = e.attr("data-src");
+                    map.put("Img"+j+"", attrKey[j]);
+                    j++;
+                }
+                if(j==3){
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        map.put("suc","성공");
+        mv.addAllObjects(map);
+        mv.setViewName("jsonView");
+
+        return mv;
+    }
+    }
