@@ -12,10 +12,6 @@
 
 <style>
 
-    .u_file{
-
-
-    }
 
 </style>
 <body>
@@ -36,11 +32,11 @@
         </tr>
 
         <tr>
-
+            <td>
             <div id="imgViewArea" style="margin-top:10px; display:none;">
                 <img id="imgArea" style="width:200px; height:100px;" onerror="imgAreaError()"/>
             </div>
-
+            </td>
         </tr>
 
         <tr>
@@ -58,7 +54,13 @@
 
             </select></td>
         </tr>
+        <tr>
+            <td>
 
+
+            </td>
+
+        </tr>
 
         <table id="mytable" border="1" cellspacing="0">
             <thead>
@@ -125,6 +127,8 @@
             '<td><div class="select_list"><img class="select_img" src="" width="100px" height="100px">' +
             '<img class="select_img" src="" width="100px" height="100px">' +
             '<img class="select_img" src="" width="100px" height="100px"></div></td>' +
+            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td>' +
+            '<td><button type="button" class="imgBtn" onclick="searchImg() >이미지 검색</button></td>' +
             '</tr>' +
             '');
     });

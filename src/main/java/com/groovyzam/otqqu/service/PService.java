@@ -18,7 +18,11 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+<<<<<<< HEAD
 import java.util.HashMap;
+=======
+import java.util.ArrayList;
+>>>>>>> dddb440e8d05ab6f4a5a693ff5c86691e0da33fe
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -99,7 +103,7 @@ public class PService {
 
         if (result1 > 0 && result2 > 0) {
 
-            mav.setViewName("Main");
+            mav.setViewName("redirect:/");
             System.out.println("게시글 등록 성공");
         } else {
             mav.setViewName("Main");
@@ -114,7 +118,7 @@ public class PService {
         ModelAndView mv = new ModelAndView("jsonView");
         Map map = new HashMap();
 
-        String URL = "https://www.google.com/search?q="+PIMG+"&source=lnms&tbm=isch";
+        String URL = "https://www.google.com/search?q=" + PIMG + "&source=lnms&tbm=isch";
 
         Connection conn = Jsoup.connect(URL);
 
@@ -124,17 +128,17 @@ public class PService {
             System.out.println("Attribute 탐색");
             Elements link = html.getElementsByTag("img");
 
-            int j=0;
+            int j = 0;
             String attrKey[] = new String[3];
 
             for (Element e : link) {
-                if(e.attr("data-src") != ""){
+                if (e.attr("data-src") != "") {
                     System.out.println(e.attr("data-src"));
                     attrKey[j] = e.attr("data-src");
-                    map.put("Img"+j+"", attrKey[j]);
+                    map.put("Img" + j + "", attrKey[j]);
                     j++;
                 }
-                if(j==3){
+                if (j == 3) {
                     break;
                 }
             }
@@ -142,10 +146,34 @@ public class PService {
             e.printStackTrace();
         }
 
-        map.put("suc","성공");
+        map.put("suc", "성공");
         mv.addAllObjects(map);
         mv.setViewName("jsonView");
 
         return mv;
+    }
+
+    public ModelAndView mainPost() {
+
+       int StartPnum = 1;
+       int LastPnum = 3;
+        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+
+        mav.addObject("postList", postList);
+        mav.setViewName("Main");
+
+        return mav;
+    }
+
+    public List<PDTO> ajaxPost(int page) {
+        int StartPnum = page;
+        int LastPnum = page;
+
+
+        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+
+
+        return postList;
+
     }
 }

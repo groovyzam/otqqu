@@ -8,10 +8,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
@@ -85,12 +82,11 @@ public class HService {
 
         } else {
             System.out.println("비밀번호 불일치");
-            System.out.println(human.getHpw());
-            System.out.println(secu1.getHpw());
         }
-        mav.setViewName("Main");
+        mav.setViewName("redirect:/");
         return mav;
     }
+
 
 
     // 회원목록

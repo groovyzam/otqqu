@@ -5,6 +5,8 @@ import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface PDAO {
 
@@ -12,4 +14,6 @@ public interface PDAO {
 
 
     int ProductUpload(ProductDTO product);
+
+    List<PDTO> mainPost(int startPnum, int lastPnum);
 }

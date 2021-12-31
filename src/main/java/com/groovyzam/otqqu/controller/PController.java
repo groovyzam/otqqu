@@ -34,25 +34,13 @@ public class PController {
     public String PostForm(){
 
 
-
-        if(session.getAttribute("loginId") == null){
-
-            StringBuilder sb = new StringBuilder();
-            sb.append("<script>");
-            sb.append("alert('로그인 후 이용');");
-            sb.append("history.back();");
-            sb.append("</script>");
-
-            return sb.toString();
-
-        }
-
         return "Post";
     }
 
     //pUpload
     @ResponseBody
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
+
     public ModelAndView pUpload(@ModelAttribute PDTO pdto,
               @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
@@ -72,6 +60,21 @@ public class PController {
 
         return mav;
     }
+    @RequestMapping(value="/mainPost", method = RequestMethod.GET)
+    public ModelAndView mainPost(){
+
+        mav=psvc.mainPost();
+
+        return mav;
+    }
+    @RequestMapping(value = "/ajaxPost", method = RequestMethod.POST)
+    public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page){
+
+        List<PDTO> list=psvc.ajaxPost(page);
+        return list;
+    }
+
+
 
     @RequestMapping(value = "PostProductImg")
     public ModelAndView getImg(@RequestParam("PIMG") String PIMG){

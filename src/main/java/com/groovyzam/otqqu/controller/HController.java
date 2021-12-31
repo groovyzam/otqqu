@@ -2,7 +2,15 @@ package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.service.HService;
+<<<<<<< HEAD
 import com.groovyzam.otqqu.service.PService;
+=======
+
+
+import com.groovyzam.otqqu.service.PService;
+
+
+>>>>>>> dddb440e8d05ab6f4a5a693ff5c86691e0da33fe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +42,7 @@ public class HController {
             return "Login";
         }
 
-        return "Main";
+        return "redirect:/mainPost";
     }
 
     // hjoinForm : 회원가입 페이지로 이동
@@ -98,6 +106,4 @@ public class HController {
 
         return mav;
     }
-
-
 }
