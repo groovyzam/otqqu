@@ -46,11 +46,8 @@ public class PController {
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
             , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
 
-
     ) throws IOException {
         pdto.setHid((String) session.getAttribute("loginId"));
-
-
 
         mav = psvc.pUpload(pdto, Pcategory, Pbrand, PproductName, Pprice, PproductFile);
 

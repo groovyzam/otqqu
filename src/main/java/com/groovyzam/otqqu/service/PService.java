@@ -48,7 +48,7 @@ public class PService {
 
         String PfileName = uuid + "_" + originalFileName;
 
-        String savePath = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/photo/" + PfileName;
+        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
 
 
         if (!Pfile.isEmpty()) {
@@ -57,6 +57,7 @@ public class PService {
         } else {
             post.setPfileName("default.png");
         }
+
 
 
         int result1 = pdao.PostUpload(post);
@@ -77,7 +78,7 @@ public class PService {
 
             String ProductfileName = uuid2 + "_" + originalFileName2;
 
-            String savePath2 = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
+            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
 
 
 

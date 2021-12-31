@@ -83,7 +83,7 @@ public class HController {
     public String hLogout(){
 
         session.invalidate();
-        return "Main";
+        return "redirect:/";
     }
 
 

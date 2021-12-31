@@ -21,14 +21,9 @@
 
 <button onclick="location.href='hList'" value="회원목록">회원목록</button>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<button onclick="location.href='img'"> 이미지</button>
 
-=======
 
 <a th:href="@{hView(Hid=${session.loginId})}"><button>내 정보보기</button></a>
-<a th:href="@{pView(Pnum='41')}">21번게시물</a>
 
 
 
@@ -40,35 +35,9 @@
 <button onclick="location.href='PostForm'" value="회원목록">게시글 작성</button>
 
 
-<form action="img" method="GET">
-<h1>제발...ㅁㄴㅇㄹ</h1>
-
-=======
-<button onclick="location.href='PostForm'" value="회원목록">게시글 작성</button>
-
-<form action="img" method="GET">
->>>>>>> ec44d9c81158d0c3127bd55bd4e76b9443c05c75
-
-    <input type="text" name="PIMG">
-    <input type="submit" value="전송">
-
-</form>
 <div th:each="list : ${postList}" class="img_box fadein" style="text-align: center">
     <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" width="500px" height="500px" class="test_image">
 </div>
-
-<a th:href="@{hView(Hid=${session.loginId})}"><button>내 정보보기</button></a>
-<a th:href="@{pView(Pnum='41')}">21번게시물</a>
-
-
-
-<div th:text="${session.loginId}"></div>
-
-
-
-
-
-<h1>제발...ㅁㄴㅇㄹ</h1>
 
 
 </body>

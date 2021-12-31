@@ -80,23 +80,16 @@ public class HService {
         // pwEnc.matches() 타입은 boolean => true or false
         if(pwEnc.matches(human.getHpw(),secu1.getHpw())){
             System.out.println("비밀번호 일치!");
-            mav.setViewName("Main");
+            mav.setViewName("redirect:/mainPost");
             session.setAttribute("loginId", secu1.getHid());
 
         } else {
             System.out.println("비밀번호 불일치");
-        }
-        mav.setViewName("redirect:/");
-        HDTO secu = hdao.hLogin(human);
-
-        // pwEnc.matches() 타입은 boolean => true or false
-        if (pwEnc.matches(human.getHpw(), secu.getHpw())) {
-
             mav.setViewName("Main");
-            session.setAttribute("loginId", human.getHid());
-        } else {
-            System.out.println("비밀번호 불일치");
+
         }
+        HDTO secu = hdao.hLogin(human);
+        // pwEnc.matches() 타입은 boolean => true or false
 
         return mav;
     }
@@ -147,7 +140,7 @@ public class HService {
 
         System.out.println("Hfile" + Hfile);
 
-        String savePath = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/profile/" + Hfile;
+        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/profile/" + Hfile;
 
         if (HProfile != null) {
             human.setHfile(Hfile);
