@@ -14,7 +14,10 @@
 
     </insert>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ec44d9c81158d0c3127bd55bd4e76b9443c05c75
 
     <select id="mainPost" parameterType="int" resultType="post">
 

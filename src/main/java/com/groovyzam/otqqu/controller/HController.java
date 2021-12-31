@@ -95,7 +95,6 @@ public class HController {
 
         return mav;
     }
- }
 
     // hView : 내 정보보기(회원)
     @RequestMapping(value="hView", method = RequestMethod.GET)

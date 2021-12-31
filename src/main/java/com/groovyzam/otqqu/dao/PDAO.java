@@ -16,14 +16,11 @@ public interface PDAO {
 
     int ProductUpload(ProductDTO product);
 
-<<<<<<< HEAD
     List<PDTO> mainPost(int startPnum, int lastPnum);
-=======
 
     PDTO pView(int pnum);
 
     List<COMMENT> cList(int Pnum);
 
     int cWrite(COMMENT comment);
->>>>>>> c6b647434608a13a98655f390ccbcebb69d7f6ad
 }

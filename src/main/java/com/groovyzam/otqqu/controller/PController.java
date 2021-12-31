@@ -71,6 +71,10 @@ public class PController {
         return list;
         // pView : 게시글 정보보기
     }
+
+
+
+    // pView : 게시글 정보보기
     @RequestMapping(value = "pView", method = RequestMethod.GET)
     public ModelAndView pView(@RequestParam("Pnum") int Pnum){
 
@@ -112,6 +116,5 @@ public class PController {
 
         return mv;
     }
-
 
 }

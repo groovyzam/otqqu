@@ -2,7 +2,6 @@ package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
 import com.groovyzam.otqqu.dto.COMMENT;
-import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import org.jsoup.Connection;
@@ -19,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -73,15 +73,17 @@ public class PService {
             String originalFileName2 = MultiFile.get(i).getOriginalFilename();
 
 
-             String uuid2 = UUID.randomUUID().toString().substring(1, 7);
+            String uuid2 = UUID.randomUUID().toString().substring(1, 7);
 
             String ProductfileName = uuid2 + "_" + originalFileName2;
 
             String savePath2 = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
 
+
+
             if (!MultiFile.get(i).isEmpty()) {
                 productDTO.setPproductFileName(ProductfileName);
-                    MultiFile.get(i).transferTo(new File(savePath2));
+                MultiFile.get(i).transferTo(new File(savePath2));
 
             } else {
                 productDTO.setPproductFileName("default.png");
@@ -111,46 +113,24 @@ public class PService {
         return mav;
     }
 
-    public ModelAndView mainPost() {
-
-        int StartPnum = 1;
-        int LastPnum = 3;
-        List<PDTO> postList = pdao.mainPost(StartPnum, LastPnum);
-
-        mav.addObject("postList", postList);
-        mav.setViewName("Main");
-
-    }
-
     public ModelAndView pView(int Pnum) {
         PDTO post = pdao.pView(Pnum);
-        System.out.println("post ============== "  + post);
+        System.out.println("post ============== " + post);
 
-        if( post != null){
+        if (post != null) {
             mav.addObject("post", post);
             mav.setViewName("Pview");
-        }else{
+        } else {
             mav.setViewName("Main");
         }
 
         return mav;
     }
 
-    public List<PDTO> ajaxPost(int page){
-            int StartPnum = page;
-            int LastPnum = page;
-
-
-            List<PDTO> postList = pdao.mainPost(StartPnum, LastPnum);
-
-
-            return postList;
-
-        }
     // 댓글
     public List<COMMENT> cList(int Pnum) {
         List<COMMENT> commentList = pdao.cList(Pnum);
-        System.out.println("commentlist : " + commentList ) ;
+        System.out.println("commentlist : " + commentList);
         return commentList;
     }
 
@@ -159,10 +139,10 @@ public class PService {
 
         int result = pdao.cWrite(Comment);
 
-        if(result>0){
+        if (result > 0) {
             commentList = pdao.cList(Comment.getPnum());
-        }else{
-            commentList=null;
+        } else {
+            commentList = null;
         }
 
         return commentList;
@@ -206,4 +186,28 @@ public class PService {
 
         return mv;
     }
+
+    public ModelAndView mainPost() {
+
+       int StartPnum = 1;
+       int LastPnum = 3;
+        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+
+        mav.addObject("postList", postList);
+        mav.setViewName("Main");
+
+        return mav;
     }
+
+    public List<PDTO> ajaxPost(int page) {
+        int StartPnum = page;
+        int LastPnum = page;
+
+
+        List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
+
+
+        return postList;
+
+    }
+}
