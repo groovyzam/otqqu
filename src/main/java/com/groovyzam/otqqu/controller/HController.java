@@ -1,16 +1,9 @@
 package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.HDTO;
+import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.service.HService;
-<<<<<<< HEAD
 import com.groovyzam.otqqu.service.PService;
-=======
-
-
-import com.groovyzam.otqqu.service.PService;
-
-
->>>>>>> dddb440e8d05ab6f4a5a693ff5c86691e0da33fe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,15 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @Controller
 public class HController {
 
     @Autowired
     private HService hsvc;
-
-    @Autowired
-    private PService psvc;
 
     @Autowired
     private HttpSession session;
@@ -84,9 +75,7 @@ public class HController {
     @RequestMapping(value = "/hLogin", method = RequestMethod.POST)
     public ModelAndView mLogin(@ModelAttribute HDTO human) {
 
-
         mav = hsvc.hLogin(human);
-
         return mav;
     }
     // hLogout : 로그아웃
@@ -106,4 +95,34 @@ public class HController {
 
         return mav;
     }
+    // hView : 내 정보보기(회원)
+    @RequestMapping(value="hView", method = RequestMethod.GET)
+    public ModelAndView hView(@RequestParam("Hid") String Hid){
+        mav = hsvc.hView(Hid);
+
+
+        return mav;
+    }
+
+    // uPloadFile : 내 정보보기에서 프로필 수정
+    @RequestMapping(value="/uPloadFile", method = RequestMethod.POST)
+    public ModelAndView uPloadFile(@ModelAttribute HDTO human) throws IOException {
+
+        mav = hsvc.uploadFilea(human);
+
+        return mav;
+
+    }
+
+    // uPdelete : 기본프로필로 변경
+    @RequestMapping(value="/uPdelete", method = RequestMethod.POST)
+    public ModelAndView uPdelete(@ModelAttribute HDTO human) throws IOException {
+
+        mav = hsvc.uPdelete(human);
+
+
+        return mav;
+    }
+
+
 }

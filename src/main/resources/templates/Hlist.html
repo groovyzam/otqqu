@@ -27,7 +27,7 @@
 
     <tbody>
     <tr th:each="list : ${humanList}">
-        <td th:text="${list.Hnum}">회원번호</td>
+
         <td th:text="${list.Hname}">이름</td>
         <td><a th:text="${list.Hid}" th:href="@{hView(Hid=${list.Hid}, hName=${list.Hname})}"></a></td>
         <td th:text="${list.Hemail}">이메일</td>

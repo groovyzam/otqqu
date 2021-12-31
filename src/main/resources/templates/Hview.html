@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="KIMAH"/>
+    <meta name="description" content="SpringBoot Thymeleaf">
+    <title>Spring Boot Test</title>
+</head>
+<style>
+    #modal {
+        display: none;
+
+        position:relative;
+        width:100%;
+        height:100%;
+        z-index:1;
+    }
+
+    #modal h2 {
+        margin:0;
+    }
+
+    #modal button {
+        display:inline-block;
+        width:100px;
+        margin-left:calc(100% - 100px - 10px);
+    }
+
+    #modal .modal_content {
+
+        width:300px;
+        margin:100px auto;
+        padding:20px 10px;
+        background:#fff;
+        border:2px solid #666;
+    }
+
+    #modal .modal_layer {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0, 0, 0, 0.5);
+        z-index:-1;
+    }
+</style>
+<body>
+
+<h1>내 회원 정보보기</h1>
+
+<table>
+    <caption>회원 상세보기</caption>
+    <tr>
+        <th>아이디</th>
+        <td th:text="${member.Hid}"></td>
+    </tr>
+
+    <tr>
+        <th>비밀번호</th>
+        <td th:text="${member.Hpw}"></td>
+    </tr>
+
+    <tr>
+        <th>이름</th>
+        <td th:text="${member.Hname}"></td>
+    </tr>
+
+    <tr>
+        <th>나이</th>
+        <td th:text="${member.Hage}"> </td>
+    </tr>
+
+    <tr>
+        <th>프로필 수정하기</th>
+        <td>
+            <!--<form method="POST" enctype="multipart/form-data" action="uPloadFile">
+                <input type="file"  name="HProfile"/>
+                <input type="hidden" name="Hid" th:value="${member.Hid}">
+                <input type="submit" value="수정하기">
+            </form>
+
+            <form method="POST" enctype="multipart/form-data" action="uPdelete">
+                <input type="hidden" name="Hid" th:value="${member.Hid}">
+                <input type="hidden" name="Hfile" th:value="기본프로필.PNG">
+                <input type="submit" value="삭제하기">
+            </form>-->
+        </td>
+
+    </tr>
+</table>
+<div>
+    <div>
+        <img id="img" th:src="@{/profile/{Hfile}(Hfile=${member.Hfile})}">
+    </div>
+</div>
+
+<div id="root">
+
+    <button type="button" id="modal_opne_btn">수정하기</button>
+
+</div>
+
+<div id="modal">
+
+    <div class="modal_content">
+        <h2>수정하기</h2>
+
+        <p>모달 창 입니다.</p>
+
+        <form method="POST" enctype="multipart/form-data" action="uPloadFile">
+            <input type="file"  name="HProfile"/>
+            <input type="hidden" name="Hid" th:value="${member.Hid}">
+            <input type="submit" value="수정하기">
+        </form>
+
+        <form method="POST" enctype="multipart/form-data" action="uPdelete">
+            <input type="hidden" name="Hid" th:value="${member.Hid}">
+            <input type="hidden" name="Hfile" th:value="기본프로필.PNG">
+            <input type="submit" value="삭제하기">
+        </form>
+
+        <button type="button" id="modal_close_btn">x</button>
+
+    </div>
+
+    <div class="modal_layer"></div>
+</div>
+
+
+
+<table>
+    <caption><h2> 내 게시글 정보 불러오기</h2></caption>
+        <tr>
+            <td> 제목 </td>
+            <td> 내용</td>
+            <td> 스타일</td>
+            <td> 게시글좋아요갯수</td>
+            <td> 사진</td>
+        </tr>
+    <tr th:each="pmylist : ${pmylist}">
+        <td th:text="${pmylist.Ptitle}"></td>
+        <td th:text="${pmylist.Pcontent}"></td>
+        <td th:text="${pmylist.Pstyle}"></td>
+        <td th:text="${pmylist.Pup}"></td>
+        <td><img th:src="@{photo/{PfileName}(PfileName=${pmylist.PfileName})}"></td>
+    </tr>
+
+</table>
+
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    document.getElementById("modal_opne_btn").onclick = function() {
+        document.getElementById("modal").style.display="block";
+    }
+
+    document.getElementById("modal_close_btn").onclick = function() {
+        document.getElementById("modal").style.display="none";
+    }
+</script>
+</html>

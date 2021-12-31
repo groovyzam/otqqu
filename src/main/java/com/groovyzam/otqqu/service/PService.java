@@ -1,6 +1,8 @@
 package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
+import com.groovyzam.otqqu.dto.COMMENT;
+import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import org.jsoup.Connection;
@@ -18,11 +20,8 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.util.HashMap;
-=======
 import java.util.ArrayList;
->>>>>>> dddb440e8d05ab6f4a5a693ff5c86691e0da33fe
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -42,6 +41,7 @@ public class PService {
 
     public ModelAndView pUpload(PDTO post, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<String> pprice, List<MultipartFile> pproductFile) throws IOException {
 
+
         int result2 = 0;
 
         MultipartFile Pfile = post.getPfile();
@@ -51,7 +51,10 @@ public class PService {
 
         String PfileName = uuid + "_" + originalFileName;
 
-        String savePath = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/photo/" + PfileName;
+
+        String savePath = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/photo/" + PfileName;
+
+
 
 
         if (!Pfile.isEmpty()) {
@@ -60,7 +63,6 @@ public class PService {
         } else {
             post.setPfileName("default.png");
         }
-
 
 
         int result1 = pdao.PostUpload(post);
@@ -77,15 +79,19 @@ public class PService {
             String originalFileName2 = MultiFile.get(i).getOriginalFilename();
 
 
-             String uuid2 = UUID.randomUUID().toString().substring(1, 7);
+            String uuid2 = UUID.randomUUID().toString().substring(1, 7);
 
             String ProductfileName = uuid2 + "_" + originalFileName2;
 
-            String savePath2 = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
+
+            String savePath2 = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/" + pcategory.get(i) + "/" + ProductfileName;
+
+
+
 
             if (!MultiFile.get(i).isEmpty()) {
                 productDTO.setPproductFileName(ProductfileName);
-                    MultiFile.get(i).transferTo(new File(savePath2));
+                MultiFile.get(i).transferTo(new File(savePath2));
 
             } else {
                 productDTO.setPproductFileName("default.png");
@@ -101,6 +107,7 @@ public class PService {
 
         }
 
+
         if (result1 > 0 && result2 > 0) {
 
             mav.setViewName("redirect:/");
@@ -114,11 +121,46 @@ public class PService {
         return mav;
     }
 
+    public ModelAndView pView(int Pnum) {
+        PDTO post = pdao.pView(Pnum);
+        System.out.println("post ============== " + post);
+
+        if (post != null) {
+            mav.addObject("post", post);
+            mav.setViewName("Pview");
+        } else {
+            mav.setViewName("Main");
+        }
+
+        return mav;
+    }
+
+    // 댓글
+    public List<COMMENT> cList(int Pnum) {
+        List<COMMENT> commentList = pdao.cList(Pnum);
+        System.out.println("commentlist : " + commentList);
+        return commentList;
+    }
+
+    public List<COMMENT> cWirte(COMMENT Comment) {
+        List<COMMENT> commentList = null;
+
+        int result = pdao.cWrite(Comment);
+
+        if (result > 0) {
+            commentList = pdao.cList(Comment.getPnum());
+        } else {
+            commentList = null;
+        }
+
+        return commentList;
+    }
+
     public ModelAndView PostProductImg(String PIMG) {
         ModelAndView mv = new ModelAndView("jsonView");
         Map map = new HashMap();
 
-        String URL = "https://www.google.com/search?q=" + PIMG + "&source=lnms&tbm=isch";
+        String URL = "https://www.google.com/search?q="+PIMG+"&source=lnms&tbm=isch";
 
         Connection conn = Jsoup.connect(URL);
 
@@ -128,17 +170,17 @@ public class PService {
             System.out.println("Attribute 탐색");
             Elements link = html.getElementsByTag("img");
 
-            int j = 0;
+            int j=0;
             String attrKey[] = new String[3];
 
             for (Element e : link) {
-                if (e.attr("data-src") != "") {
+                if(e.attr("data-src") != ""){
                     System.out.println(e.attr("data-src"));
                     attrKey[j] = e.attr("data-src");
-                    map.put("Img" + j + "", attrKey[j]);
+                    map.put("Img"+j+"", attrKey[j]);
                     j++;
                 }
-                if (j == 3) {
+                if(j==3){
                     break;
                 }
             }
@@ -146,7 +188,7 @@ public class PService {
             e.printStackTrace();
         }
 
-        map.put("suc", "성공");
+        map.put("suc","성공");
         mv.addAllObjects(map);
         mv.setViewName("jsonView");
 
