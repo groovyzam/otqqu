@@ -122,9 +122,6 @@
             </tr>
         </table>
     </table>
-
-
-
     <div id="imgResult">
     </div>
 
@@ -250,6 +247,10 @@
             '</td><td>' + '<input type="text" name="Pprice" placeholder="상품 가격">' + '</td>' +
             '</td><td>' + '<input type="file" class="PproductFile" id="ProductFile" name="PproductFile" placeholder="상품 사진">' +
             '' + '</td>' +
+            '</td><td>' + '<input type="file" name="PproductFile" placeholder="상품 사진">' + '</td>' +
+            '<td><button type="button" class="imgBtn" onclick="searchImg() >이미지 검색</button></td>' +
+            '</td><td>' + '<input type="file" id="ProductFile" name="PproductFile" placeholder="상품 사진">' +
+            '<img src=""  class="selectedImg" width="100px" height="100px">' + '</td>' +
             '<td><button type="button" class="img_btn_class" id="imgBtn'+imgNum+'" onclick="searchImg(' +
             'function listNum(){return  ' + imgNum + ';})">이미지 검색</button>' +
             '<input type="hidden" value="" class="PproductFileImg" name="PproductFileImg"></td>' +

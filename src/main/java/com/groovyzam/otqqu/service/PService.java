@@ -2,17 +2,18 @@ package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
 import com.groovyzam.otqqu.dto.*;
+import com.groovyzam.otqqu.dto.COMMENT;
+import com.groovyzam.otqqu.dto.PDTO;
+import com.groovyzam.otqqu.dto.ProductDTO;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -54,7 +55,6 @@ public class PService {
 
 
         String savePath = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/photo/" + PfileName;
-
 
         if (!Pfile.isEmpty()) {
             post.setPfileName(PfileName);
@@ -171,11 +171,11 @@ public class PService {
         return commentList;
     }
 
-    public ModelAndView PostProductImg(String PIMG) {
+    public ModelAndView PostProductImg(String pimg) {
         ModelAndView mv = new ModelAndView("jsonView");
         Map map = new HashMap();
 
-        String URL = "https://www.google.com/search?q="+PIMG+"&source=lnms&tbm=isch";
+        String URL = "https://www.google.com/search?q="+pimg +"&source=lnms&tbm=isch";
 
         Connection conn = Jsoup.connect(URL);
 
@@ -232,5 +232,28 @@ public class PService {
 
         return postList;
 
+    }
+
+    public ModelAndView PstyleList(String pstyle) {
+
+        List<PDTO> list = pdao.PstyleList(pstyle);
+
+        System.out.println(list);
+
+        mav.addObject("StyleList",list);
+        mav.setViewName("Pstyle");
+
+        return mav;
+    }
+
+    public ModelAndView PcategoryList(String Pcategory) {
+
+
+        List<PDTO> list = pdao.PcategoryList(Pcategory);
+
+        System.out.println(Pcategory);
+        mav.addObject("CategoryList",list);
+        mav.setViewName("Pcategory");
+        return mav;
     }
 }

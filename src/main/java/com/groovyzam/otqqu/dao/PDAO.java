@@ -26,4 +26,8 @@ public interface PDAO {
     int cWrite(COMMENT comment);
 
     int imgRatioUpload(PimgRatioDTO imgRatio);
+
+    List<PDTO> PstyleList(String pstyle);
+
+    List<PDTO> PcategoryList(String Pcategory);
 }

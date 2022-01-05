@@ -40,8 +40,40 @@
         SELECT * FROM POST WHERE HID = #{Hid}
     </select>
 
+    <select id="Search" parameterType="String" resultType="human">
+        SELECT * FROM HUMAN WHERE HID LIKE '%'||#{keyword}||'%'
+    </select>
+
+    <select id="autocomplete" parameterType="String" resultType="human">
+        select HID from HUMAN where HID like concat('%',concat(UPPER(#{b}),'%')) or
+            HID like concat('%',concat(LOWER(#{b}),'%'))
+    </select>
+
+    <insert id="hFollow" parameterType="String">
+        INSERT INTO FOLLOW VALUES(#{sessionId},#{Hid})
+    </insert>
+
+    <delete id="hUnFollow" parameterType="String">
+        DELETE FROM FOLLOW WHERE FOLLOWINGID=#{sessionId} AND FOLLOWERID=#{Hid}
+    </delete>
+
+    <select id="followList" parameterType="String" resultType="String">
+    SELECT FOLLOWERID FROM FOLLOW WHERE FOLLOWINGID=#{sessionId} AND FOLLOWERID =#{Hid}
+    </select>
+
+    <select id="following" parameterType="String" resultType="String">
+        SELECT FOLLOWINGID FROM FOLLOW WHERE FOLLOWINGID =#{Hid}
+    </select>
+    <select id="follower" parameterType="String" resultType="String">
+        SELECT FOLLOWERID FROM FOLLOW WHERE FOLLOWERID =#{Hid}
+    </select>
+
+    <update id="hModify" parameterType="human">
+        UPDATE HUMAN SET HNAME=#{Hname},HAGE=#{Hage},HHEIGHT=#{Hheight},HWEIGHT=#{Hweight},HGENDER=#{Hgender},HPHONE=#{Hphone} WHERE HID=#{Hid}
+    </update>
 
 
-
-
+    <update id="HpwModify" parameterType="String">
+        UPDATE HUMAN SET HPW=#{hpw} WHERE HID=#{sessionId}
+    </update>
 </mapper>

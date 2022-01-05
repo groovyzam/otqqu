@@ -14,7 +14,6 @@
 
     </insert>
 
-
     <select id="mainPost" parameterType="int" resultType="post">
 
         SELECT * FROM (SELECT ROWNUM AS ROWPNUM,PNUM,HID,PTITLE,PCONTENT,PSTYLE,PUP,PFILENAME FROM POST ORDER BY PNUM DESC)A WHERE A.ROWPNUM BETWEEN #{startPnum} AND #{lastPnum}
@@ -37,4 +36,13 @@
     <insert id="imgRatioUpload" parameterType="imgRatio">
         INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft})
     </insert>
+
+    <select id="PstyleList" parameterType="String" resultType="post">
+        SELECT * FROM POST WHERE PSTYLE=#{pstyle}
+    </select>
+
+    <select id="PcategoryList" parameterType="String" resultType="post">
+        SELECT * FROM POST A,(SELECT PNUM FROM ${Pcategory})B WHERE A.PNUM=B.PNUM
+    </select>
+
 </mapper>

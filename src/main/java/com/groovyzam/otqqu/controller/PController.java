@@ -2,20 +2,20 @@ package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
+<<<<<<< HEAD
 import com.groovyzam.otqqu.dto.PimgRatioDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
+=======
+>>>>>>> f2170caa4a788ea9809da5a4e3846c1936e53964
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +63,8 @@ public class PController {
 
         mav = psvc.pUpload(pdto,imgRatio, Pcategory, Pbrand, PproductName, Pprice, PproductFile,PproductFileImg);
 
+        pdto.setHid((String) session.getAttribute("loginId"));
+
         return mav;
     }
 
@@ -74,12 +76,12 @@ public class PController {
         return mav;
     }
     @RequestMapping(value = "/ajaxPost", method = RequestMethod.POST)
-    public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page){
+    public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page) {
 
-        List<PDTO> list=psvc.ajaxPost(page);
+        List<PDTO> list = psvc.ajaxPost(page);
         return list;
+        // pView : 게시글 정보보기
     }
-
 
 
 
@@ -116,13 +118,27 @@ public class PController {
         return commentList;
     }
 
-
     @RequestMapping(value = "PostProductImg")
     public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
         ModelAndView mv = new ModelAndView("jsonView");
         mv = psvc.PostProductImg(PIMG);
 
         return mv;
+    }
+
+    //pStyleList 게시글 스타일별 목록
+    @RequestMapping(value = "pStyleList", method = RequestMethod.GET)
+    public ModelAndView pStyleList(@RequestParam("Pstyle") String Pstyle){
+
+        mav = psvc.PstyleList(Pstyle);
+        return mav;
+    }
+    //pCategoryList 상품 카테고리별 목록
+    @RequestMapping(value = "pCategoryList", method = RequestMethod.GET)
+    public ModelAndView  pCategoryList(@RequestParam("Pcategory") String Pcategory){
+
+        mav = psvc.PcategoryList(Pcategory);
+        return mav;
     }
 
 }

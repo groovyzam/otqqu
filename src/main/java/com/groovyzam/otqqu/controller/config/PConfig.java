@@ -9,6 +9,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 public class PConfig implements WebMvcConfigurer {
     @Bean
     MappingJackson2JsonView jsonView(){
+
         return new MappingJackson2JsonView();
     }
 }
