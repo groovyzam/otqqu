@@ -23,4 +23,6 @@ public interface PDAO {
     List<COMMENT> cList(int Pnum);
 
     int cWrite(COMMENT comment);
+
+    int cDelete(COMMENT comment);
 }

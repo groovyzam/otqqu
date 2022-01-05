@@ -22,14 +22,14 @@
 <span>=========================================</span>
 <br/><br/><br/><br/><br/>
 
-<h2>여기서부터는 카테고리별 사진 등록?</h2>
+<h2>여기서부터는 카테고리별 사진 등록</h2>
 
 <span>======================================</span>
 
 <h2>여기서 부터 댓글</h2>
 
 <div>
-    <textarea rows="5" cols="20" id="CContent"></textarea>
+    <textarea rows="5" cols="20" id="CContent" name="CContent"></textarea>
     <button id="cmtBtn">댓글 입력</button>
 </div>
 
@@ -47,10 +47,11 @@
         $.ajax({
             type : "POST" ,
             url : "C_list" ,
-            data : {"Pnum" : Pnum} ,
+            data : {"Pnum" : Pnum},
             dataType : "json",
             success : function(result){
                 commentList(result);
+
             },
             error : function(){
                 alert("댓글 리스트 불러오기 실패!");
@@ -59,16 +60,16 @@
 
 
        $("#cmtBtn").click(function(){
-            let CWriter =  document.getElementById("Hid").value
-            let CContent = $("#CContent").val();
-            let Cnum = document.getElementById("Pnum").value;
+            let Cwriter =  document.getElementById("Hid").value
+            let Ccontent = $("#CContent").val();
+            let Pnum = document.getElementById("Pnum").value;
 
             $.ajax({
                 type : "POST" ,
                 url : "C_write" ,
-                data : { "CWriter": CWriter,
-                    "CContent": CContent,
-                    "Cnum": Cnum
+                data : { "Cwriter": Cwriter,
+                    "Ccontent": Ccontent,
+                    "Pnum": Pnum
                 } ,
                 dataType : "json" ,
                 // 입력을 하자마자 commentList을 새로고침? 하기 위해서
@@ -81,7 +82,6 @@
                 }
             });
         });
-
     });
 
     function commentList(result){
@@ -90,18 +90,21 @@
 
         output +="<table>";
         output +="<caption>댓글 목록</caption>";
+        output +="<thead>";
         output +="<tr>";
         output +="<th>작성자</th>";
         output +="<th>내용</th>";
+        output +="<th>댓글삭제</th>";
         output +="</tr>";
+        output +="</thead>";
 
         for(let i in result){
             output +="<tr>";
-           output +="<td>"+result[i].CWriter+"</td>";
-            output +="<td>"+result[i].CContent+"</td>";
+            output +="<td>"+result[i].cwriter+"</td>";
+            output +="<td>"+result[i].ccontent+"</td>";
+            output +="<td><button onclick='cmtDelete("+result[i].cnum+")'>삭제</button></td>";
             output +="</tr>";
         }
-
         output +="</table>";
 
         $("#commentArea").html(output);
@@ -109,14 +112,14 @@
 
     }
 
-   /* function cmtDelete(CNo){
-
+    function cmtDelete(cnum){
+        let Pnum = document.getElementById("Pnum").value;
         $.ajax({
             type : "GET",
             url : "C_delete" ,
             data : {
-                "CNo" : CNo,
-                "CBNo" : "${post.Cnum}"
+                "Cnum" : cnum,
+                "Pnum" : Pnum
             } ,
             dataType : "json",
             success : function(result){
@@ -129,7 +132,7 @@
 
         });
     }
-*/
+
 
 
 </script>

@@ -40,8 +40,4 @@
         SELECT * FROM POST WHERE HID = #{Hid}
     </select>
 
-
-
-
-
 </mapper>
