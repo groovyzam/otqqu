@@ -11,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -116,7 +117,6 @@ public class PService {
 
     public ModelAndView pView(int Pnum) {
         PDTO post = pdao.pView(Pnum);
-        System.out.println("post ============== " + post);
 
         if (post != null) {
             mav.addObject("post", post);
@@ -131,10 +131,11 @@ public class PService {
     // 댓글
     public List<COMMENT> cList(int Pnum) {
         List<COMMENT> commentList = pdao.cList(Pnum);
-        System.out.println("commentlist : " + commentList);
+
         return commentList;
     }
 
+    // 댓글 작성하기
     public List<COMMENT> cWirte(COMMENT Comment) {
         List<COMMENT> commentList = null;
 
@@ -149,11 +150,27 @@ public class PService {
         return commentList;
     }
 
-    public ModelAndView PostProductImg(String pimg) {
+
+    // 댓글 삭제하기
+    public List<COMMENT> cDelete(COMMENT comment) {
+        List<COMMENT> commentList = null;
+
+        int result = pdao.cDelete(comment);
+
+        if(result>0){
+            commentList = pdao.cList(comment.getPnum());
+        }else{
+            commentList = null;
+        }
+
+        return commentList;
+    }
+
+    public ModelAndView PostProductImg(String PIMG) {
         ModelAndView mv = new ModelAndView("jsonView");
         Map map = new HashMap();
 
-        String URL = "https://www.google.com/search?q="+pimg +"&source=lnms&tbm=isch";
+        String URL = "https://www.google.com/search?q="+PIMG +"&source=lnms&tbm=isch";
 
         Connection conn = Jsoup.connect(URL);
 

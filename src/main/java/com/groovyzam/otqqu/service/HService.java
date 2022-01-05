@@ -7,13 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -36,6 +42,15 @@ public class HService {
 
 
     // 회원가입
+    public Map<String, String> validateHandling(BindingResult br) {
+        Map<String,String> validatorResult = new HashMap<>();
+        for(FieldError error : br.getFieldErrors()){
+            String validKeyName = String.format("valid_%s",error.getField());
+            validatorResult.put(validKeyName,error.getDefaultMessage());
+        }
+        return validatorResult;
+    }
+
     public ModelAndView hJoin(HDTO human) {
 
         human.setHpw(pwEnc.encode(human.getHpw()));
@@ -72,6 +87,7 @@ public class HService {
     public ModelAndView hLogin(HDTO human) {
 
         HDTO secu1 = hdao.hLogin(human);
+
         // pwEnc.matches() 타입은 boolean => true or false
         if(pwEnc.matches(human.getHpw(),secu1.getHpw())){
             System.out.println("비밀번호 일치!");
@@ -237,7 +253,7 @@ public class HService {
         }
         return mav;
 
-    }
+}
 
 
     public ModelAndView hModifyForm(String hid) {

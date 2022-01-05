@@ -25,12 +25,13 @@
         SELECT *FROM POST WHERE PNUM = #{Pnum}
     </select>
 
+
     <select id="cList" parameterType="int" resultType="comment">
         SELECT *FROM PCOMMENT WHERE PNUM = #{Pnum} ORDER BY CNUM DESC
     </select>
 
     <insert id="cWrite" parameterType="comment">
-        INSERT INTO PCOMMENT VALUES (PCMT_SEQ,#{Cnum},#{Cwriter},#{Ccontent})
+        INSERT INTO PCOMMENT VALUES (PCMT_SEQ.NEXTVAL,#{Pnum},#{Cwriter},#{Ccontent})
     </insert>
 
     <select id="PstyleList" parameterType="String" resultType="post">
@@ -40,6 +41,10 @@
     <select id="PcategoryList" parameterType="String" resultType="post">
         SELECT * FROM POST A,(SELECT PNUM FROM ${Pcategory})B WHERE A.PNUM=B.PNUM
     </select>
+
+    <delete id="cDelete" parameterType="comment">
+        DELETE FROM PCOMMENT WHERE CNUM = #{Cnum}
+    </delete>
 
 
 </mapper>

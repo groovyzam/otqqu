@@ -28,4 +28,5 @@ public interface PDAO {
 
     List<PDTO> PcategoryList(String Pcategory);
 
+    int cDelete(COMMENT comment);
 }

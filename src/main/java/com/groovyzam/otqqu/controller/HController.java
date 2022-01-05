@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 @Controller
 public class HController {
@@ -41,7 +44,7 @@ public class HController {
     public String Main() {
 
 
-        if(session.getAttribute("loginId") == null){
+        if (session.getAttribute("loginId") == null) {
             return "Login";
         }
 
@@ -49,8 +52,8 @@ public class HController {
     }
 
     // hjoinForm : 회원가입 페이지로 이동
-    @RequestMapping(value="/hjoinForm", method = RequestMethod.GET)
-    public String hjoinForm(){
+    @RequestMapping(value = "/hjoinForm", method = RequestMethod.GET)
+    public String hjoinForm() {
         return "Join";
     }
 
@@ -60,18 +63,24 @@ public class HController {
         return "HpwModify";
     }
 
-
     // hJoin : 회원가입
-    @RequestMapping(value="/hJoin", method = RequestMethod.POST)
-    public ModelAndView hJoin(@ModelAttribute HDTO human){
-
+    @RequestMapping(value = "/hJoin", method = RequestMethod.POST)
+    public String hJoin(@Valid HDTO human, BindingResult br, Model model) {
+        if(br.hasErrors()){
+            model.addAttribute("human",human);
+            Map<String,String> validatorResult = hsvc.validateHandling(br);
+            for(String key : validatorResult.keySet()){
+                model.addAttribute(key,validatorResult.get(key));
+            }
+            return "/Join";
+        }
         mav = hsvc.hJoin(human);
 
-        return mav;
+        return "redirect:hLoginForm";
     }
 
     // A_idOverlap : 아이디 중복검사
-    @RequestMapping(value="/A_idOverlap", method= RequestMethod.POST)
+    @RequestMapping(value = "/A_idOverlap", method = RequestMethod.POST)
     public @ResponseBody
     String idOverlap(@RequestParam("Hid") String Hid) {
         // JSON(Ajax)을 이용할 떄 추가
@@ -80,7 +89,7 @@ public class HController {
         return result;
     }
 
-    // Hlogin : 로그인 페이지로 이동
+    // hLoginForm : 로그인 페이지로 이동
     @RequestMapping(value = "/hLoginForm", method = RequestMethod.GET)
     public String Hlogin() {
 
@@ -90,14 +99,16 @@ public class HController {
 
     // hLogin : 로그인
     @RequestMapping(value = "/hLogin", method = RequestMethod.POST)
-    public ModelAndView mLogin(@ModelAttribute HDTO human) {
+    public ModelAndView mLogin(@ModelAttribute HDTO human){
 
-        mav = hsvc.hLogin(human);
-        return mav;
+            mav = hsvc.hLogin(human);
+            return mav;
+
     }
+
     // hLogout : 로그아웃
-    @RequestMapping(value="hLogout", method = RequestMethod.GET)
-    public String hLogout(){
+    @RequestMapping(value = "hLogout", method = RequestMethod.GET)
+    public String hLogout() {
 
         session.invalidate();
         return "redirect:/";
@@ -114,8 +125,8 @@ public class HController {
     }
 
     // hView : 내 정보보기(회원)
-    @RequestMapping(value="hView", method = RequestMethod.GET)
-    public ModelAndView hView(@RequestParam("Hid") String Hid){
+    @RequestMapping(value = "hView", method = RequestMethod.GET)
+    public ModelAndView hView(@RequestParam("Hid") String Hid) {
         mav = hsvc.hView(Hid);
 
 
@@ -123,7 +134,7 @@ public class HController {
     }
 
     // uPloadFile : 내 정보보기에서 프로필 수정
-    @RequestMapping(value="/uPloadFile", method = RequestMethod.POST)
+    @RequestMapping(value = "/uPloadFile", method = RequestMethod.POST)
     public ModelAndView uPloadFile(@ModelAttribute HDTO human) throws IOException {
 
         mav = hsvc.uploadFilea(human);
@@ -133,7 +144,7 @@ public class HController {
     }
 
     // uPdelete : 기본프로필로 변경
-    @RequestMapping(value="/uPdelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/uPdelete", method = RequestMethod.POST)
     public ModelAndView uPdelete(@ModelAttribute HDTO human) throws IOException {
 
         mav = hsvc.uPdelete(human);
@@ -229,4 +240,6 @@ public class HController {
         mav = hsvc.HpwModify(hdto);
         return mav;
     }
+
 }
+

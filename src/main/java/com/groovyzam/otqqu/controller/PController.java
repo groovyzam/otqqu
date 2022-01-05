@@ -5,14 +5,17 @@ import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PController {
@@ -87,24 +90,27 @@ public class PController {
     @RequestMapping(value = "C_list", method = RequestMethod.POST)
     public @ResponseBody List<COMMENT> cList(@RequestParam("Pnum") int Pnum){
 
-
-        System.out.println("========Cnum =======" + Pnum);
-
         List<COMMENT> commentList = psvc.cList(Pnum);
 
         return commentList;
     }
 
-    // C_write
+    // C_write : 댓글 작성하기
     @RequestMapping(value = "C_write", method = RequestMethod.POST)
     public @ResponseBody List<COMMENT> cWrite(@ModelAttribute COMMENT comment){
 
         List<COMMENT>  commentList = psvc.cWirte(comment);
-        System.out.println("commnentsgfdsfg : " + comment );
+
         return commentList;
     }
 
 
+    // C_delete : 댓글 삭제
+    @RequestMapping(value = "C_delete", method = RequestMethod.GET)
+    public @ResponseBody List<COMMENT> cDelete(@ModelAttribute COMMENT comment){
+        List<COMMENT>  commentList = psvc.cDelete(comment);
+        return commentList;
+    }
 
     @RequestMapping(value = "PostProductImg")
     public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
@@ -128,5 +134,6 @@ public class PController {
         mav = psvc.PcategoryList(Pcategory);
         return mav;
     }
+
 
 }
