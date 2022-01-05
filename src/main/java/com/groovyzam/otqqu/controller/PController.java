@@ -2,6 +2,7 @@ package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
+import com.groovyzam.otqqu.dto.PimgRatioDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class PController {
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
 
     public ModelAndView pUpload(@ModelAttribute PDTO pdto,
+              @ModelAttribute PimgRatioDTO imgRatio,
               @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
@@ -57,8 +59,9 @@ public class PController {
 
         System.out.println("1. 컨트롤러 : " + pdto.toString());
         System.out.println(Pprice.toString());
+        System.out.println(imgRatio.toString());
 
-        mav = psvc.pUpload(pdto, Pcategory, Pbrand, PproductName, Pprice, PproductFile,PproductFileImg);
+        mav = psvc.pUpload(pdto,imgRatio, Pcategory, Pbrand, PproductName, Pprice, PproductFile,PproductFileImg);
 
         return mav;
     }

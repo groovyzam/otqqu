@@ -1,10 +1,7 @@
 package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
-import com.groovyzam.otqqu.dto.COMMENT;
-import com.groovyzam.otqqu.dto.HDTO;
-import com.groovyzam.otqqu.dto.PDTO;
-import com.groovyzam.otqqu.dto.ProductDTO;
+import com.groovyzam.otqqu.dto.*;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -44,7 +41,7 @@ public class PService {
     private HttpSession session;
 
 
-    public ModelAndView pUpload(PDTO post, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<Integer> pprice, List<MultipartFile> pproductFile, List<String> PproductFileImg) throws IOException {
+    public ModelAndView pUpload(PDTO post,PimgRatioDTO imgRatio, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<Integer> pprice, List<MultipartFile> pproductFile, List<String> PproductFileImg) throws IOException {
 
         int result2 = 0;
 
@@ -68,6 +65,7 @@ public class PService {
 
         int result1 = pdao.PostUpload(post);
 
+        int result3 = pdao.imgRatioUpload(imgRatio);
 
         List<MultipartFile> MultiFile = pproductFile;
 
@@ -125,7 +123,7 @@ public class PService {
         }
 
 
-        if (result1 > 0 && result2 > 0) {
+        if (result1 > 0 && result2 > 0 && result3 > 0) {
 
             mav.setViewName("redirect:/");
             System.out.println("게시글 등록 성공");

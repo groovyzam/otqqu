@@ -34,4 +34,7 @@
         INSERT INTO PCOMMENT VALUES (PCMT_SEQ,#{Cnum},#{Cwriter},#{Ccontent})
     </insert>
 
+    <insert id="imgRatioUpload" parameterType="imgRatio">
+        INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft})
+    </insert>
 </mapper>
