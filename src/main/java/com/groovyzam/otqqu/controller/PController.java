@@ -114,4 +114,19 @@ public class PController {
         return mv;
     }
 
+    //pStyleList 게시글 스타일별 목록
+    @RequestMapping(value = "pStyleList", method = RequestMethod.GET)
+    public ModelAndView pStyleList(@RequestParam("Pstyle") String Pstyle){
+
+        mav = psvc.PstyleList(Pstyle);
+        return mav;
+    }
+    //pCategoryList 상품 카테고리별 목록
+    @RequestMapping(value = "pCategoryList", method = RequestMethod.GET)
+    public ModelAndView  pCategoryList(@RequestParam("Pcategory") String Pcategory){
+
+        mav = psvc.PcategoryList(Pcategory);
+        return mav;
+    }
+
 }

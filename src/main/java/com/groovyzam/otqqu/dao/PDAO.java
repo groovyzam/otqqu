@@ -23,4 +23,9 @@ public interface PDAO {
     List<COMMENT> cList(int Pnum);
 
     int cWrite(COMMENT comment);
+
+    List<PDTO> PstyleList(String pstyle);
+
+    List<PDTO> PcategoryList(String Pcategory);
+
 }

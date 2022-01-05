@@ -211,4 +211,27 @@ public class PService {
         return postList;
 
     }
+
+    public ModelAndView PstyleList(String pstyle) {
+
+        List<PDTO> list = pdao.PstyleList(pstyle);
+
+        System.out.println(list);
+
+        mav.addObject("StyleList",list);
+        mav.setViewName("Pstyle");
+
+        return mav;
+    }
+
+    public ModelAndView PcategoryList(String Pcategory) {
+
+
+        List<PDTO> list = pdao.PcategoryList(Pcategory);
+
+        System.out.println(Pcategory);
+        mav.addObject("CategoryList",list);
+        mav.setViewName("Pcategory");
+        return mav;
+    }
 }

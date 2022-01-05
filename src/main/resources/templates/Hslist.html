@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE-edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="inception"/>
+    <meta name="description" content="페이지 설명"/>
+    <title>회원 검색목록</title>
+
+</head>
+<body>
+
+
+<table>
+    <caption>회원 검색 목록</caption>
+    <thead>
+    <tr>
+        <th>이름</th>
+        <th>아이디</th>
+        <th>이메일</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr  th:each="hList : ${hList}">
+        <td th:text="${hList.Hname}">이름</td>
+        <td><a th:text="${hList.Hid}" th:href="@{hView(Hid=${hList.Hid})}"></a></td>
+        <td th:text="${hList.Hemail}">이메일</td>
+       <td> 프로필<img width="100px" height="100px" id="img" th:src="@{/profile/{hList}(hList=${hList.Hfile})}"></td>
+
+    </tr>
+
+    </tbody>
+</table>
+</body>
+</html>

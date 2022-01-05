@@ -33,4 +33,13 @@
         INSERT INTO PCOMMENT VALUES (PCMT_SEQ,#{Cnum},#{Cwriter},#{Ccontent})
     </insert>
 
+    <select id="PstyleList" parameterType="String" resultType="post">
+        SELECT * FROM POST WHERE PSTYLE=#{pstyle}
+    </select>
+
+    <select id="PcategoryList" parameterType="String" resultType="post">
+        SELECT * FROM POST A,(SELECT PNUM FROM ${Pcategory})B WHERE A.PNUM=B.PNUM
+    </select>
+
+
 </mapper>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="KIMAH"/>
+    <meta name="description" content="SpringBoot Thymeleaf">
+    <title>Spring Boot Test</title>
+</head>
+<body>
+
+
+<input type="hidden" name="Pstyle" value="${StyleList.Pstyle}">
+
+
+<div th:each="list : ${StyleList}" class="img_box fadein" style=" text-align: center; float: left; width: 30%;" >
+    <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" width="150px" height="150px" class="test_image">
+</div>
+
+
+</body>
+
+
+</html>

@@ -8,6 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    
 </head>
 
 <body>
@@ -34,9 +35,31 @@
 
 <button onclick="location.href='PostForm'" value="회원목록">게시글 작성</button>
 
+<form action="Search" method="GET">
+    <input type="text" name="keyword" id="searchInput" placeholder="검색어를 입력해주세요">
+    <input type="submit" value="검색">
+</form>
+<h3>STYLE</h3>
+<button onclick="location.href='pStyleList?Pstyle=casual'">캐주얼</button>
+<button onclick="location.href='pStyleList?Pstyle=street'">스트릿</button>
+<button onclick="location.href='pStyleList?Pstyle=vintage'">빈티지</button>
+<button onclick="location.href='pStyleList?Pstyle=classic'">클래식</button>
+<button onclick="location.href='pStyleList?Pstyle=other'">기타</button>
+<h3>CATEGORY</h3>
+<button onclick="location.href='pCategoryList?Pcategory=cap'">모자</button>
+<button onclick="location.href='pCategoryList?Pcategory=outer'">아우터</button>
+<button onclick="location.href='pCategoryList?Pcategory=top'">상의</button>
+<button onclick="location.href='pCategoryList?Pcategory=bottom'">하의</button>
+<button onclick="location.href='pCategoryList?Pcategory=shoes'">신발</button>
+<button onclick="location.href='pCategoryList?Pcategory=accessories'">악세서리</button>
+
 
 <div th:each="list : ${postList}" class="img_box fadein" style="text-align: center">
+
+    프로필사진
+    <h1 th:text="${list.Hid}"></h1>
     <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" width="500px" height="500px" class="test_image">
+
 </div>
 
 
@@ -100,6 +123,36 @@
     });
 
 </script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $("#searchInput").autocomplete({
+            source : function(request, response) {
+
+                $.ajax({
+
+                    url : "/autocomplete",
+                    type : "post",
+                    dataType : "json",
+                    data: request,
+
+                    success : function(data) {
+
+                        var result = data;
+                        response(result);
+                    },
+
+                    error : function(data) {
+                        alert("에러가 발생하였습니다.")
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+
 
 
 

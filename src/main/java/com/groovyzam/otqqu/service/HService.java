@@ -3,11 +3,6 @@ package com.groovyzam.otqqu.service;
 import com.groovyzam.otqqu.dao.HDAO;
 import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.dto.PDTO;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -109,24 +104,7 @@ public class HService {
     }
 
     // 내 정보보기
-    public ModelAndView hView(String Hid) {
-        HDTO human = hdao.hView(Hid);
-        List<PDTO> pmylist = hdao.pMylist(Hid);
 
-        System.out.println("pmylist : " + pmylist);
-
-        if (human != null) {
-
-            mav.addObject("pmylist", pmylist);
-            mav.addObject("member", human);
-            mav.setViewName("Hview");
-        } else {
-            mav.setViewName("redirect:/hList");
-        }
-
-
-        return mav;
-    }
 
     // 내 정보보기에서 프로필 수정
     public ModelAndView uploadFilea(HDTO human) throws IOException {
@@ -184,8 +162,137 @@ public class HService {
         return mav;
     }
 
+    // Search : 검색어 입력
+    public ModelAndView Search(String keyword) {
+        List<HDTO> hList = hdao.Search(keyword);
 
 
+        mav.addObject("keyword", keyword);
+        mav.addObject("hList",hList);
+
+
+
+        mav.setViewName("Hslist");
+
+        return mav;
+    }
+    public ModelAndView hView(String Hid) {
+        HDTO human = hdao.hView(Hid);
+        List<PDTO> pmylist = hdao.pMylist(Hid);
+
+
+        //팔로우 정보에 사용할 세션ID 불러오기
+        String sessionId = (String) session.getAttribute("loginId");
+
+        //팔로우 여부를 확인하기 위한 정보 가져오기
+        String followList = hdao.followList(sessionId,Hid);
+
+        // 회원의 팔로우 한 회원 수
+        List<PDTO> following = hdao.following(Hid);
+
+       // 회원의 팔로워 수
+        List<PDTO> follower = hdao.follower(Hid);
+
+        if (human != null) {
+            mav.addObject("following", following);
+            mav.addObject("follower", follower);
+            mav.addObject("followList",followList);
+            mav.addObject("pmylist", pmylist);
+            mav.addObject("member", human);
+            mav.setViewName("Hview");
+        } else {
+            mav.setViewName("redirect:/hList");
+        }
+
+
+        return mav;
+    }
+
+    public ModelAndView hFollow(String Hid, String sessionId) {
+
+        //팔로우 목록에 추가
+        int result=hdao.hFollow(Hid,sessionId);
+
+        if(result>0){
+
+            mav.setViewName("redirect:hView?Hid="+Hid+"");
+        }else {
+            mav.setViewName("Main");
+        }
+        return mav;
+
+    }
+    public ModelAndView hUnFollow(String Hid, String sessionId) {
+
+
+        //팔로우 목록에서 제거
+        int result=hdao.hUnFollow(Hid,sessionId);
+
+        if(result>0){
+
+            mav.setViewName("redirect:hView?Hid="+Hid+"");
+
+        }else {
+            mav.setViewName("Main");
+        }
+        return mav;
+
+    }
+
+
+    public ModelAndView hModifyForm(String hid) {
+
+        HDTO hdto = hdao.hView(hid);
+
+        mav.addObject("human",hdto);
+        mav.setViewName("Hmodify");
+         return mav;
+    }
+
+    public ModelAndView hModify(HDTO hdto) {
+
+        int result = hdao.hModify(hdto);
+
+        if(result>0){
+            mav.setViewName("redirect:hView?Hid="+hdto.getHid()+"");
+        }
+
+        return mav;
+    }
+
+    public String pwOverlap(String hpw) {
+
+        String sessionId= (String) session.getAttribute("loginId");
+        HDTO human = hdao.hView(sessionId);
+
+        String result = null;
+
+        if(pwEnc.matches(hpw,human.getHpw())){
+            result = "OK"; // 중복 x
+        } else {
+            result = "NO"; // 중복 o
+        }
+
+        return result;
+    }
+
+    public ModelAndView HpwModify(HDTO hdto) {
+
+        String sessionId= (String) session.getAttribute("loginId");
+        hdto.setHpw(pwEnc.encode(hdto.getHpw()));
+
+
+        int result= hdao.HpwModify(sessionId,hdto.getHpw());
+
+        if(result>0){
+            mav.setViewName("redirect:/hLogout");
+            System.out.println("비밀번호 변경");
+        }else {
+            mav.setViewName("Main");
+        }
+
+        return mav;
+    }
 }
 
 
