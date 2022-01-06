@@ -9,30 +9,20 @@ import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
-=======
 import org.springframework.validation.BindingResult;
->>>>>>> 080b43d11bf529e60456c3731cddf35c5c5cbf04
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-<<<<<<< HEAD
 import javax.servlet.http.HttpServletRequest;
-=======
->>>>>>> 080b43d11bf529e60456c3731cddf35c5c5cbf04
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
-=======
 import java.util.Map;
->>>>>>> 080b43d11bf529e60456c3731cddf35c5c5cbf04
 
 @Controller
 public class HController {
