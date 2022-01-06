@@ -10,7 +10,7 @@ public class COMMENT {
 
     private int Cnum;
     private int Pnum;
-    private int Cwriter;
-    private int Ccomment;
+    private String Cwriter;
+    private String Ccontent;
 
 }

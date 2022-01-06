@@ -10,19 +10,21 @@
     <title>Spring Boot Test</title>
 </head>
 <body>
-<form action="hJoin" method="POST" enctype="multipart/form-data">
+<form action="hJoin" method="POST" enctype="multipart/form-data" modelAttribute="HDTO" id="joinform">
 
     <table>
         <caption>회원가입</caption>
         <tr>
             <th>이름</th>
-            <td><input type="text" name="Hname"/></td>
+            <td><input type="text" name="Hname" /></td>
+            <span th:text="${valid_Hname}"></span>
         </tr>
 
         <tr>
             <th>아이디</th>
             <td>
                 <input type="text" name="Hid" id="Hid" onkeyup="idOverlap()"/>
+                <span th:text="${valid_Hid}"></span>
                 <span id="confirmId"></span></td>
              </tr>
 
@@ -30,7 +32,7 @@
         <tr>
             <th>패스워드</th>
             <td><input type="password" name="Hpw" id="Hpw" onkeyup="pwCheck()" />
-
+                <span th:text="${valid_Hpw}"></span>
                 <span class="section_pw_check_text"></span>
             </td>
         </tr>
@@ -46,43 +48,53 @@
             <th>이메일</th>
             <td>
 
-            <input type="email" name="Hemail" id="Hemail"/>
-                <span id="emailConfirmText"><input type="button" value="인증" onclick="confirmEmail()"/></span>
+            <input type="email" name="Hemail"/>
+                <span th:text="${valid_Hemail}"></span>
+                <!--<span id="emailConfirmText"><input type="button" value="인증" onclick="confirmEmail()"/></span>-->
             </td>
         </tr>
 
 
         <tr>
             <th>나이</th>
-            <td><input type="text" name="Hage"/></td>
+            <td><input type="text" name="Hage" />
+                <span th:text="${valid_Hage}"></span></td>
+
         </tr>
 
         <tr>
             <th>키</th>
-            <td><input type="text" name="Hheight"/></td>
+            <td><input type="text" name="Hheight" />
+                <span th:text="${valid_Hheight}"></span></td>
+
         </tr>
 
         <tr>
             <th>몸무게</th>
-            <td><input type="text" name="Hweight"/></td>
+            <td><input type="text" name="Hweight" />
+                <span th:text="${valid_Hweight}"></span></td>
+
         </tr>
 
         <tr>
             <th>성별</th>
             <td>
-                <input type="radio" name="Hgender" value="m">남
-                <input type="radio" name="Hgender" value="w">여
+                <input type="radio" name="Hgender" value="m" >남
+                <input type="radio" name="Hgender" value="w" >여
+                <span th:text="${valid_Hgender}"></span>
             </td>
         </tr>
 
         <tr>
             <th>전화번호</th>
-            <td><input type="text" name="Hphone"/></td>
+            <td><input type="text" name="Hphone"/>
+                <span th:text="${valid_Hphone}"></span></td>
+
         </tr>
 
         <tr>
             <input type="hidden" name="Hfile" th:value="기본프로필.PNG"/>
-            <td colspan="2"><input type="submit" value="가입"></td>
+            <td colspan="2"><input type="submit" value="가입" onclick="hJoin()"></td>
         </tr>
 
     </table>
@@ -186,6 +198,20 @@
         }
     }
 
-</script>
+    function hJoin(){
 
+        if(!idOverlap()){
+            alert("아이디 중복체크를 진행해주세요");
+        }else if(pwCheck() == false){
+            alert("비밀번호를 규칙에 맞게 입력하세요");
+        }else if(pwEqual() == false){
+            alert("비밀번호가 서로 일치하지 않습니다.");
+        }else{
+            joinform.submit();
+        }
+
+    }
+
+
+</script>
 </html>

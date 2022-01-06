@@ -30,4 +30,6 @@ public interface PDAO {
     List<PDTO> PstyleList(String pstyle);
 
     List<PDTO> PcategoryList(String Pcategory);
+
+    int cDelete(COMMENT comment);
 }

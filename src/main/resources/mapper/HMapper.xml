@@ -40,6 +40,7 @@
         SELECT * FROM POST WHERE HID = #{Hid}
     </select>
 
+<<<<<<< HEAD
     <select id="Search" parameterType="String" resultType="human">
         SELECT * FROM HUMAN WHERE HID LIKE '%'||#{keyword}||'%'
     </select>
@@ -76,4 +77,5 @@
     <update id="HpwModify" parameterType="String">
         UPDATE HUMAN SET HPW=#{hpw} WHERE HID=#{sessionId}
     </update>
+
 </mapper>
