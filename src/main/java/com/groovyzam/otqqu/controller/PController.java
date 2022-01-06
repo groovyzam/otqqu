@@ -2,11 +2,8 @@ package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
-<<<<<<< HEAD
 import com.groovyzam.otqqu.dto.PimgRatioDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
-=======
->>>>>>> f2170caa4a788ea9809da5a4e3846c1936e53964
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -75,6 +72,7 @@ public class PController {
 
         return mav;
     }
+
     @RequestMapping(value = "/ajaxPost", method = RequestMethod.POST)
     public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page) {
 

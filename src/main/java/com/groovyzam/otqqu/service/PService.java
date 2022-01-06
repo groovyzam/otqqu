@@ -212,8 +212,8 @@ public class PService {
 
     public ModelAndView mainPost() {
 
-       int StartPnum = 1;
-       int LastPnum = 3;
+        int StartPnum = 1;
+        int LastPnum = 3;
         List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
 
         mav.addObject("postList", postList);
