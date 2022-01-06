@@ -76,4 +76,5 @@
     <update id="HpwModify" parameterType="String">
         UPDATE HUMAN SET HPW=#{hpw} WHERE HID=#{sessionId}
     </update>
+
 </mapper>

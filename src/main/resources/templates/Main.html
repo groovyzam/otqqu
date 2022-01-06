@@ -37,9 +37,33 @@
 
 <a th:href="@{hView(Hid=${session.loginId})}"><button>내 정보보기</button></a>
 
+<<<<<<< HEAD
+
+
 
 <div th:text="${session.loginId}"></div>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<a th:href="@{pView(Pnum='41')}">41번게시물</a>
+
+<div th:text="${session.loginId}"></div>
+
+
+
+
+>>>>>>> 27c127a3b3e69c4a9322b1270473b698242de1d3
+=======
+
+<button onclick="location.href='img'" > 이미지</button>
+
+>>>>>>> parent of d86e346 (게시글 사진 클릭)
+=======
+
+<button onclick="location.href='img'" > 이미지</button>
+
+>>>>>>> parent of d86e346 (게시글 사진 클릭)
 <button onclick="location.href='PostForm'" value="회원목록">게시글 작성</button>
 
 <form action="Search" method="GET">
@@ -60,12 +84,13 @@
 <button onclick="location.href='pCategoryList?Pcategory=shoes'">신발</button>
 <button onclick="location.href='pCategoryList?Pcategory=accessories'">악세서리</button>
 
-</a>
+
 <div th:each="list : ${postList}" class="img_box fadein" style="text-align: center">
-    <a th:href="@{pView(Pnum=${list.Pnum})}">
+
+    프로필사진
     <h1 th:text="${list.Hid}"></h1>
     <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" width="500px" height="500px" class="test_image">
-    </a>
+
 </div>
 
 
@@ -97,13 +122,10 @@
                     console.log("성공");
                     /* 이미지 동적 추가 */
 
-
-
                     var append_node = "";
                     append_node += "<div class='img_box fadein' style=\"text-align: center\">";
-                    append_node += "<a href='pView?Pnum="+data[i].pnum+"' id='test'>";
+                    console.log(data[i].pfileName);
                     append_node += "<img width='500px' height='500px' class='test_image' src='/photo/"+data[i].pfileName+"'>";
-                    append_node += "</a>";
                     append_node += "</div>";
                     $('body').append(append_node)
                 }
@@ -116,6 +138,7 @@
             }
         });
     }
+
     //스크롤 맨 아래일 때 실행
     $(window).scroll(function () {
         if ($(window).scrollTop() + 200 >= $(document).height() - $(window).height()) {

@@ -1,10 +1,12 @@
 package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
+
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import com.groovyzam.otqqu.dto.*;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -75,7 +77,7 @@ public class PService {
             String fileUrl = null;
             String ProductfileNameImg = null;
             String uuid2 = UUID.randomUUID().toString().substring(1, 7);
-            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i);
+            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/"+ pcategory.get(i);
             String savePath3 =  "/" + ProductfileName;
 
             ProductDTO productDTO = new ProductDTO();
@@ -187,7 +189,10 @@ public class PService {
         return commentList;
     }
 
+
     public ModelAndView PostProductImg(String PIMG) {
+
+
         ModelAndView mv = new ModelAndView("jsonView");
         Map map = new HashMap();
 
@@ -250,6 +255,7 @@ public class PService {
 
     }
 
+
     public ModelAndView PstyleList(String pstyle) {
 
         List<PDTO> list = pdao.PstyleList(pstyle);
@@ -272,4 +278,5 @@ public class PService {
         mav.setViewName("Pcategory");
         return mav;
     }
+
 }

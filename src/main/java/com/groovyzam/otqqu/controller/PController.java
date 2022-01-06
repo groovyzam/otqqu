@@ -1,15 +1,16 @@
 package com.groovyzam.otqqu.controller;
-
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.PimgRatioDTO;
+
+import com.groovyzam.otqqu.dto.ProductDTO;
+
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,13 +40,14 @@ public class PController {
     @ResponseBody
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
     public ModelAndView pUpload(@ModelAttribute PDTO pdto,
-              @ModelAttribute PimgRatioDTO imgRatio,
-              @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
+                                @ModelAttribute PimgRatioDTO imgRatio,
+                                @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
             , @RequestParam(value = "Pprice", required = true) List<Integer> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
             , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
+
 
     ) throws IOException {
         pdto.setHid((String) session.getAttribute("loginId"));
@@ -57,7 +59,11 @@ public class PController {
         System.out.println(Pprice.toString());
         System.out.println(imgRatio.toString());
 
+
         mav = psvc.pUpload(pdto,imgRatio, Pcategory, Pbrand, PproductName, Pprice, PproductFile,ProductFileImg);
+
+        pdto.setHid((String) session.getAttribute("loginId"));
+
 
         return mav;
     }
@@ -110,12 +116,16 @@ public class PController {
     }
 
 
+
+
     // C_delete : 댓글 삭제
     @RequestMapping(value = "C_delete", method = RequestMethod.GET)
     public @ResponseBody List<COMMENT> cDelete(@ModelAttribute COMMENT comment){
         List<COMMENT>  commentList = psvc.cDelete(comment);
         return commentList;
     }
+
+
 
     @RequestMapping(value = "PostProductImg")
     public ModelAndView getImg(@RequestParam("PIMG") String PIMG){
@@ -141,4 +151,7 @@ public class PController {
     }
 
 
+
 }
+
+

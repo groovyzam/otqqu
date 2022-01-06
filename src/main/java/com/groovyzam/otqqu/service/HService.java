@@ -99,12 +99,9 @@ public class HService {
             mav.setViewName("Main");
 
         }
-        HDTO secu = hdao.hLogin(human);
-        // pwEnc.matches() 타입은 boolean => true or false
 
         return mav;
     }
-
 
 
     // 회원목록
@@ -134,7 +131,7 @@ public class HService {
 
         System.out.println("Hfile" + Hfile);
 
-        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/profile/" + Hfile;
+        String savePath = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/profile/" + Hfile;
 
         if (HProfile != null) {
             human.setHfile(Hfile);
@@ -205,6 +202,7 @@ public class HService {
 
         // 회원의 팔로우 한 회원 수
         List<PDTO> following = hdao.following(Hid);
+        
 
        // 회원의 팔로워 수
         List<PDTO> follower = hdao.follower(Hid);
@@ -270,6 +268,7 @@ public class HService {
         int result = hdao.hModify(hdto);
 
         if(result>0){
+
             mav.setViewName("redirect:hView?Hid="+hdto.getHid()+"");
         }
 

@@ -5,7 +5,10 @@ import com.groovyzam.otqqu.dto.HDTO;
 import com.groovyzam.otqqu.service.HService;
 
 
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +23,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import java.util.HashMap;
+
 
 @Controller
 public class HController {
@@ -240,6 +247,32 @@ public class HController {
         mav = hsvc.HpwModify(hdto);
         return mav;
     }
+
+
+    @RequestMapping(value = "/check", method = RequestMethod.POST)
+    public  @ResponseBody String sendSms(HttpServletRequest request) throws Exception {
+
+        String api_key = "NCS0IMJVIMR6GLKZ";
+        String api_secret = "U3HT9Q0PWGSICBP2AZSZAVEKXSWO3NJK";
+
+        Message coolsms = new Message(api_key, api_secret);
+
+        HashMap<String, String> set = new HashMap<String, String>();
+
+        set.put("to", (String)request.getParameter("Hphone")); // 받는 사람
+        set.put("from", "01083668581"); // 발신번호
+        set.put("text", "안녕하세요 인증번호는 [" + (String) request.getParameter("text") + "]입니다"); // 문자내용
+        set.put("type", "sms"); // 문자 타입
+        set.put("app_version","test app 1.2");
+
+        try {
+            JSONObject object = coolsms.send(set);
+        } catch (CoolsmsException e) {
+            e.printStackTrace();
+        }
+        return "ok";
+    }
+
 
 }
 
