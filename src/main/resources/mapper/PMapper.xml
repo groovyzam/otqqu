@@ -46,5 +46,7 @@
         DELETE FROM PCOMMENT WHERE CNUM = #{Cnum}
     </delete>
 
-
+    <insert id="imgRatioUpload" parameterType="imgRatio">
+        INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft})
+    </insert>
 </mapper>

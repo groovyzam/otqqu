@@ -2,20 +2,18 @@ package com.groovyzam.otqqu.controller;
 
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
+import com.groovyzam.otqqu.dto.PimgRatioDTO;
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class PController {
@@ -40,23 +38,30 @@ public class PController {
     //pUpload
     @ResponseBody
     @RequestMapping(value = "pUpload", method = RequestMethod.POST)
-
     public ModelAndView pUpload(@ModelAttribute PDTO pdto,
+              @ModelAttribute PimgRatioDTO imgRatio,
               @RequestParam(value = "Pcategory", required = true) List<String> Pcategory
             , @RequestParam(value = "Pbrand", required = true) List<String> Pbrand
             , @RequestParam(value = "PproductName", required = true) List<String> PproductName
-            , @RequestParam(value = "Pprice", required = true) List<String> Pprice
+            , @RequestParam(value = "Pprice", required = true) List<Integer> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
             , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
 
     ) throws IOException {
         pdto.setHid((String) session.getAttribute("loginId"));
 
-        mav = psvc.pUpload(pdto, Pcategory, Pbrand, PproductName, Pprice, PproductFile);
+        //List<MultipartFile> 비어있으면 isEmpty()
+        //List<String> 비어있으면 equals("")
 
+        System.out.println("1. 컨트롤러 : " + pdto.toString());
+        System.out.println(Pprice.toString());
+        System.out.println(imgRatio.toString());
+
+        mav = psvc.pUpload(pdto,imgRatio, Pcategory, Pbrand, PproductName, Pprice, PproductFile,ProductFileImg);
 
         return mav;
     }
+
     @RequestMapping(value="/mainPost", method = RequestMethod.GET)
     public ModelAndView mainPost(){
 

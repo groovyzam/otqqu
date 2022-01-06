@@ -3,6 +3,7 @@ package com.groovyzam.otqqu.dao;
 
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
+import com.groovyzam.otqqu.dto.PimgRatioDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,4 +30,6 @@ public interface PDAO {
     List<PDTO> PcategoryList(String Pcategory);
 
     int cDelete(COMMENT comment);
+
+    int imgRatioUpload(PimgRatioDTO imgRatio);
 }

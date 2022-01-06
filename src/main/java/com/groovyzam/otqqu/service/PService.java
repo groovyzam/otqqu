@@ -4,6 +4,7 @@ import com.groovyzam.otqqu.dao.PDAO;
 import com.groovyzam.otqqu.dto.COMMENT;
 import com.groovyzam.otqqu.dto.PDTO;
 import com.groovyzam.otqqu.dto.ProductDTO;
+import com.groovyzam.otqqu.dto.*;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,15 +12,18 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -37,8 +41,7 @@ public class PService {
     private HttpSession session;
 
 
-    public ModelAndView pUpload(PDTO post, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<String> pprice, List<MultipartFile> pproductFile) throws IOException {
-
+    public ModelAndView pUpload(PDTO post,PimgRatioDTO imgRatio, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<Integer> pprice, List<MultipartFile> pproductFile, List<String> PproductFileImg) throws IOException {
 
         int result2 = 0;
 
@@ -49,8 +52,8 @@ public class PService {
 
         String PfileName = uuid + "_" + originalFileName;
 
-        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
 
+        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
 
         if (!Pfile.isEmpty()) {
             post.setPfileName(PfileName);
@@ -59,42 +62,59 @@ public class PService {
             post.setPfileName("default.png");
         }
 
-
-
         int result1 = pdao.PostUpload(post);
 
+        int result3 = pdao.imgRatioUpload(imgRatio);
 
         List<MultipartFile> MultiFile = pproductFile;
 
-        for (int i = 0; i < pcategory.size(); i++) {
+        for (int i = 0; i < pproductFile.size(); i++) {
 
+            String originalFileName2 = null;
+            String ProductfileName = null;
+            String fileUrl = null;
+            String ProductfileNameImg = null;
+            String uuid2 = UUID.randomUUID().toString().substring(1, 7);
+            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i);
+            String savePath3 =  "/" + ProductfileName;
 
             ProductDTO productDTO = new ProductDTO();
 
+            if(pproductFile.get(i).isEmpty() && !PproductFileImg.get(i).equals("")){
+                ProductfileNameImg = UUID.randomUUID().toString().substring(1, 7);
+                ProductfileName = uuid2 + "_" + ProductfileNameImg;
+                fileUrl = PproductFileImg.get(i);
+                Path target = Paths.get(savePath2,ProductfileName + ".jpg");
 
-            String originalFileName2 = MultiFile.get(i).getOriginalFilename();
+                URL url = new URL(fileUrl);
+
+                InputStream in = url.openStream();
+                Files.copy(in, target);
+                in.close();
+
+                System.out.println(i+"번째 파일 업로드 (url)");
+            }
+            else if(!pproductFile.get(i).isEmpty() && PproductFileImg.get(i).equals("")){
+                originalFileName2 = MultiFile.get(i).getOriginalFilename();
+                ProductfileName = uuid2 + "_" + originalFileName2;
+                MultiFile.get(i).transferTo(new File(savePath2+savePath3));
+                System.out.println(i+"번째 파일 업로드 (파일)");
+            }
 
 
-            String uuid2 = UUID.randomUUID().toString().substring(1, 7);
-
-            String ProductfileName = uuid2 + "_" + originalFileName2;
-
-            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/" + pcategory.get(i)+"/" + ProductfileName;
-
-
-
-            if (!MultiFile.get(i).isEmpty()) {
+            if (!MultiFile.get(i).isEmpty() || !PproductFileImg.get(i).equals("")) {
+                System.out.println(i+"번 : "+ProductfileName);
                 productDTO.setPproductFileName(ProductfileName);
-                MultiFile.get(i).transferTo(new File(savePath2));
-
-            } else {
+            }
+            else {
                 productDTO.setPproductFileName("default.png");
             }
 
-            productDTO.setPcategory(pcategory.get(i).toString());
-            productDTO.setPbrand(pbrand.get(i).toString());
-            productDTO.setPproductName(pproductName.get(i).toString());
-            productDTO.setPprice(Integer.parseInt(pprice.get(i).toString()));
+            productDTO.setPcategory(pcategory.get(i));
+            productDTO.setPbrand(pbrand.get(i));
+            productDTO.setPproductName(pproductName.get(i));
+
+            productDTO.setPprice(pprice.get(i));
             productDTO.setPproductFileName(ProductfileName);
 
             result2 = pdao.ProductUpload(productDTO);
@@ -102,7 +122,7 @@ public class PService {
         }
 
 
-        if (result1 > 0 && result2 > 0) {
+        if (result1 > 0 && result2 > 0 && result3 > 0) {
 
             mav.setViewName("redirect:/");
             System.out.println("게시글 등록 성공");
@@ -116,6 +136,7 @@ public class PService {
     }
 
     public ModelAndView pView(int Pnum) {
+
         PDTO post = pdao.pView(Pnum);
 
         if (post != null) {
