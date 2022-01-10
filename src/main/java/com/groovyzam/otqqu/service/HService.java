@@ -132,7 +132,7 @@ public class HService {
 
         System.out.println("Hfile" + Hfile);
 
-        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/profile/" + Hfile;
+        String savePath = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/profile/" + Hfile;
 
         if (HProfile != null) {
             human.setHfile(Hfile);
@@ -305,6 +305,20 @@ public class HService {
             mav.setViewName("Main");
         }
 
+        return mav;
+    }
+
+    public ModelAndView mainProfile(String HID) {
+
+        String profile = hdao.mainProfile(HID);
+
+        System.out.println("프로필사진 : "+profile);
+
+        if(profile != null) {
+            mav.addObject("Hfile", profile);
+        }
+
+        mav.setViewName("mainPost");
         return mav;
     }
 }

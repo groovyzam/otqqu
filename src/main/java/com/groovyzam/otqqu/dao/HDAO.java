@@ -59,4 +59,6 @@ public interface HDAO {
     int hModify(HDTO hdto);
 
     int HpwModify(String sessionId, String hpw);
+
+    String mainProfile(String HID);
 }

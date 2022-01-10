@@ -77,4 +77,7 @@
         UPDATE HUMAN SET HPW=#{hpw} WHERE HID=#{sessionId}
     </update>
 
+    <select id="mainProfile" parameterType="String">
+        SELECT HFILE FROM HUMAN WHERE HID = #{HID}
+    </select>
 </mapper>

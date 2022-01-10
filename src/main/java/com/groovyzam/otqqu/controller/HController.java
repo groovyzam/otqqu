@@ -51,6 +51,17 @@ public class HController {
             return "Login";
         }
 
+        return "Main";
+    }
+
+    @RequestMapping(value = "/Main", method = RequestMethod.GET)
+    public String MainPage() {
+
+
+        if (session.getAttribute("loginId") == null) {
+            return "Login";
+        }
+
         return "redirect:/mainPost";
     }
 
@@ -292,6 +303,14 @@ public class HController {
 
         return "ok";
 
+    }
+
+    @RequestMapping(value = "mainProfile", method = RequestMethod.POST)
+    public ModelAndView mainProfile(@RequestParam String HID){
+
+        mav=hsvc.mainProfile(HID);
+
+        return mav;
     }
 }
 

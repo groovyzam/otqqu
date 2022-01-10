@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 @Service
 public class PService {
 
@@ -78,7 +77,6 @@ public class PService {
             String ProductfileNameImg = null;
             String uuid2 = UUID.randomUUID().toString().substring(1, 7);
             String savePath2 = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/" + pcategory.get(i);
-            String savePath3 =  "/" + ProductfileName;
 
             ProductDTO productDTO = new ProductDTO();
 
@@ -99,6 +97,8 @@ public class PService {
             else if(!pproductFile.get(i).isEmpty() && PproductFileImg.get(i).equals("")){
                 originalFileName2 = MultiFile.get(i).getOriginalFilename();
                 ProductfileName = uuid2 + "_" + originalFileName2;
+                String savePath3 =  "/" + ProductfileName;
+                System.out.println(savePath2+savePath3);
                 MultiFile.get(i).transferTo(new File(savePath2+savePath3));
                 System.out.println(i+"번째 파일 업로드 (파일)");
             }
@@ -126,7 +126,7 @@ public class PService {
 
         if (result1 > 0 && result2 > 0 && result3 > 0) {
 
-            mav.setViewName("redirect:/");
+            mav.setViewName("Main");
             System.out.println("게시글 등록 성공");
         } else {
             mav.setViewName("Main");
@@ -229,7 +229,7 @@ public class PService {
     public ModelAndView mainPost() {
 
         int StartPnum = 1;
-        int LastPnum = 3;
+        int LastPnum = 12;
         List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
 
         mav.addObject("postList", postList);
