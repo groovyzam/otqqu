@@ -90,4 +90,13 @@
     <select id="postLikeNum" parameterType="int" resultType="int">
             SELECT COUNT(*) FROM POSTLIKE WHERE PNUM=#{Pnum}
     </select>
+
+    <select id="postLikeId" parameterType="like" resultType="String">
+        SELECT HID FROM POSTLIKE WHERE PNUM=#{Pnum} AND HID=#{Hid}
+    </select>
+
+    <delete id="postLikeDelete" parameterType="like">
+        DELETE FROM POSTLIKE WHERE PNUM=#{Pnum} AND HID=#{Hid}
+    </delete>
+
 </mapper>

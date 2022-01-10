@@ -25,6 +25,8 @@ import javax.validation.Valid;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -133,7 +135,10 @@ public class HController {
 
     // hView : 내 정보보기(회원)
     @RequestMapping(value = "hView", method = RequestMethod.GET)
-    public ModelAndView hView(@RequestParam("Hid") String Hid) {
+    public ModelAndView hView(@RequestParam("Hid") String Hid) throws UnsupportedEncodingException {
+
+
+        System.out.println("한글깨짐3"+Hid);
         mav = hsvc.hView(Hid);
 
 
@@ -191,7 +196,7 @@ public class HController {
     @RequestMapping(value = "hFollow", method = RequestMethod.GET)
     public ModelAndView hFollow(@RequestParam ("Hid") String Hid){
 
-        System.out.println(Hid);
+        System.out.println("한글깨짐2+"+Hid);
         String sessionId= (String) session.getAttribute("loginId");
 
         mav=hsvc.hFollow(Hid,sessionId);
@@ -203,7 +208,7 @@ public class HController {
     @RequestMapping(value = "hUnFollow", method = RequestMethod.GET)
     public ModelAndView hUnFollow(@RequestParam ("Hid") String Hid){
 
-        System.out.println(Hid);
+        System.out.println("한글깨짐2"+Hid);
         String sessionId= (String) session.getAttribute("loginId");
 
         mav=hsvc.hUnFollow(Hid,sessionId);

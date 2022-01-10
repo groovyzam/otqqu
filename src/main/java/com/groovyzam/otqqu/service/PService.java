@@ -137,6 +137,11 @@ public class PService {
     }
     // 게시글 정보
     public ModelAndView pView(int Pnum) {
+        String sessionId = (String) session.getAttribute("loginId");
+
+        POSTLIKE postlike = new POSTLIKE();
+        postlike.setHid(sessionId);
+        postlike.setPnum(Pnum);
 
         PDTO post = pdao.pView(Pnum);
         List<CAP> cap = pdao.cap(Pnum);
@@ -146,6 +151,8 @@ public class PService {
         List<SHOES> shoes = pdao.shoes(Pnum);
         List<ACCESSORIES> accessories = pdao.accessories(Pnum);
         int like = pdao.postLikeNum(Pnum);
+        String likeId = pdao.postLikeId(postlike);
+
 
         if (post != null) {
             mav.addObject("cap", cap);
@@ -156,6 +163,7 @@ public class PService {
             mav.addObject("accessories", accessories);
             mav.addObject("post", post);
             mav.addObject("like", like);
+            mav.addObject("likeId", likeId);
             mav.setViewName("Pview");
         } else {
             mav.setViewName("Main");
@@ -381,6 +389,22 @@ public class PService {
             mav.setViewName("redirect:pView?Pnum="+pnum+"");
         }
 
+        return mav;
+    }
+
+    public ModelAndView postLikeDelete(int pnum) {
+
+        String sessionId = (String) session.getAttribute("loginId");
+
+        POSTLIKE like = new POSTLIKE();
+        like.setHid(sessionId);
+        like.setPnum(pnum);
+
+        int result = pdao.postLikeDelete(like);
+
+        if (result>0){
+            mav.setViewName("redirect:pView?Pnum="+pnum+"");
+        }
         return mav;
     }
 }

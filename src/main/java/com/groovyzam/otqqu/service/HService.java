@@ -17,10 +17,8 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Service
 public class HService {
@@ -146,6 +144,7 @@ public class HService {
 
         if (result > 0) {
             //성공
+
             mav.addObject("member", human1);
             mav.setViewName("redirect:/hView?Hid=" + human1.getHid());
         } else {
@@ -190,7 +189,10 @@ public class HService {
         return mav;
     }
     public ModelAndView hView(String Hid) {
+
+        System.out.println("한글깨짐HID = "+Hid);
         HDTO human = hdao.hView(Hid);
+
         List<PDTO> pmylist = hdao.pMylist(Hid);
 
 
@@ -200,19 +202,21 @@ public class HService {
         //팔로우 여부를 확인하기 위한 정보 가져오기
         String followList = hdao.followList(sessionId,Hid);
 
-        // 회원의 팔로우 한 회원 수
-        List<PDTO> following = hdao.following(Hid);
-        
+        // 팔로잉 회원 목록
+        List<HDTO> following = hdao.following(Hid);
 
-       // 회원의 팔로워 수
-        List<PDTO> follower = hdao.follower(Hid);
+       //  팔로워 회원 목록
+        List<HDTO> follower = hdao.follower(Hid);
+
 
         if (human != null) {
             mav.addObject("following", following);
             mav.addObject("follower", follower);
+
             mav.addObject("followList",followList);
             mav.addObject("pmylist", pmylist);
             mav.addObject("member", human);
+
             mav.setViewName("Hview");
         } else {
             mav.setViewName("redirect:/hList");
@@ -228,6 +232,7 @@ public class HService {
         int result=hdao.hFollow(Hid,sessionId);
 
         if(result>0){
+
 
             mav.setViewName("redirect:hView?Hid="+Hid+"");
         }else {
@@ -247,6 +252,7 @@ public class HService {
             mav.setViewName("redirect:hView?Hid="+Hid+"");
 
         }else {
+
             mav.setViewName("Main");
         }
         return mav;

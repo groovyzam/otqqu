@@ -12,7 +12,17 @@
 <body>
 
 좋아요 개수<p th:text="${like}"></p>
-<a th:if="${session.loginId ne post.Hid}" th:href="@{postLike(Pnum=${post.Pnum})}"><button>좋아요</button></a>
+
+
+    <div th:if="${likeId ne session.loginId}">
+        <a th:if="${session.loginId ne post.Hid}" th:href="@{postLike(Pnum=${post.Pnum})}"><img src="photo/like.png" width="30px"></img></a>
+    </div>
+
+    <div th:if="${likeId eq session.loginId}">
+        <a th:if="${session.loginId ne post.Hid}" th:href="@{postLikeDelete(Pnum=${post.Pnum})}"><img src="photo/unlike.png" width="30px"></img></a>
+    </div>
+
+
 
 <span th:text="${post.Pnum}" ></span>
 <input type="hidden" th:value="${post.Pnum}" th:id="Pnum">

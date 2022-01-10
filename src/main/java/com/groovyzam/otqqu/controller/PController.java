@@ -183,6 +183,14 @@ public class PController {
 
         return mav;
     }
+    //postLikeDelete 좋아요 취소
+    @RequestMapping(value = "postLikeDelete", method = RequestMethod.GET)
+    public ModelAndView  postLikeDelete(@RequestParam("Pnum") int  Pnum){
+
+        mav = psvc.postLikeDelete(Pnum);
+
+        return mav;
+    }
 
 
 
