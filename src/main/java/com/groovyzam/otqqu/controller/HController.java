@@ -54,7 +54,7 @@ public class HController {
         return "Main";
     }
 
-    @RequestMapping(value = "/Main", method = RequestMethod.GET)
+    @RequestMapping(value = "Main", method = RequestMethod.GET)
     public String MainPage() {
 
 
@@ -66,19 +66,19 @@ public class HController {
     }
 
     // hjoinForm : 회원가입 페이지로 이동
-    @RequestMapping(value = "/hjoinForm", method = RequestMethod.GET)
+    @RequestMapping(value = "hjoinForm", method = RequestMethod.GET)
     public String hjoinForm() {
         return "Join";
     }
 
     // hjoinForm : 회원가입 페이지로 이동
-    @RequestMapping(value="/HpwModifyForm", method = RequestMethod.GET)
+    @RequestMapping(value="HpwModifyForm", method = RequestMethod.GET)
     public String  HpwModifyForm(){
         return "HpwModify";
     }
 
     // hJoin : 회원가입
-    @RequestMapping(value = "/hJoin", method = RequestMethod.POST)
+    @RequestMapping(value = "hJoin", method = RequestMethod.POST)
     public String hJoin(@Valid HDTO human, BindingResult br, Model model) {
         if(br.hasErrors()){
             model.addAttribute("human",human);
@@ -94,7 +94,7 @@ public class HController {
     }
 
     // A_idOverlap : 아이디 중복검사
-    @RequestMapping(value = "/A_idOverlap", method = RequestMethod.POST)
+    @RequestMapping(value = "A_idOverlap", method = RequestMethod.POST)
     public @ResponseBody
     String idOverlap(@RequestParam("Hid") String Hid) {
         // JSON(Ajax)을 이용할 떄 추가
@@ -104,7 +104,7 @@ public class HController {
     }
 
     // hLoginForm : 로그인 페이지로 이동
-    @RequestMapping(value = "/hLoginForm", method = RequestMethod.GET)
+    @RequestMapping(value = "hLoginForm", method = RequestMethod.GET)
     public String Hlogin() {
 
         return "Login";
@@ -112,7 +112,7 @@ public class HController {
     }
 
     // hLogin : 로그인
-    @RequestMapping(value = "/hLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "hLogin", method = RequestMethod.POST)
     public ModelAndView mLogin(@ModelAttribute HDTO human){
 
             mav = hsvc.hLogin(human);
@@ -130,7 +130,7 @@ public class HController {
 
 
     // hList : 관리자용 회원목록
-    @RequestMapping(value = "/hList", method = RequestMethod.GET)
+    @RequestMapping(value = "hList", method = RequestMethod.GET)
     public ModelAndView hList() {
 
         mav = hsvc.hList();
@@ -148,7 +148,7 @@ public class HController {
     }
 
     // uPloadFile : 내 정보보기에서 프로필 수정
-    @RequestMapping(value = "/uPloadFile", method = RequestMethod.POST)
+    @RequestMapping(value = "uPloadFile", method = RequestMethod.POST)
     public ModelAndView uPloadFile(@ModelAttribute HDTO human) throws IOException {
 
         mav = hsvc.uploadFilea(human);
@@ -158,7 +158,7 @@ public class HController {
     }
 
     // uPdelete : 기본프로필로 변경
-    @RequestMapping(value = "/uPdelete", method = RequestMethod.POST)
+    @RequestMapping(value = "uPdelete", method = RequestMethod.POST)
     public ModelAndView uPdelete(@ModelAttribute HDTO human) throws IOException {
 
         mav = hsvc.uPdelete(human);
@@ -177,7 +177,7 @@ public class HController {
     }
 
     // 자동완성 검색
-    @RequestMapping(value = "/autocomplete", method = RequestMethod.POST)
+    @RequestMapping(value = "autocomplete", method = RequestMethod.POST)
     public void aSearch(Locale locale, Model model, HttpServletRequest request,
                         HttpServletResponse resp, HDTO human) throws IOException {
         String result = request.getParameter("term");

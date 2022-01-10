@@ -69,7 +69,7 @@ public class PService {
 
         List<MultipartFile> MultiFile = pproductFile;
 
-        for (int i = 0; i < pproductFile.size(); i++) {
+        for (int i = 0; i < pcategory.size(); i++) {
 
             String originalFileName2 = null;
             String ProductfileName = null;
@@ -80,11 +80,59 @@ public class PService {
 
             ProductDTO productDTO = new ProductDTO();
 
-            if(pproductFile.get(i).isEmpty() && !PproductFileImg.get(i).equals("")){
+            if(PproductFileImg.size() != 0 && pproductFile.size() != 0) {
+                if (pproductFile.get(i).getOriginalFilename().equals("") && !PproductFileImg.get(i).equals("")) {
+                    ProductfileNameImg = UUID.randomUUID().toString().substring(1, 7);
+                    ProductfileName = uuid2 + "_" + ProductfileNameImg;
+                    fileUrl = PproductFileImg.get(i);
+                    Path target = Paths.get(savePath2, ProductfileName + ".jpg");
+
+                    URL url = new URL(fileUrl);
+
+                    InputStream in = url.openStream();
+                    Files.copy(in, target);
+                    in.close();
+
+                    System.out.println(i + "번째 파일 업로드 (url)");
+                } else if (!pproductFile.get(i).getOriginalFilename().equals("") && PproductFileImg.get(i).equals("")) {
+                    originalFileName2 = pproductFile.get(i).getOriginalFilename();
+                    ProductfileName = uuid2 + "_" + originalFileName2;
+                    System.out.println(ProductfileName);
+                    String savePath3 = "/" + ProductfileName;
+                    System.out.println(savePath2 + savePath3);
+                    MultiFile.get(i).transferTo(new File(savePath2 + savePath3));
+                    System.out.println(i + "번째 파일 업로드 (파일)");
+                }
+
+
+                if (!pproductFile.get(i).getOriginalFilename().equals("") || !PproductFileImg.get(i).equals("")) {
+                    System.out.println(i + "번 : " + ProductfileName);
+                    productDTO.setPproductFileName(ProductfileName);
+                } else {
+                    productDTO.setPproductFileName("default.png");
+                }
+            }
+            else if(PproductFileImg.size() == 0){
+                originalFileName2 = pproductFile.get(i).getOriginalFilename();
+                ProductfileName = uuid2 + "_" + originalFileName2;
+                System.out.println(ProductfileName);
+                String savePath3 = "/" + ProductfileName;
+                System.out.println(savePath2 + savePath3);
+                MultiFile.get(i).transferTo(new File(savePath2 + savePath3));
+                System.out.println(i + "번째 파일 업로드 (파일)");
+
+                if (!pproductFile.get(i).getOriginalFilename().equals("")) {
+                    System.out.println(i + "번 : " + ProductfileName);
+                    productDTO.setPproductFileName(ProductfileName);
+                } else {
+                    productDTO.setPproductFileName("default.png");
+                }
+            }
+            else{
                 ProductfileNameImg = UUID.randomUUID().toString().substring(1, 7);
                 ProductfileName = uuid2 + "_" + ProductfileNameImg;
                 fileUrl = PproductFileImg.get(i);
-                Path target = Paths.get(savePath2,ProductfileName + ".jpg");
+                Path target = Paths.get(savePath2, ProductfileName + ".jpg");
 
                 URL url = new URL(fileUrl);
 
@@ -92,24 +140,14 @@ public class PService {
                 Files.copy(in, target);
                 in.close();
 
-                System.out.println(i+"번째 파일 업로드 (url)");
-            }
-            else if(!pproductFile.get(i).isEmpty() && PproductFileImg.get(i).equals("")){
-                originalFileName2 = MultiFile.get(i).getOriginalFilename();
-                ProductfileName = uuid2 + "_" + originalFileName2;
-                String savePath3 =  "/" + ProductfileName;
-                System.out.println(savePath2+savePath3);
-                MultiFile.get(i).transferTo(new File(savePath2+savePath3));
-                System.out.println(i+"번째 파일 업로드 (파일)");
-            }
+                System.out.println(i + "번째 파일 업로드 (url)");
 
-
-            if (!MultiFile.get(i).isEmpty() || !PproductFileImg.get(i).equals("")) {
-                System.out.println(i+"번 : "+ProductfileName);
-                productDTO.setPproductFileName(ProductfileName);
-            }
-            else {
-                productDTO.setPproductFileName("default.png");
+                if (!PproductFileImg.get(i).equals("")) {
+                    System.out.println(i + "번 : " + ProductfileName);
+                    productDTO.setPproductFileName(ProductfileName);
+                } else {
+                    productDTO.setPproductFileName("default.png");
+                }
             }
 
             productDTO.setPcategory(pcategory.get(i));

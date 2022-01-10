@@ -32,7 +32,7 @@ public class PController {
 
 
     // PostForm : 게시글 등록 페이지로 이동
-    @RequestMapping(value="/PostForm", method = RequestMethod.GET)
+    @RequestMapping(value="PostForm", method = RequestMethod.GET)
     public String PostForm(){
 
 
@@ -68,7 +68,7 @@ public class PController {
         return mav;
     }
 
-    @RequestMapping(value="/mainPost", method = RequestMethod.GET)
+    @RequestMapping(value="mainPost", method = RequestMethod.GET)
     public ModelAndView mainPost(){
 
         mav=psvc.mainPost();

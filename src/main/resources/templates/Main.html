@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
-
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -21,16 +19,10 @@
     <link rel='stylesheet' href='css/style.css' type='text/css' media='all'/>
     <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
     <link rel="stylesheet" href="css/OTQQU.css">
+    <link rel="stylesheet" href="css/Main.css">
     <title>옷:꾸</title>
 
 </head>
-
-
-<style>
-    .test_image {
-        object-fit: cover;
-    }
-</style>
 
 <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
 <header class="site-header" style="margin: 0 auto;">
@@ -143,9 +135,9 @@
                 </div>
             </div>
         </div>
-
     </div>
-    <nav id="site-navigation" class="main-navigation" style="margin: 60px auto 0 auto; width: 980px;">
+
+    <nav id="site-navigation" class="main-navigation" style="margin: 60px auto 0 auto; width: 980px; border-top: 0;">
 
         <div class="nav_main_list">
             <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
@@ -207,33 +199,7 @@
     </div>
 </footer>
 </body>
-<script>
-    $('#header_menu_post').mouseenter(function () {
-        $('#header_menu_post').css('display', 'none');
-        $('#header_menu_post_on').css('display', 'block');
-    });
-    $('#header_menu_post_on').mouseleave(function () {
-        $('#header_menu_post_on').css('display', 'none');
-        $('#header_menu_post').css('display', 'block');
-    });
-
-    $('#header_menu_account').mouseenter(function () {
-        $('#header_menu_account').css('display', 'none');
-        $('#header_menu_account_on').css('display', 'block');
-    });
-    $('#header_menu_account_on').mouseleave(function () {
-        $('#header_menu_account_on').css('display', 'none');
-        $('#header_menu_account').css('display', 'block');
-    });
-    $('.dropdown-content').mouseenter(function () {
-        $('#header_menu_account').css('display', 'none');
-        $('#header_menu_account_on').css('display', 'block');
-    });
-    $('.dropdown-content').mouseleave(function () {
-        $('#header_menu_account_on').css('display', 'none');
-        $('#header_menu_account').css('display', 'block');
-    });
-</script>
+<script type="text/javascript" src="/js/OTQQU.js"></script>
 <script type="text/javascript" src="/js/Main.js"></script>
 <script src='/js/jquery.js'></script>
 <script src='/js/plugins.js'></script>

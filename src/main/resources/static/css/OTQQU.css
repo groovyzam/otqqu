@@ -1,10 +1,3 @@
-.button_button{
-    color: blue;
-}
-
-
-
-
 .site_title{
     font-family: "Herr Von Muellerhoff";
     font-size: 30px;
@@ -22,6 +15,7 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0%);
+    border-bottom: 1px solid #888888;
 }
 
 .search_input_wrap{
@@ -115,76 +109,6 @@
     display: none;
     cursor: pointer;
     color: #000;
-}
-
-
-/*nav*/
-.nav_main_list{
-    padding: 0 180px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-.nav_main_list:last-child{
-    margin-bottom: 0;
-}
-.nav_main_list_btn{
-    display: inline-block;
-    background-color: #FAFAFA;
-    border: none;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-.nav_main_list_btn:hover{
-    background-color: #EAEAEA;
-    color: #000;
-}
-
-/*post*/
-.post_list_wrap{
-    margin: 25px auto 60px auto;
-    width: 980px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 25px 25px;
-    place-items: center;
-}
-.post_list{
-    width: 310px;
-    height: 310px;
-}
-.post_list_image{
-    width: inherit;
-    height: inherit;
-    object-fit: cover;
-}
-.post_list_grey{
-    position: relative;
-    display: block;
-    top: -310px;
-    left: 0;
-    width: inherit;
-    height: inherit;
-    z-index: 100;
-}
-.post_list_grey:hover{
-    background-color: rgba(38, 38, 38, 0.4);
-}
-.post_list_grey:hover .post_list_grey_text{
-    display: block;
-}
-.post_list_grey_text{
-    position: relative;
-    display: none;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    top: 50%;
-    transform: translate(0%, -50%);
-    z-index: 1000;
-}
-.post_list_grey_heart{
-    margin-bottom: 4px;
 }
 
 /*footer*/
