@@ -1,11 +1,9 @@
 package com.groovyzam.otqqu.dao;
 
 
-import com.groovyzam.otqqu.dto.COMMENT;
-import com.groovyzam.otqqu.dto.PDTO;
-import com.groovyzam.otqqu.dto.PimgRatioDTO;
-import com.groovyzam.otqqu.dto.ProductDTO;
+import com.groovyzam.otqqu.dto.*;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -34,4 +32,24 @@ public interface PDAO {
 
     int imgRatioUpload(PimgRatioDTO imgRatio);
 
+    List<CAP> cap(int pnum);
+
+   List<OUTER> outer(int pnum);
+
+    List<TOP> top(int pnum);
+
+    List<BOTTOM> bottom(int pnum);
+
+    List<SHOES> shoes(int pnum);
+    List<ACCESSORIES> accessories(int pnum);
+
+    int postModify1(PDTO pdto);
+
+    int postModify2(PDTO pdto);
+
+    int postDelete(int pnum);
+
+    int postLike(POSTLIKE like);
+
+    int postLikeNum(int Pnum);
 }

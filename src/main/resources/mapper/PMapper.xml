@@ -52,11 +52,42 @@
         SELECT * FROM POST A,(SELECT PNUM FROM ${Pcategory})B WHERE A.PNUM=B.PNUM
     </select>
 
-    <delete id="cDelete" parameterType="comment">
-        DELETE FROM PCOMMENT WHERE CNUM = #{Cnum}
+    <select id="cap" parameterType="int" resultType="cap">
+        SELECT * FROM CAP WHERE PNUM = #{pnum}
+    </select>
+    <select id="outer" parameterType="int" resultType="outer">
+        SELECT * FROM outer WHERE PNUM = #{pnum}
+    </select>
+    <select id="top" parameterType="int" resultType="top">
+    SELECT * FROM top WHERE PNUM = #{pnum}
+</select>
+    <select id="bottom" parameterType="int" resultType="bottom">
+    SELECT * FROM bottom WHERE PNUM = #{pnum}
+</select>
+    <select id="shoes" parameterType="int" resultType="shoes">
+    SELECT * FROM shoes WHERE PNUM = #{pnum}
+</select>
+    <select id="accessories" parameterType="int" resultType="accessories">
+    SELECT * FROM accessories WHERE PNUM = #{pnum}
+</select>
+
+    <update id="postModify1" parameterType="post">
+        UPDATE POST SET PTITLE=#{Ptitle},PCONTENT=#{Pcontent},PSTYLE=#{Pstyle} WHERE Pnum=#{Pnum}
+    </update>
+
+    <update id="postModify2" parameterType="post">
+        UPDATE POST SET PTITLE=#{Ptitle},PCONTENT=#{Pcontent},PSTYLE=#{Pstyle}, PFILENAME=#{PfileName} WHERE Pnum=#{Pnum}
+    </update>
+
+    <delete id="postDelete" parameterType="int">
+        DELETE FROM POST WHERE PNUM = #{Pnum}
     </delete>
 
-    <insert id="imgRatioUpload" parameterType="imgRatio">
-        INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft})
+    <insert id="postLike" parameterType="like">
+            INSERT INTO POSTLIKE VALUES(#{Hid}, #{Pnum})
     </insert>
+
+    <select id="postLikeNum" parameterType="int" resultType="int">
+            SELECT COUNT(*) FROM POSTLIKE WHERE PNUM=#{Pnum}
+    </select>
 </mapper>

@@ -1,145 +1,85 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Security & Java Mail Sender" />
-    <title>test</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="KIMAH"/>
+    <meta name="description" content="SpringBoot Thymeleaf">
+    <title>Spring Boot Test</title>
 </head>
-
-<style>
-    #imgViewArea {
-        position: absolute;
-        width: 500px;
-        height: 500px;
-        overflow: hidden;
-        top: 100px;
-        left: 500px;
-        transition: 0.3s;
-        background-color: black;
-
-    }
-    .post_img_preview {
-        position: relative;
-        left: 0;
-        top: 0;
-        -webkit-user-drag: none;
-        transition: none;
-        height: 100%;
-        width: 100%;
-    }
-    .imgRatioBox{
-        position: absolute;
-        z-index: 1000;
-        top: 0;
-        left: 0;
-    }
-</style>
 <body>
 
-<form action="pUpload" method="POST" id="postForm" enctype="multipart/form-data">
+<form action="postModify" method="post" enctype="multipart/form-data">
+<table>
 
-    <table>
+    <caption>게시글 수정</caption>
+    <tr>
+        <td><img ></td>
+        <td><input type="file" name="Pfile" id="u_file" accept="image/*"></td>
+        <td>
+            <div id="imgViewArea">
+                <img th:src="@{photo/{PfileName}(PfileName=${post.PfileName})}" id="imgArea" class="post_img_preview" onerror="imgAreaError()" >
+            </div>
+            <div class="imgRatioBox">
+                <button type="button" id="1_1" onclick="ratio(1)">1:1</button>
+                <button type="button" id="4_5" onclick="ratio(2)">4:5</button>
+                <button type="button" id="16_9" onclick="ratio(3)">16:9</button>
+            </div>
+        </td>
+        <td>
+            <input type="hidden" name="imgRatioWidth" id="imgRatioWidth" value="">
+            <input type="hidden" name="imgRatioHeight" id="imgRatioHeight" value="">
+            <input type="hidden" name="imgTop" id="imgTop" value="">
+            <input type="hidden" name="imgLeft" id="imgLeft" value="">
+        </td>
+    </tr>
 
-        <caption>게시글 등록</caption>
-        <tr>
-            <td><input type="file" name="Pfile" id="u_file" accept="image/*"></td>
-            <td>
-                <div id="imgViewArea" style="display: none;">
-                    <img id="imgArea" class="post_img_preview" onerror="imgAreaError()">
-                </div>
-                <div class="imgRatioBox">
-                    <button type="button" id="1_1" onclick="ratio(1)">1:1</button>
-                    <button type="button" id="4_5" onclick="ratio(2)">4:5</button>
-                    <button type="button" id="16_9" onclick="ratio(3)">16:9</button>
-                </div>
-            </td>
-            <td>
-                <input type="hidden" name="imgRatioWidth" id="imgRatioWidth" value="">
-                <input type="hidden" name="imgRatioHeight" id="imgRatioHeight" value="">
-                <input type="hidden" name="imgTop" id="imgTop" value="">
-                <input type="hidden" name="imgLeft" id="imgLeft" value="">
-            </td>
-        </tr>
-
-        <tr>
-            <td>제목</td>
-            <td><input type="text" name="Ptitle" placeholder="제목"></td>
-        </tr>
-        <tr>
-            <td>내용</td>
-            <td><input type="text" name="Pcontent" placeholder="내용"></td>
-        </tr>
-
-
-
-
-        <tr>
-            <td>스타일</td>
-            <td>
-                <select name="Pstyle">
-                    <option value="casual">캐주얼</option>
-                    <option value="minimal">미니멀</option>
-                    <option value="street">스트릿</option>
-                    <option value="amekaji">아메카지</option>
-                    <option value="amekaji">시티보이</option>
-                    <option value="classic">클래식</option>
-                    <option value="other">기타</option>
-                </select>
-            </td>
-
-        </tr>
-        <tr>
-            <td>
+    <tr>
+        <td>제목</td>
+        <td><input type="text" name="Ptitle" th:value="${post.Ptitle}">
+        <input type="hidden" name="Pnum" th:value="${post.Pnum}">
+        </td>
+    </tr>
+    <tr>
+        <td>내용</td>
+        <td><input type="text" name="Pcontent" th:value="${post.Pcontent}"></td>
+    </tr>
 
 
-            </td>
-
-        </tr>
-
-        <table id="mytable" border="1" cellspacing="0">
-            <thead>
-            <tr>
-                <th>상품 사진</th>
-                <th>카테고리</th>
-                <th>브랜드</th>
-                <th>상품명</th>
-                <th>상품 가격</th>
-                <th>상품 사진 업로드</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-
-            <tr>
-                <td>
 
 
-                </td>
+    <tr>
 
-            </tr>
-        </table>
-    </table>
-    <div id="imgResult">
-    </div>
+        <td>스타일
+        </td>
+        <td>
+            <select name="Pstyle" th:field="${post.Pstyle}" th:value="${post.Pstyle}">
+                <option value="casual" >캐주얼</option>
+                <option value="minimal">미니멀</option>
+                <option value="street">스트릿</option>
+                <option value="amekaji">아메카지</option>
+                <option value="amekaji">시티보이</option>
+                <option value="classic">클래식</option>
+                <option value="other">기타</option>
+            </select>
+        </td>
 
-    <input type="button" value="등록" onclick="finalSubmit()">
+    </tr>
 
+<tr>
+    <td> <input type="submit" value="수정"></td>
+</tr>
+</table>
 </form>
 
-<button id='btn-add-row'>+</button>
-<button id='btn-delete-row'>-</button>
-
-
 </body>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+
+
     let imgArea = document.getElementById('imgArea');
     let imgViewArea = document.getElementById('imgViewArea');
     $('#imgArea').mousedown(function (event) {
@@ -390,6 +330,5 @@
 
 
 </script>
-
 
 </html>

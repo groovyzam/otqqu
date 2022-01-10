@@ -32,19 +32,21 @@
         <td th:text="${follower.size()}"></td>
     </tr>
 
-</table>
+
 
         <img id="img" th:src="@{/profile/{Hfile}(Hfile=${member.Hfile})}" width="150px" height="150px" style="border-radius: 70%;">
 
+<tr th:if="${session.loginId ne member.Hid}">
 <td th:if="${followList eq null}"><a  th:href="@{hFollow(Hid=${member.Hid})}">팔로우</a></td>
 <td th:if="${followList ne null}"><a  th:href="@{hUnFollow(Hid=${member.Hid})}">팔로우 취소</a></td><br>
+</tr>
 
 
 
 <a th:if="${session.loginId eq member.Hid}" th:href="@{hModifyForm(Hid=${member.Hid})}">프로필 수정</a></td>
 
 
-
+</table>
 
 
 <table>

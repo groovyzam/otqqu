@@ -37,33 +37,28 @@
 
 <a th:href="@{hView(Hid=${session.loginId})}"><button>내 정보보기</button></a>
 
-<<<<<<< HEAD
+
 
 
 
 <div th:text="${session.loginId}"></div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<a th:href="@{pView(Pnum='41')}">41번게시물</a>
+
 
 <div th:text="${session.loginId}"></div>
 
 
 
 
->>>>>>> 27c127a3b3e69c4a9322b1270473b698242de1d3
-=======
+<button onclick="location.href='img'" > 이미지</button>
+
 
 <button onclick="location.href='img'" > 이미지</button>
 
->>>>>>> parent of d86e346 (게시글 사진 클릭)
-=======
+
 
 <button onclick="location.href='img'" > 이미지</button>
 
->>>>>>> parent of d86e346 (게시글 사진 클릭)
 <button onclick="location.href='PostForm'" value="회원목록">게시글 작성</button>
 
 <form action="Search" method="GET">
@@ -85,12 +80,13 @@
 <button onclick="location.href='pCategoryList?Pcategory=accessories'">악세서리</button>
 
 
-<div th:each="list : ${postList}" class="img_box fadein" style="text-align: center">
 
-    프로필사진
+<div th:each="list : ${postList}" class="img_box fadein" style="text-align: center" id>
+
+    <a th:href="@{pView(Pnum=${list.Pnum})}">
     <h1 th:text="${list.Hid}"></h1>
     <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" width="500px" height="500px" class="test_image">
-
+    </a>
 </div>
 
 
@@ -107,8 +103,6 @@
     var loading = false;    //중복실행여부 확인 변수
     var page=4;   //불러올 페이지
 
-    /*nextpageload function*/
-
 
     function next_load() {
         $.ajax({
@@ -124,8 +118,9 @@
 
                     var append_node = "";
                     append_node += "<div class='img_box fadein' style=\"text-align: center\">";
-                    console.log(data[i].pfileName);
+                    append_node += "<a href='pView?Pnum="+data[i].pnum+"'>";
                     append_node += "<img width='500px' height='500px' class='test_image' src='/photo/"+data[i].pfileName+"'>";
+                    append_node += "</a>"
                     append_node += "</div>";
                     $('body').append(append_node)
                 }
@@ -181,11 +176,8 @@
             }
         });
     });
+
 </script>
-
-
-
-
 
 </html>
 </html>

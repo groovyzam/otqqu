@@ -150,6 +150,40 @@ public class PController {
         return mav;
     }
 
+    //postModifyForm 게시글 수정 페이지 이동
+    @RequestMapping(value = "postModifyForm", method = RequestMethod.GET)
+    public ModelAndView  postModifyForm(@RequestParam("Pnum") int  Pnum){
+
+        mav = psvc.postModifyForm(Pnum);
+
+        return mav;
+    }
+
+    //postModify 게시글 수정
+    @RequestMapping(value = "postModify", method = RequestMethod.POST)
+    public ModelAndView  postModify(@ModelAttribute PDTO pdto) throws IOException{
+
+        mav = psvc.postModify(pdto);
+        return mav;
+    }
+    //postDelete 게시글 삭제
+    @RequestMapping(value = "postDelete", method = RequestMethod.GET)
+    public ModelAndView  postDelete(@RequestParam("Pnum") int  Pnum){
+
+        mav = psvc.postDelete(Pnum);
+
+        return mav;
+    }
+
+    //postLike 게시글 좋아요
+    @RequestMapping(value = "postLike", method = RequestMethod.GET)
+    public ModelAndView  postLike(@RequestParam("Pnum") int  Pnum){
+
+        mav = psvc.postLike(Pnum);
+
+        return mav;
+    }
+
 
 
 }

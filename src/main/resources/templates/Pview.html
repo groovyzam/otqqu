@@ -11,6 +11,8 @@
 </head>
 <body>
 
+좋아요 개수<p th:text="${like}"></p>
+<a th:if="${session.loginId ne post.Hid}" th:href="@{postLike(Pnum=${post.Pnum})}"><button>좋아요</button></a>
 
 <span th:text="${post.Pnum}" ></span>
 <input type="hidden" th:value="${post.Pnum}" th:id="Pnum">
@@ -23,6 +25,63 @@
 <br/><br/><br/><br/><br/>
 
 <h2>여기서부터는 카테고리별 사진 등록</h2>
+<table>
+    <div th:if="${cap ne null}">
+        <tr  th:each="cap : ${cap}" >
+       <td> 모자 <img th:src="@{/cap/{fileName}(fileName=${cap.CfileName})}" width="100px" height="100px"></td>
+        <td th:text="${cap.Cbrand}"> </td>
+        <td th:text="${cap.Cproduct}"> </td>
+        <td th:text="${cap.Cprice}"> </td>
+    </tr>
+    </div>
+
+    <div th:if="${outer ne null}">
+    <tr  th:each="outer : ${outer}" >
+       <td> 아우터 <img th:src="@{/outer/{fileName}(fileName=${outer.OfileName})}" width="100px" height="100px"></td>
+        <td th:text="${outer.Obrand}"> </td>
+        <td th:text="${outer.Oproduct}"> </td>
+        <td th:text="${outer.Oprice}"> </td>
+    </tr>
+
+</div>
+    <div th:if="${top ne null}" >
+        <tr th:each="top : ${top}" >
+      <td> 상의  <img th:src="@{/top/{fileName}(fileName=${top.TfileName})}" width="100px" height="100px"></td>
+        <td th:text="${top.Tbrand}"> </td>
+        <td th:text="${top.Tproduct}"> </td>
+        <td th:text="${top.Tprice}"> </td>
+    </tr>
+    </div>
+
+    <div th:if="${bottom ne null}">
+        <tr  th:each="bottom : ${bottom}" >
+        <td>하의 <img th:src="@{/bottom/{fileName}(fileName=${bottom.BfileName})}" width="100px" height="100px"></td>
+        <td th:text="${bottom.Bbrand}"> </td>
+        <td th:text="${bottom.Bproduct}"> </td>
+        <td th:text="${bottom.Bprice}"> </td>
+    </tr>
+        </div>
+
+    <div th:if="${shoes ne null}">
+    <tr  th:each="shoes : ${shoes}" >
+       <td>신발  <img th:src="@{/shoes/{fileName}(fileName=${shoes.SfileName})}" width="100px" height="100px"></td>
+        <td th:text="${shoes.Sbrand}"> </td>
+        <td th:text="${shoes.Sproduct}"> </td>
+        <td th:text="${shoes.Sprice}"> </td>
+    </tr>
+</div>
+
+    <div th:if="${accessories ne null}">
+    <tr   th:each="accessories : ${accessories}">
+        <td>악세서리 <img th:src="@{/accessories/{fileName}(fileName=${accessories.AfileName})}" width="100px" height="100px"></td>
+        <td th:text="${accessories.Abrand}"> </td>
+        <td th:text="${accessories.Aproduct}"> </td>
+        <td th:text="${accessories.Aprice}"> </td>
+    </tr>
+    </div>
+
+</table>
+
 
 <span>======================================</span>
 
@@ -35,6 +94,11 @@
 
 
 <div id ="commentArea"></div>
+
+
+<a th:if="${session.loginId eq post.Hid}" th:href="@{postModifyForm(Pnum=${post.Pnum})}"><button>게시글 수정</button></a>
+<a th:if="${session.loginId eq post.Hid}" th:href="@{postDelete(Pnum=${post.Pnum})}"><button>게시글 삭제</button></a>
+
 
 </body>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -54,7 +54,6 @@ public class PService {
 
         String PfileName = uuid + "_" + originalFileName;
 
-
         String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
 
         if (!Pfile.isEmpty()) {
@@ -84,9 +83,9 @@ public class PService {
 
             if(pproductFile.get(i).isEmpty() && !PproductFileImg.get(i).equals("")){
                 ProductfileNameImg = UUID.randomUUID().toString().substring(1, 7);
-                ProductfileName = uuid2 + "_" + ProductfileNameImg;
+                ProductfileName = uuid2 + "_" + ProductfileNameImg+".jpg";
                 fileUrl = PproductFileImg.get(i);
-                Path target = Paths.get(savePath2,ProductfileName + ".jpg");
+                Path target = Paths.get(savePath2,ProductfileName);
 
                 URL url = new URL(fileUrl);
 
@@ -136,13 +135,27 @@ public class PService {
 
         return mav;
     }
-
+    // 게시글 정보
     public ModelAndView pView(int Pnum) {
 
         PDTO post = pdao.pView(Pnum);
+        List<CAP> cap = pdao.cap(Pnum);
+        List<OUTER> outer = pdao.outer(Pnum);
+        List<TOP> top = pdao.top(Pnum);
+        List<BOTTOM> bottom = pdao.bottom(Pnum);
+        List<SHOES> shoes = pdao.shoes(Pnum);
+        List<ACCESSORIES> accessories = pdao.accessories(Pnum);
+        int like = pdao.postLikeNum(Pnum);
 
         if (post != null) {
+            mav.addObject("cap", cap);
+            mav.addObject("outer", outer);
+            mav.addObject("top", top);
+            mav.addObject("bottom", bottom);
+            mav.addObject("shoes", shoes);
+            mav.addObject("accessories", accessories);
             mav.addObject("post", post);
+            mav.addObject("like", like);
             mav.setViewName("Pview");
         } else {
             mav.setViewName("Main");
@@ -231,6 +244,7 @@ public class PService {
         return mv;
     }
 
+    //기존 Main화면 게시글
     public ModelAndView mainPost() {
 
        int StartPnum = 1;
@@ -243,6 +257,7 @@ public class PService {
         return mav;
     }
 
+    //Main화면 무한스크롤
     public List<PDTO> ajaxPost(int page) {
         int StartPnum = page;
         int LastPnum = page;
@@ -256,6 +271,7 @@ public class PService {
     }
 
 
+    //스타일별 게시글
     public ModelAndView PstyleList(String pstyle) {
 
         List<PDTO> list = pdao.PstyleList(pstyle);
@@ -268,6 +284,7 @@ public class PService {
         return mav;
     }
 
+    //카테고리별 게시글
     public ModelAndView PcategoryList(String Pcategory) {
 
 
@@ -279,4 +296,91 @@ public class PService {
         return mav;
     }
 
+    //게시글 수정 페이지 이동
+    public ModelAndView postModifyForm(int Pnum) {
+
+        PDTO post = pdao.pView(Pnum);
+        List<CAP> cap = pdao.cap(Pnum);
+        List<OUTER> outer = pdao.outer(Pnum);
+        List<TOP> top = pdao.top(Pnum);
+        List<BOTTOM> bottom = pdao.bottom(Pnum);
+        List<SHOES> shoes = pdao.shoes(Pnum);
+        List<ACCESSORIES> accessories = pdao.accessories(Pnum);
+
+        if (post != null) {
+            mav.addObject("cap", cap);
+            mav.addObject("outer", outer);
+            mav.addObject("top", top);
+            mav.addObject("bottom", bottom);
+            mav.addObject("shoes", shoes);
+            mav.addObject("accessories", accessories);
+            mav.addObject("post", post);
+            mav.setViewName("Pmodify");
+        } else {
+            mav.setViewName("Main");
+        }
+
+        return mav;
+    }
+
+    public ModelAndView postModify(PDTO pdto) throws IOException {
+
+        int result=0;
+        if(pdto.getPfile()==null){
+            result = pdao.postModify1(pdto);
+        }else{
+            MultipartFile Pfile = pdto.getPfile();
+            String originalFileName = Pfile.getOriginalFilename();
+
+            String uuid = UUID.randomUUID().toString().substring(1, 7);
+
+            String PfileName = uuid + "_" + originalFileName;
+
+            String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
+
+            if (!Pfile.isEmpty()) {
+                pdto.setPfileName(PfileName);
+                Pfile.transferTo(new File(savePath));
+            } else {
+                pdto.setPfileName("default.png");
+            }
+
+            result = pdao.postModify2(pdto);
+        }
+
+        if(result>0){
+
+            mav.setViewName("redirect:/pView?Pnum="+pdto.getPnum()+"");
+        }
+
+
+        return mav;
+    }
+
+    public ModelAndView postDelete(int pnum) {
+
+        int result = pdao.postDelete(pnum);
+
+        if (result>0) {
+            mav.setViewName("redirect:/");
+        }
+            return mav;
+    }
+
+    public ModelAndView postLike(int pnum) {
+
+        String sessionId = (String) session.getAttribute("loginId");
+
+        POSTLIKE like = new POSTLIKE();
+        like.setHid(sessionId);
+        like.setPnum(pnum);
+
+        int result = pdao.postLike(like);
+
+        if(result>0){
+            mav.setViewName("redirect:pView?Pnum="+pnum+"");
+        }
+
+        return mav;
+    }
 }
