@@ -23,10 +23,16 @@ public interface PDAO {
 
     int cWrite(COMMENT comment);
 
+<<<<<<< HEAD
+=======
+    int imgRatioUpload(PimgRatioDTO imgRatio);
+
+>>>>>>> e3b3883a52b90b1952cb9b3114902149097e0e02
     List<PDTO> PstyleList(String pstyle);
 
     List<PDTO> PcategoryList(String Pcategory);
 
+<<<<<<< HEAD
 
     int cDelete(COMMENT comment);
 
@@ -56,4 +62,7 @@ public interface PDAO {
     String postLikeId(POSTLIKE like);
 
     int postLikeDelete(POSTLIKE like);
+=======
+    int cDelete(COMMENT comment);
+>>>>>>> e3b3883a52b90b1952cb9b3114902149097e0e02
 }

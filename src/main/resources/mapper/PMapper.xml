@@ -34,11 +34,9 @@
         INSERT INTO PCOMMENT VALUES (PCMT_SEQ.NEXTVAL,#{Pnum},#{Cwriter},#{Ccontent})
     </insert>
 
-
     <delete id="cDelete" parameterType="comment">
         DELETE FROM PCOMMENT WHERE CNUM = #{Cnum}
     </delete>
-
 
     <insert id="imgRatioUpload" parameterType="imgRatio">
         INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft})

@@ -29,7 +29,7 @@ public class PController {
 
 
     // PostForm : 게시글 등록 페이지로 이동
-    @RequestMapping(value="/PostForm", method = RequestMethod.GET)
+    @RequestMapping(value="PostForm", method = RequestMethod.GET)
     public String PostForm(){
 
 
@@ -47,7 +47,7 @@ public class PController {
             , @RequestParam(value = "Pprice", required = true) List<Integer> Pprice
             , @RequestParam(value = "PproductFile") List<MultipartFile> PproductFile
             , @RequestParam(value = "PproductFileImg") List<String> ProductFileImg
-
+            ,@RequestParam(value = "PproductFileImg") List<String> PproductFileImg
 
     ) throws IOException {
         pdto.setHid((String) session.getAttribute("loginId"));
@@ -59,7 +59,6 @@ public class PController {
         System.out.println(Pprice.toString());
         System.out.println(imgRatio.toString());
 
-
         mav = psvc.pUpload(pdto,imgRatio, Pcategory, Pbrand, PproductName, Pprice, PproductFile,ProductFileImg);
 
         pdto.setHid((String) session.getAttribute("loginId"));
@@ -68,13 +67,14 @@ public class PController {
         return mav;
     }
 
-    @RequestMapping(value="/mainPost", method = RequestMethod.GET)
+    @RequestMapping(value="mainPost", method = RequestMethod.GET)
     public ModelAndView mainPost(){
 
         mav=psvc.mainPost();
 
         return mav;
     }
+
     @RequestMapping(value = "/ajaxPost", method = RequestMethod.POST)
     public @ResponseBody List<PDTO> ajaxPost(@RequestParam ("page") int page) {
 
@@ -115,16 +115,12 @@ public class PController {
         return commentList;
     }
 
-
-
-
     // C_delete : 댓글 삭제
     @RequestMapping(value = "C_delete", method = RequestMethod.GET)
     public @ResponseBody List<COMMENT> cDelete(@ModelAttribute COMMENT comment){
         List<COMMENT>  commentList = psvc.cDelete(comment);
         return commentList;
     }
-
 
 
     @RequestMapping(value = "PostProductImg")
@@ -149,6 +145,7 @@ public class PController {
         mav = psvc.PcategoryList(Pcategory);
         return mav;
     }
+
 
     //postModifyForm 게시글 수정 페이지 이동
     @RequestMapping(value = "postModifyForm", method = RequestMethod.GET)
@@ -191,7 +188,6 @@ public class PController {
 
         return mav;
     }
-
 
 
 }

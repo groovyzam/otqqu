@@ -64,6 +64,7 @@
     <select id="follower" parameterType="String" resultType="human">
         SELECT * FROM HUMAN WHERE HID IN (SELECT FOLLOWINGID FROM FOLLOW WHERE FOLLOWERID =#{Hid})
     </select>
+
     <select id="following" parameterType="String" resultType="human">
         SELECT * FROM HUMAN WHERE HID IN (SELECT FOLLOWERID FROM FOLLOW WHERE FOLLOWINGID =#{Hid})
     </select>
@@ -72,9 +73,12 @@
         UPDATE HUMAN SET HNAME=#{Hname},HAGE=#{Hage},HHEIGHT=#{Hheight},HWEIGHT=#{Hweight},HGENDER=#{Hgender},HPHONE=#{Hphone} WHERE HID=#{Hid}
     </update>
 
-
     <update id="HpwModify" parameterType="String">
         UPDATE HUMAN SET HPW=#{hpw} WHERE HID=#{sessionId}
     </update>
+
+    <select id="mainProfile" parameterType="String">
+        SELECT HFILE FROM HUMAN WHERE HID = #{HID}
+    </select>
 
 </mapper>

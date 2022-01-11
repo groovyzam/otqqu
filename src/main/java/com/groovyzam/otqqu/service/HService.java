@@ -98,6 +98,9 @@ public class HService {
 
         }
 
+        // pwEnc.matches() 타입은 boolean => true or false
+
+
         return mav;
     }
 
@@ -129,7 +132,8 @@ public class HService {
 
         System.out.println("Hfile" + Hfile);
 
-        String savePath = "C:/Users/PC/SpringBoot/otqqu/src/main/resources/static/profile/" + Hfile;
+
+        String savePath = "C:/Users/joype/Desktop/otqqu/src/main/resources/static/profile/" + Hfile;
 
         if (HProfile != null) {
             human.setHfile(Hfile);
@@ -257,7 +261,7 @@ public class HService {
         }
         return mav;
 
-}
+    }
 
 
     public ModelAndView hModifyForm(String hid) {
@@ -314,8 +318,21 @@ public class HService {
 
         return mav;
     }
-}
 
+    public ModelAndView mainProfile(String HID) {
+
+        String profile = hdao.mainProfile(HID);
+
+        System.out.println("프로필사진 : "+profile);
+
+        if(profile != null) {
+            mav.addObject("Hfile", profile);
+        }
+
+        mav.setViewName("mainPost");
+        return mav;
+    }
+}
 
 
 

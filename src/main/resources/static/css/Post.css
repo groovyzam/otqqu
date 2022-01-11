@@ -1,0 +1,12 @@
+.post_main_wrap{
+    margin-top: 100px;
+}
+.post_main_imgfile{
+    width: 640px;
+    height: 640px;
+    border: 1px solid #888888;
+    box-sizing: border-box;
+}
+.post_main_content_wrap{
+    width: 340px;
+}

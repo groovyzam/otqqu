@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-
 @Service
 public class PService {
 
@@ -43,98 +42,7 @@ public class PService {
     private HttpSession session;
 
 
-    public ModelAndView pUpload(PDTO post,PimgRatioDTO imgRatio, List<String> pcategory, List<String> pbrand, List<String> pproductName, List<Integer> pprice, List<MultipartFile> pproductFile, List<String> PproductFileImg) throws IOException {
-
-        int result2 = 0;
-
-        MultipartFile Pfile = post.getPfile();
-        String originalFileName = Pfile.getOriginalFilename();
-
-        String uuid = UUID.randomUUID().toString().substring(1, 7);
-
-        String PfileName = uuid + "_" + originalFileName;
-
-        String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
-
-        if (!Pfile.isEmpty()) {
-            post.setPfileName(PfileName);
-            Pfile.transferTo(new File(savePath));
-        } else {
-            post.setPfileName("default.png");
-        }
-
-        int result1 = pdao.PostUpload(post);
-
-        int result3 = pdao.imgRatioUpload(imgRatio);
-
-        List<MultipartFile> MultiFile = pproductFile;
-
-        for (int i = 0; i < pproductFile.size(); i++) {
-
-            String originalFileName2 = null;
-            String ProductfileName = null;
-            String fileUrl = null;
-            String ProductfileNameImg = null;
-            String uuid2 = UUID.randomUUID().toString().substring(1, 7);
-            String savePath2 = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/"+ pcategory.get(i);
-            String savePath3 =  "/" + ProductfileName;
-
-            ProductDTO productDTO = new ProductDTO();
-
-            if(pproductFile.get(i).isEmpty() && !PproductFileImg.get(i).equals("")){
-                ProductfileNameImg = UUID.randomUUID().toString().substring(1, 7);
-                ProductfileName = uuid2 + "_" + ProductfileNameImg+".jpg";
-                fileUrl = PproductFileImg.get(i);
-                Path target = Paths.get(savePath2,ProductfileName);
-
-                URL url = new URL(fileUrl);
-
-                InputStream in = url.openStream();
-                Files.copy(in, target);
-                in.close();
-
-                System.out.println(i+"번째 파일 업로드 (url)");
-            }
-            else if(!pproductFile.get(i).isEmpty() && PproductFileImg.get(i).equals("")){
-                originalFileName2 = MultiFile.get(i).getOriginalFilename();
-                ProductfileName = uuid2 + "_" + originalFileName2;
-                MultiFile.get(i).transferTo(new File(savePath2+savePath3));
-                System.out.println(i+"번째 파일 업로드 (파일)");
-            }
-
-
-            if (!MultiFile.get(i).isEmpty() || !PproductFileImg.get(i).equals("")) {
-                System.out.println(i+"번 : "+ProductfileName);
-                productDTO.setPproductFileName(ProductfileName);
-            }
-            else {
-                productDTO.setPproductFileName("default.png");
-            }
-
-            productDTO.setPcategory(pcategory.get(i));
-            productDTO.setPbrand(pbrand.get(i));
-            productDTO.setPproductName(pproductName.get(i));
-
-            productDTO.setPprice(pprice.get(i));
-            productDTO.setPproductFileName(ProductfileName);
-
-            result2 = pdao.ProductUpload(productDTO);
-
-        }
-
-
-        if (result1 > 0 && result2 > 0 && result3 > 0) {
-
-            mav.setViewName("redirect:/");
-            System.out.println("게시글 등록 성공");
-        } else {
-            mav.setViewName("Main");
-            System.out.println("게시글 실패");
-        }
-
-
-        return mav;
-    }
+   
     // 게시글 정보
     public ModelAndView pView(int Pnum) {
         String sessionId = (String) session.getAttribute("loginId");
@@ -193,7 +101,6 @@ public class PService {
 
         return commentList;
     }
-
 
     // 댓글 삭제하기
     public List<COMMENT> cDelete(COMMENT comment) {
@@ -255,8 +162,8 @@ public class PService {
     //기존 Main화면 게시글
     public ModelAndView mainPost() {
 
-       int StartPnum = 1;
-       int LastPnum = 3;
+        int StartPnum = 1;
+        int LastPnum = 12;
         List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
 
         mav.addObject("postList", postList);
@@ -280,6 +187,7 @@ public class PService {
 
 
     //스타일별 게시글
+
     public ModelAndView PstyleList(String pstyle) {
 
         List<PDTO> list = pdao.PstyleList(pstyle);
@@ -407,4 +315,5 @@ public class PService {
         }
         return mav;
     }
+
 }
