@@ -42,7 +42,7 @@ public class PService {
     private HttpSession session;
 
 
-   
+
     // 게시글 정보
     public ModelAndView pView(int Pnum) {
         String sessionId = (String) session.getAttribute("loginId");
