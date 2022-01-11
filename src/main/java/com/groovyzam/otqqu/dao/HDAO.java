@@ -47,10 +47,10 @@ public interface HDAO {
     String followList(String sessionId, String Hid);
 
     //팔로잉 회원
-    List<PDTO> following(String Hid);
+    List<HDTO> following(String Hid);
 
     //팔로워 회원
-    List<PDTO> follower(String Hid);
+    List<HDTO> follower(String Hid);
 
     //회원 정보 수정 페이지에 기본 정보
     HDTO hModifyForm(String hid);

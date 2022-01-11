@@ -6,7 +6,7 @@
 
 
     <insert id="PostUpload" parameterType="post">
-        INSERT INTO POST VALUES (POST_SEQ.NEXTVAL,#{Hid},#{Ptitle},#{Pcontent},#{Pstyle},#{Pup},#{PfileName})
+        INSERT INTO POST VALUES (POST_SEQ.NEXTVAL,#{Hid},#{Ptitle},#{Pcontent},#{Pstyle},#{PfileName})
     </insert>
 
     <insert id="ProductUpload" parameterType="product">
@@ -16,7 +16,7 @@
 
     <select id="mainPost" parameterType="int" resultType="post">
 
-        SELECT * FROM (SELECT ROWNUM AS ROWPNUM,PNUM,HID,PTITLE,PCONTENT,PSTYLE,PUP,PFILENAME FROM POST ORDER BY PNUM DESC)A WHERE A.ROWPNUM BETWEEN #{startPnum} AND #{lastPnum}
+        SELECT * FROM (SELECT ROWNUM AS ROWPNUM,PNUM,HID,PTITLE,PCONTENT,PSTYLE,PFILENAME FROM POST ORDER BY PNUM DESC)A WHERE A.ROWPNUM BETWEEN #{startPnum} AND #{lastPnum}
 
 
     </select>
@@ -33,7 +33,6 @@
     <insert id="cWrite" parameterType="comment">
         INSERT INTO PCOMMENT VALUES (PCMT_SEQ.NEXTVAL,#{Pnum},#{Cwriter},#{Ccontent})
     </insert>
-
     <insert id="imgRatioUpload" parameterType="imgRatio">
         INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft})
     </insert>
@@ -45,9 +44,53 @@
     <select id="PcategoryList" parameterType="String" resultType="post">
         SELECT * FROM POST A,(SELECT PNUM FROM ${Pcategory})B WHERE A.PNUM=B.PNUM
     </select>
-
     <delete id="cDelete" parameterType="comment">
         DELETE FROM PCOMMENT WHERE CNUM = #{Cnum}
     </delete>
+    <select id="cap" parameterType="int" resultType="cap">
+        SELECT * FROM CAP WHERE PNUM = #{pnum}
+    </select>
+    <select id="outer" parameterType="int" resultType="outer">
+        SELECT * FROM outer WHERE PNUM = #{pnum}
+    </select>
+    <select id="top" parameterType="int" resultType="top">
+    SELECT * FROM top WHERE PNUM = #{pnum}
+</select>
+    <select id="bottom" parameterType="int" resultType="bottom">
+    SELECT * FROM bottom WHERE PNUM = #{pnum}
+</select>
+    <select id="shoes" parameterType="int" resultType="shoes">
+    SELECT * FROM shoes WHERE PNUM = #{pnum}
+</select>
+    <select id="accessories" parameterType="int" resultType="accessories">
+    SELECT * FROM accessories WHERE PNUM = #{pnum}
+</select>
 
+    <update id="postModify1" parameterType="post">
+        UPDATE POST SET PTITLE=#{Ptitle},PCONTENT=#{Pcontent},PSTYLE=#{Pstyle} WHERE Pnum=#{Pnum}
+    </update>
+
+    <update id="postModify2" parameterType="post">
+        UPDATE POST SET PTITLE=#{Ptitle},PCONTENT=#{Pcontent},PSTYLE=#{Pstyle}, PFILENAME=#{PfileName} WHERE Pnum=#{Pnum}
+    </update>
+
+    <delete id="postDelete" parameterType="int">
+        DELETE FROM POST WHERE PNUM = #{Pnum}
+    </delete>
+
+    <insert id="postLike" parameterType="like">
+            INSERT INTO POSTLIKE VALUES(#{Hid}, #{Pnum})
+    </insert>
+
+    <select id="postLikeNum" parameterType="int" resultType="int">
+            SELECT COUNT(*) FROM POSTLIKE WHERE PNUM=#{Pnum}
+    </select>
+
+    <select id="postLikeId" parameterType="like" resultType="String">
+        SELECT HID FROM POSTLIKE WHERE PNUM=#{Pnum} AND HID=#{Hid}
+    </select>
+
+    <delete id="postLikeDelete" parameterType="like">
+        DELETE FROM POSTLIKE WHERE PNUM=#{Pnum} AND HID=#{Hid}
+    </delete>
 </mapper>

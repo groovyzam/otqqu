@@ -61,11 +61,11 @@
     SELECT FOLLOWERID FROM FOLLOW WHERE FOLLOWINGID=#{sessionId} AND FOLLOWERID =#{Hid}
     </select>
 
-    <select id="following" parameterType="String" resultType="String">
-        SELECT FOLLOWINGID FROM FOLLOW WHERE FOLLOWINGID =#{Hid}
+    <select id="follower" parameterType="String" resultType="human">
+        SELECT * FROM HUMAN WHERE HID IN (SELECT FOLLOWINGID FROM FOLLOW WHERE FOLLOWERID =#{Hid})
     </select>
-    <select id="follower" parameterType="String" resultType="String">
-        SELECT FOLLOWERID FROM FOLLOW WHERE FOLLOWERID =#{Hid}
+    <select id="following" parameterType="String" resultType="human">
+        SELECT * FROM HUMAN WHERE HID IN (SELECT FOLLOWERID FROM FOLLOW WHERE FOLLOWINGID =#{Hid})
     </select>
 
     <update id="hModify" parameterType="human">

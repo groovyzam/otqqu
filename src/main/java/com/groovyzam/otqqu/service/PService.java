@@ -2,9 +2,6 @@ package com.groovyzam.otqqu.service;
 
 import com.groovyzam.otqqu.dao.PDAO;
 import com.groovyzam.otqqu.dto.*;
-import com.groovyzam.otqqu.dto.COMMENT;
-import com.groovyzam.otqqu.dto.PDTO;
-import com.groovyzam.otqqu.dto.ProductDTO;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,7 +9,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +21,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -174,12 +169,35 @@ public class PService {
 
         return mav;
     }
-
+    // 게시글 정보
     public ModelAndView pView(int Pnum) {
+        String sessionId = (String) session.getAttribute("loginId");
+
+        POSTLIKE postlike = new POSTLIKE();
+        postlike.setHid(sessionId);
+        postlike.setPnum(Pnum);
+
         PDTO post = pdao.pView(Pnum);
+        List<CAP> cap = pdao.cap(Pnum);
+        List<OUTER> outer = pdao.outer(Pnum);
+        List<TOP> top = pdao.top(Pnum);
+        List<BOTTOM> bottom = pdao.bottom(Pnum);
+        List<SHOES> shoes = pdao.shoes(Pnum);
+        List<ACCESSORIES> accessories = pdao.accessories(Pnum);
+        int like = pdao.postLikeNum(Pnum);
+        String likeId = pdao.postLikeId(postlike);
+
 
         if (post != null) {
+            mav.addObject("cap", cap);
+            mav.addObject("outer", outer);
+            mav.addObject("top", top);
+            mav.addObject("bottom", bottom);
+            mav.addObject("shoes", shoes);
+            mav.addObject("accessories", accessories);
             mav.addObject("post", post);
+            mav.addObject("like", like);
+            mav.addObject("likeId", likeId);
             mav.setViewName("Pview");
         } else {
             mav.setViewName("Main");
@@ -209,7 +227,6 @@ public class PService {
 
         return commentList;
     }
-
     // 댓글 삭제하기
     public List<COMMENT> cDelete(COMMENT comment) {
         List<COMMENT> commentList = null;
@@ -224,6 +241,7 @@ public class PService {
 
         return commentList;
     }
+
 
     public ModelAndView PostProductImg(String PIMG) {
         ModelAndView mv = new ModelAndView("jsonView");
@@ -264,6 +282,7 @@ public class PService {
         return mv;
     }
 
+    //기존 Main화면 게시글
     public ModelAndView mainPost() {
 
         int StartPnum = 1;
@@ -276,6 +295,7 @@ public class PService {
         return mav;
     }
 
+    //Main화면 무한스크롤
     public List<PDTO> ajaxPost(int page) {
         int StartPnum = page;
         int LastPnum = page;
@@ -289,6 +309,7 @@ public class PService {
     }
 
 
+    //스타일별 게시글
     public ModelAndView PstyleList(String pstyle) {
 
         List<PDTO> list = pdao.PstyleList(pstyle);
@@ -301,6 +322,7 @@ public class PService {
         return mav;
     }
 
+    //카테고리별 게시글
     public ModelAndView PcategoryList(String Pcategory) {
 
 
@@ -312,4 +334,107 @@ public class PService {
         return mav;
     }
 
+    //게시글 수정 페이지 이동
+    public ModelAndView postModifyForm(int Pnum) {
+
+        PDTO post = pdao.pView(Pnum);
+        List<CAP> cap = pdao.cap(Pnum);
+        List<OUTER> outer = pdao.outer(Pnum);
+        List<TOP> top = pdao.top(Pnum);
+        List<BOTTOM> bottom = pdao.bottom(Pnum);
+        List<SHOES> shoes = pdao.shoes(Pnum);
+        List<ACCESSORIES> accessories = pdao.accessories(Pnum);
+
+        if (post != null) {
+            mav.addObject("cap", cap);
+            mav.addObject("outer", outer);
+            mav.addObject("top", top);
+            mav.addObject("bottom", bottom);
+            mav.addObject("shoes", shoes);
+            mav.addObject("accessories", accessories);
+            mav.addObject("post", post);
+            mav.setViewName("Pmodify");
+        } else {
+            mav.setViewName("Main");
+        }
+
+        return mav;
+    }
+
+    public ModelAndView postModify(PDTO pdto) throws IOException {
+
+        int result=0;
+        if(pdto.getPfile()==null){
+            result = pdao.postModify1(pdto);
+        }else{
+            MultipartFile Pfile = pdto.getPfile();
+            String originalFileName = Pfile.getOriginalFilename();
+
+            String uuid = UUID.randomUUID().toString().substring(1, 7);
+
+            String PfileName = uuid + "_" + originalFileName;
+
+            String savePath = "C:/Users/G/IdeaProjects/otqqu/src/main/resources/static/photo/" + PfileName;
+
+            if (!Pfile.isEmpty()) {
+                pdto.setPfileName(PfileName);
+                Pfile.transferTo(new File(savePath));
+            } else {
+                pdto.setPfileName("default.png");
+            }
+
+            result = pdao.postModify2(pdto);
+        }
+
+        if(result>0){
+
+            mav.setViewName("redirect:/pView?Pnum="+pdto.getPnum()+"");
+        }
+
+
+        return mav;
+    }
+
+    public ModelAndView postDelete(int pnum) {
+
+        int result = pdao.postDelete(pnum);
+
+        if (result>0) {
+            mav.setViewName("redirect:/");
+        }
+            return mav;
+    }
+
+    public ModelAndView postLike(int pnum) {
+
+        String sessionId = (String) session.getAttribute("loginId");
+
+        POSTLIKE like = new POSTLIKE();
+        like.setHid(sessionId);
+        like.setPnum(pnum);
+
+        int result = pdao.postLike(like);
+
+        if(result>0){
+            mav.setViewName("redirect:pView?Pnum="+pnum+"");
+        }
+
+        return mav;
+    }
+
+    public ModelAndView postLikeDelete(int pnum) {
+
+        String sessionId = (String) session.getAttribute("loginId");
+
+        POSTLIKE like = new POSTLIKE();
+        like.setHid(sessionId);
+        like.setPnum(pnum);
+
+        int result = pdao.postLikeDelete(like);
+
+        if (result>0){
+            mav.setViewName("redirect:pView?Pnum="+pnum+"");
+        }
+        return mav;
+    }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
@@ -8,9 +9,84 @@
     <meta name="author" content="KIMAH"/>
     <meta name="description" content="SpringBoot Thymeleaf">
     <title>Spring Boot Test</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
+
+<button type="button" id="modal_show1">
+    팔로잉
+</button>
+
+<button type="button" id="modal_show2">
+    팔로워
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3> 팔로잉 </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <table>
+                    <tr th:each="i : ${following}">
+
+                        <td><a th:href="@{hView(Hid=${i.Hid})}"><img th:src="@{/profile/{Hfile}(Hfile=${i.Hfile})}" width="50px" height="50px" style="border-radius: 70%;"></a></td>
+                        <td th:text="${i.Hname}"></td>
+                        <td th:text="${i.Hid}"></td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="close_modal1">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3> 팔로워 </h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+                    <table>
+                        <tr th:each="i : ${follower}">
+                            <td><a th:href="@{hView(Hid=${i.Hid})}"><img th:src="@{/profile/{Hfile}(Hfile=${i.Hfile})}" width="50px" height="50px" style="border-radius: 70%;"></a></td>
+                            <td th:text="${i.Hname}"></td>
+                            <td th:text="${i.Hid}"></td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="close_modal2">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <h1>내 회원 정보보기</h1>
 
@@ -32,19 +108,21 @@
         <td th:text="${follower.size()}"></td>
     </tr>
 
+
+    <img id="img" th:src="@{/profile/{Hfile}(Hfile=${member.Hfile})}" width="150px" height="150px"
+         style="border-radius: 70%;">
+
+    <tr th:if="${session.loginId ne member.Hid}">
+        <td th:if="${followList eq null}"><a th:href="@{hFollow(Hid=${member.Hid})}">팔로우</a></td>
+        <td th:if="${followList ne null}"><a th:href="@{hUnFollow(Hid=${member.Hid})}">팔로우 취소</a></td>
+        <br>
+    </tr>
+
+
+    <a th:if="${session.loginId eq member.Hid}" th:href="@{hModifyForm(Hid=${member.Hid})}">프로필 수정</a></td>
+
+
 </table>
-
-        <img id="img" th:src="@{/profile/{Hfile}(Hfile=${member.Hfile})}" width="150px" height="150px" style="border-radius: 70%;">
-
-<td th:if="${followList eq null}"><a  th:href="@{hFollow(Hid=${member.Hid})}">팔로우</a></td>
-<td th:if="${followList ne null}"><a  th:href="@{hUnFollow(Hid=${member.Hid})}">팔로우 취소</a></td><br>
-
-
-
-<a th:if="${session.loginId eq member.Hid}" th:href="@{hModifyForm(Hid=${member.Hid})}">프로필 수정</a></td>
-
-
-
 
 
 <table>
@@ -55,11 +133,38 @@
         <td th:text="${pmylist.Pcontent}"></td>
         <td th:text="${pmylist.Pstyle}"></td>
         <td th:text="${pmylist.Pup}"></td>
-        <td><img th:src="@{photo/{PfileName}(PfileName=${pmylist.PfileName})}"></td>
+        <td>
+            <a th:href="@{pView(Pnum=${pmylist.Pnum})}">
+                <img th:src="@{photo/{PfileName}(PfileName=${pmylist.PfileName})}">
+            </a>
+        </td>
     </tr>
 
 </table>
 
 </body>
 
+
+<script>
+
+    $(document).ready(function () {
+        $("#modal_show1").click(function () {
+            $("#exampleModal1").modal("show");
+        });
+
+        $("#close_modal1").click(function () {
+            $("#exampleModal1").modal("hide");
+        });
+
+        $("#modal_show2").click(function () {
+            $("#exampleModal2").modal("show");
+        });
+
+        $("#close_modal2").click(function () {
+            $("#exampleModal2").modal("hide");
+        });
+    });
+
+
+</script>
 </html>
