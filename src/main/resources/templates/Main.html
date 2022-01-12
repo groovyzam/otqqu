@@ -29,17 +29,31 @@
     <div class="site_branding">
         <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
 
-        <form action="Search" method="GET">
+
+
+
+
+
             <div class="search_input_wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-search bi_search" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                 </svg>
-                <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
-                       style="border: 0; padding-left: 16px;" autocomplete="off">
+
+                <form action="searchInfo" method="GET">
+                    <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
+                       style="border: 0; padding-left: 16px;" autocomplete="off" onkeyup="search()">
+
+                </form>
+
             </div>
 
-        </form>
+        <div id="searchDIV" class="search_list">
+
+
+        </div>
+
+
 
         <div class="header_menu">
 
@@ -63,7 +77,6 @@
                 </div>
             </div>
 
-
             <div class="dropdown">
                 <div class="header_menu_account_wrap">
                     <div id="header_menu_account" style="width: 26px; height: 30px">
@@ -85,6 +98,8 @@
                         </svg>
                     </div>
                 </div>
+
+
 
                 <div class="dropdown-content">
                     <a th:if="${session.loginId ne null}" th:href="@{hView(Hid=${session.loginId})}"
@@ -137,6 +152,10 @@
         </div>
     </div>
 
+
+
+
+
     <nav id="site-navigation" class="main-navigation" style="margin: 60px auto 0 auto; width: 980px; border-top: 0;">
 
         <div class="nav_main_list">
@@ -170,72 +189,23 @@
 <div th:text="${session.loginId}" id="loginId"></div>!-->
 
 <div class="post_list_wrap" id="post_list_wrap">
+
     <div th:each="list : ${postList}" class="post_list fadein" style="text-align: center">
         <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" class="post_list_image">
 
-<<<<<<< HEAD
-<a th:href="@{hView(Hid=${session.loginId})}"><button>내 정보보기</button></a>
-
-
-
-
-
-<div th:text="${session.loginId}"></div>
-
-
-
-<div th:text="${session.loginId}"></div>
-
-
-
-
-<button onclick="location.href='img'" > 이미지</button>
-
-
-<button onclick="location.href='img'" > 이미지</button>
-
-
-
-<button onclick="location.href='img'" > 이미지</button>
-
-<button onclick="location.href='PostForm'" value="회원목록">게시글 작성</button>
-
-
-
-<h3>STYLE</h3>
-<button onclick="location.href='pStyleList?Pstyle=casual'">캐주얼</button>
-<button onclick="location.href='pStyleList?Pstyle=street'">스트릿</button>
-<button onclick="location.href='pStyleList?Pstyle=vintage'">빈티지</button>
-<button onclick="location.href='pStyleList?Pstyle=classic'">클래식</button>
-<button onclick="location.href='pStyleList?Pstyle=other'">기타</button>
-<h3>CATEGORY</h3>
-<button onclick="location.href='pCategoryList?Pcategory=cap'">모자</button>
-<button onclick="location.href='pCategoryList?Pcategory=outer'">아우터</button>
-<button onclick="location.href='pCategoryList?Pcategory=top'">상의</button>
-<button onclick="location.href='pCategoryList?Pcategory=bottom'">하의</button>
-<button onclick="location.href='pCategoryList?Pcategory=shoes'">신발</button>
-<button onclick="location.href='pCategoryList?Pcategory=accessories'">악세서리</button>
-
-
-
 <div th:each="list : ${postList}" class="img_box fadein" style="text-align: center" id>
 
-    <a th:href="@{pView(Pnum=${list.Pnum})}">
-    <h1 th:text="${list.Hid}"></h1>
-    <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" width="500px" height="500px" class="test_image">
-    </a>
         <a th:href="@{pView(Pnum=${list.Pnum})}" class="post_list_grey">
             <div class="post_list_grey_text">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                      class="bi bi-suit-heart-fill post_list_grey_heart" viewBox="0 0 16 16">
                     <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
                 </svg>
-                <span th:text="${list.Pup}"></span>
             </div>
         </a>
     </div>
 </div>
-
+</div>
 <footer class="footer">
     <div class="footer_list">
         <a href="#" class="footer_text">김효섭</a>
@@ -307,36 +277,51 @@
         }
     });
 
-</script>
+    function search(){
+        let keyword = document.getElementById("searchInput").value;
+        var display = document.getElementById("searchDIV");
 
-<script type="text/javascript">
+        display.style.display='block';
+        $.ajax({
+            type : "POST",
+            url  : "/search",
+            data : {"keyword":keyword},
+            dataType : "json",
+            success: function (data){
 
-    $(document).ready(function() {
-        $("#searchInput").autocomplete({
-            source : function(request, response) {
+                var append_node = "";
 
-                $.ajax({
+                for(i=0; i<data.length;i++) {
+                    console.log("성공");
+                    append_node += "<div>";
+                    append_node+= "<a href='hView?Hid="+data[i].hid+"'>";
+                    append_node += "<img width='30px' height='30px' class='test_image' src='/profile/"+data[i].hfile+"' style='border-radius: 100%'>";
+                    append_node += "</a>"
+                    append_node += "<span>"+data[i].hid+"</span>";
+                    append_node += "</div>";
+                }
 
-                    url : "/autocomplete",
-                    type : "post",
-                    dataType : "json",
-                    data: request,
-
-                    success : function(data) {
-
-                        var result = data;
-                        response(result);
-                    },
-
-                    error : function(data) {
-                        alert("에러가 발생하였습니다.")
+                if(append_node == ""){
+                    display.style.display='none';
+                }
+                $('html').click(function (e){
+                    console.log("클릭");
+                    var target = event.target;
+                    if(!$(e.target).hasClass("search_list")){
+                        display.style.display='none';
                     }
                 });
+                $("#searchDIV").html(append_node);
+
+            },
+            error : function (){
+                console.log("search실패");
             }
         });
-    });
+    }
 
 </script>
+
 
 </html>
 </html>

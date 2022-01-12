@@ -1,9 +1,5 @@
 package com.groovyzam.otqqu.controller;
-import com.groovyzam.otqqu.dto.COMMENT;
-import com.groovyzam.otqqu.dto.PDTO;
-import com.groovyzam.otqqu.dto.PimgRatioDTO;
-
-import com.groovyzam.otqqu.dto.ProductDTO;
+import com.groovyzam.otqqu.dto.*;
 
 import com.groovyzam.otqqu.service.PService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -182,11 +178,18 @@ public class PController {
     }
     //postLikeDelete 좋아요 취소
     @RequestMapping(value = "postLikeDelete", method = RequestMethod.GET)
-    public ModelAndView  postLikeDelete(@RequestParam("Pnum") int  Pnum){
+    public ModelAndView  postLikeDelete(@RequestParam("Pnum") int Pnum){
 
         mav = psvc.postLikeDelete(Pnum);
 
         return mav;
+    }
+    @RequestMapping(value = "searchBrand", method = RequestMethod.POST)
+    public @ResponseBody List<String> searchBrand(@RequestParam(value="keyword") String keyword) {
+
+        List<String> searchBrand = psvc.searchBrand(keyword);
+
+        return searchBrand;
     }
 
 

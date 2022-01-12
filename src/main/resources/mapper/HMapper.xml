@@ -6,9 +6,11 @@
 
 
     <!--회원가입-->
-    <insert id="hJoin" parameterType="human">
-        INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},#{Hemail},#{Hage},#{Hheight},#{Hweight},#{Hgender},#{Hphone},#{Hfile})
-    </insert>
+
+        <insert id="hJoin" parameterType="human">
+            INSERT INTO HUMAN VALUES (#{Hname},#{Hid},#{Hpw},0,0,0,NULL,#{Hphone},#{Hfile})
+        </insert>
+
     <!--아이디 중복 검사-->
     <select id="idOverlap" parameterType="String" resultType="String" >
         SELECT HID FROM HUMAN WHERE HID = #{Hid}
@@ -41,7 +43,9 @@
     </select>
 
     <select id="Search" parameterType="String" resultType="human">
-        SELECT * FROM HUMAN WHERE HID LIKE '%'||#{keyword}||'%'
+        SELECT * FROM HUMAN WHERE HID IN (
+        SELECT FOLLOWERID FROM FOLLOW_VIEW WHERE FOLLOWERID LIKE '%'||#{keyword}||'%' AND 6>ROWNUM
+        )ORDER BY HID ASC
     </select>
 
     <select id="autocomplete" parameterType="String" resultType="human">

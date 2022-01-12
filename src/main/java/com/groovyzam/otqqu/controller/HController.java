@@ -62,7 +62,7 @@ public class HController {
             return "Login";
         }
 
-        return "Main";
+        return "redirect:/mainPost";
     }
 
     @RequestMapping(value = "Main", method = RequestMethod.GET)
@@ -182,12 +182,12 @@ public class HController {
     }
 
     // Search : 검색어 입력
-    @RequestMapping(value = "Search", method = RequestMethod.GET)
-    public ModelAndView Search(@RequestParam(value="keyword") String keyword, HDTO human) {
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public @ResponseBody List<HDTO> Search(@RequestParam(value="keyword") String keyword) {
 
-        mav = hsvc.Search(keyword);
+        List<HDTO> searchList = hsvc.search(keyword);
 
-        return mav;
+        return searchList;
     }
 
     // 자동완성 검색
@@ -327,5 +327,14 @@ public class HController {
 
         return mav;
     }
+    @RequestMapping(value = "searchInfo" ,method = RequestMethod.GET)
+    public ModelAndView searchInfo(@RequestParam("keyword") String Hid){
+
+        mav= hsvc.searchInfo(Hid);
+        return mav;
+
+    }
+
+
 }
 

@@ -6,7 +6,7 @@
 
 
     <insert id="PostUpload" parameterType="post">
-        INSERT INTO POST VALUES (POST_SEQ.NEXTVAL,#{Hid},#{Ptitle},#{Pcontent},#{Pstyle},#{Pup},#{PfileName})
+        INSERT INTO POST VALUES (POST_SEQ.NEXTVAL,#{Hid},#{Ptitle},#{Pcontent},#{Pstyle},#{PfileName})
     </insert>
 
     <insert id="ProductUpload" parameterType="product">
@@ -16,8 +16,7 @@
 
     <select id="mainPost" parameterType="int" resultType="post">
 
-        SELECT * FROM (SELECT ROWNUM AS ROWPNUM,PNUM,HID,PTITLE,PCONTENT,PSTYLE,PUP,PFILENAME FROM POST ORDER BY PNUM DESC)A WHERE A.ROWPNUM BETWEEN #{startPnum} AND #{lastPnum}
-
+        SELECT * FROM (SELECT ROWNUM AS ROWPNUM,PNUM,HID,PTITLE,PCONTENT,PSTYLE,PFILENAME FROM POST ORDER BY PNUM DESC)A WHERE A.ROWPNUM BETWEEN #{startPnum} AND #{lastPnum}
 
     </select>
 
@@ -96,5 +95,9 @@
     <delete id="postLikeDelete" parameterType="like">
         DELETE FROM POSTLIKE WHERE PNUM=#{Pnum} AND HID=#{Hid}
     </delete>
+
+    <select id="searchBrand" parameterType="String" resultType="String">
+        SELECT PBRAND FROM POST WHERE PBRAND LIKE '%'||#{keyword}||'%'
+    </select>
 
 </mapper>

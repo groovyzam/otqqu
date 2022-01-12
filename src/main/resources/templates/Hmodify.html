@@ -96,16 +96,6 @@
             <td><input type="text" name="Hname" th:placeholder="${human.Hname}"></td>
         </tr>
 
-
-        <tr>
-            <th>이메일</th>
-            <td>
-
-                <span th:text="${human.Hemail}"></span>
-            </td>
-        </tr>
-
-
         <tr>
             <th>나이</th>
             <td><input type="text" name="Hage" th:placeholder="${human.Hage}"/></td>
@@ -131,6 +121,10 @@
                 <input type="radio" name="Hgender" value="m" >남
                 <input type="radio" name="Hgender" value="w" checked>여
             </td>
+            <td th:if="${human.Hgender eq null}">
+            <input type="radio" name="Hgender" value="m" >남
+            <input type="radio" name="Hgender" value="w" >여
+        </td>
         </tr>
 
         <tr>

@@ -179,22 +179,21 @@ public class HService {
     }
 
     // Search : 검색어 입력
-    public ModelAndView Search(String keyword) {
-        List<HDTO> hList = hdao.Search(keyword);
+    public List<HDTO> search(String keyword) {
+        List<HDTO> hList=new ArrayList<HDTO>();
+        if(keyword != "") {
+           hList = hdao.Search(keyword);
+            return hList;
 
 
-        mav.addObject("keyword", keyword);
-        mav.addObject("hList",hList);
+        }
+        return hList;
 
-
-
-        mav.setViewName("Hslist");
-
-        return mav;
     }
+
+
     public ModelAndView hView(String Hid) {
 
-        System.out.println("한글깨짐HID = "+Hid);
         HDTO human = hdao.hView(Hid);
 
         List<PDTO> pmylist = hdao.pMylist(Hid);
@@ -330,6 +329,12 @@ public class HService {
         }
 
         mav.setViewName("mainPost");
+        return mav;
+    }
+
+    public ModelAndView searchInfo(String hid) {
+
+        mav.setViewName("redirect:hView?Hid="+hid+"");
         return mav;
     }
 }

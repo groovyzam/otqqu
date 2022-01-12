@@ -27,6 +27,18 @@
     border-radius: 10px;
     align-items: center;
 }
+.search_list{
+
+    position: absolute;
+    padding: 15px;
+    width: 500px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    top: 80px;
+    background-color: #fff;
+    display: none;
+}
+
 
 .search_input{
     width: 100%;
@@ -34,6 +46,8 @@
     background-color: #efefef;
     font-size: 16px;
     line-height: 36px;
+
+
 }
 
 .search_input:focus{

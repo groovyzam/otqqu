@@ -15,7 +15,6 @@ public class PDTO {
     private String Ptitle;
     private String Pcontent;
     private String Pstyle;
-    private int Pup;
     private MultipartFile Pfile;
     private String PfileName;
 }
