@@ -1,116 +1,369 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="author" content="KIMAH"/>
-    <meta name="description" content="SpringBoot Thymeleaf">
-    <title>Spring Boot Test</title>
+    <meta name="description" content="OTQQU"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel='stylesheet' href='css/woocommerce-layout.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/woocommerce-smallscreen.css' type='text/css'
+          media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' href='css/woocommerce.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/style.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+    <link rel="stylesheet" href="css/OTQQU.css">
+    <style>
+
+        h5 {
+            text-align: center;
+        }
+
+        .middle {
+            text-align: center;
+            width: 800px;
+            position: relative;
+            left: 560px;
+            border: 1px solid #ccc;
+            box-shadow : 0 0 8px gray inset, 0 0 8px black;
+        }
+
+        .hid {
+            display: inline-block;
+            position: relative;
+            right: 320px;
+        }
+
+        .delete {
+            display: inline-block;
+            position: relative;
+            left: 320px;
+        }
+
+        .heart {
+            position: relative;
+            left: 350px;
+        }
+
+        h4 {
+            position: relative;
+            left: 20px;
+            color: inherit;
+        }
+
+        textarea {
+            width: 600px;
+            height: 40px;
+            background-color: #efefef;
+            resize: none;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            border: none;
+        }
+
+        .heart2 {
+            display: inline-block;
+        }
+
+        .comm {
+            display: inline-block;
+        }
+
+        .like2 {
+            display: inline-block;
+        }
+
+        .table2 {
+            width: 600px;
+            position: relative;
+            left: 90px;
+        }
+
+        .brand {
+            position: relative;
+            font-weight: bolder;
+            vertical-align:top;
+            display: table;
+            right: 260px;
+            bottom: 25px;
+        }
+
+        .product {
+            position: relative;
+            font-weight: bold;
+            vertical-align:middle;
+            display: table;
+            right: 260px;
+            bottom: 25px;
+        }
+
+        .price {
+            position: relative;
+            font-weight: lighter;
+            vertical-align:bottom;
+            display: table;
+            right: 260px;
+            bottom: 25px;
+        }
+
+        h3 {
+            color: #7f8d8c;
+        }
+
+
+    </style>
 </head>
 <body>
+<div class="site_branding" style="border-bottom: 1px solid black;">
+    <h1 class="site_title"><a href="mainPost" rel="home">Otqqu</a></h1>
 
-좋아요 개수<p th:text="${like}"></p>
-
-
-    <div th:if="${likeId ne session.loginId}">
-        <a th:if="${session.loginId ne post.Hid}" th:href="@{postLike(Pnum=${post.Pnum})}"><img src="photo/like.png" width="30px"></img></a>
-    </div>
-
-    <div th:if="${likeId eq session.loginId}">
-        <a th:if="${session.loginId ne post.Hid}" th:href="@{postLikeDelete(Pnum=${post.Pnum})}"><img src="photo/unlike.png" width="30px"></img></a>
-    </div>
-
-
-
-<span th:text="${post.Pnum}" ></span>
-<input type="hidden" th:value="${post.Pnum}" th:id="Pnum">
-<span th:text="${post.Hid}"></span>
-<input type="hidden" th:value="${post.Hid}" th:id="Hid">
-<span th:text="${post.Ptitle}"></span>
-<span th:text="${post.Pcontent}"></span>
-<span><img th:src="@{photo/{PfileName}(PfileName=${post.PfileName})}"> </span>
-<span>=========================================</span>
-<br/><br/><br/><br/><br/>
-
-<h2>여기서부터는 카테고리별 사진 등록</h2>
-<table>
-    <div th:if="${cap ne null}">
-        <tr  th:each="cap : ${cap}" >
-       <td> 모자 <img th:src="@{/cap/{fileName}(fileName=${cap.CfileName})}" width="100px" height="100px"></td>
-        <td th:text="${cap.Cbrand}"> </td>
-        <td th:text="${cap.Cproduct}"> </td>
-        <td th:text="${cap.Cprice}"> </td>
-    </tr>
-    </div>
-
-    <div th:if="${outer ne null}">
-    <tr  th:each="outer : ${outer}" >
-       <td> 아우터 <img th:src="@{/outer/{fileName}(fileName=${outer.OfileName})}" width="100px" height="100px"></td>
-        <td th:text="${outer.Obrand}"> </td>
-        <td th:text="${outer.Oproduct}"> </td>
-        <td th:text="${outer.Oprice}"> </td>
-    </tr>
-
-</div>
-    <div th:if="${top ne null}" >
-        <tr th:each="top : ${top}" >
-      <td> 상의  <img th:src="@{/top/{fileName}(fileName=${top.TfileName})}" width="100px" height="100px"></td>
-        <td th:text="${top.Tbrand}"> </td>
-        <td th:text="${top.Tproduct}"> </td>
-        <td th:text="${top.Tprice}"> </td>
-    </tr>
-    </div>
-
-    <div th:if="${bottom ne null}">
-        <tr  th:each="bottom : ${bottom}" >
-        <td>하의 <img th:src="@{/bottom/{fileName}(fileName=${bottom.BfileName})}" width="100px" height="100px"></td>
-        <td th:text="${bottom.Bbrand}"> </td>
-        <td th:text="${bottom.Bproduct}"> </td>
-        <td th:text="${bottom.Bprice}"> </td>
-    </tr>
+    <form action="Search" method="GET">
+        <div class="search_input_wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-search bi_search" viewBox="0 0 16 16">
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+            </svg>
+            <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
+                   style="border: 0; padding-left: 16px;" autocomplete="off">
         </div>
 
-    <div th:if="${shoes ne null}">
-    <tr  th:each="shoes : ${shoes}" >
-       <td>신발  <img th:src="@{/shoes/{fileName}(fileName=${shoes.SfileName})}" width="100px" height="100px"></td>
-        <td th:text="${shoes.Sbrand}"> </td>
-        <td th:text="${shoes.Sproduct}"> </td>
-        <td th:text="${shoes.Sprice}"> </td>
-    </tr>
-</div>
+    </form>
 
-    <div th:if="${accessories ne null}">
-    <tr   th:each="accessories : ${accessories}">
-        <td>악세서리 <img th:src="@{/accessories/{fileName}(fileName=${accessories.AfileName})}" width="100px" height="100px"></td>
-        <td th:text="${accessories.Abrand}"> </td>
-        <td th:text="${accessories.Aproduct}"> </td>
-        <td th:text="${accessories.Aprice}"> </td>
-    </tr>
+    <div class="header_menu">
+
+        <div id="header_menu_post_wrap">
+            <div id="header_menu_post" style="width: 26px; height: 26px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                     class="bi bi-plus-circle header_menu_icon" viewBox="0 0 16 16"
+                     onclick="location.href='PostForm'">
+                    <path id="header_menu_post_1"
+                          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path id="header_menu_post_2"
+                          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </div>
+            <div id="header_menu_post_on" style="width: 26px; height: 26px">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                     class="bi bi-plus-circle-fill header_menu_icon" viewBox="0 0 16 16"
+                     onclick="location.href='PostForm'">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                </svg>
+            </div>
+        </div>
+
+
+        <div class="dropdown">
+            <div class="header_menu_account_wrap">
+                <div id="header_menu_account" style="width: 26px; height: 30px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                         class="bi bi-house header_menu_icon header_dropdown_menu_icon" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                        <path fill-rule="evenodd"
+                              d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    </svg>
+                </div>
+                <div id="header_menu_account_on" style="width: 26px; height: 30px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                         class="bi bi-house-fill" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                        <path fill-rule="evenodd"
+                              d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="dropdown-content">
+                <a th:if="${session.loginId ne null}" th:href="@{hView(Hid=${session.loginId})}"
+                   class="dropdown_content_list">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-person-circle dropdown_content_icon" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd"
+                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
+                    <span class="dropdown_text">프로필</span>
+                </a>
+                <a th:if="${session.loginId ne null}" th:href="@{hModifyForm(Hid=${session.loginId})}"
+                   class="dropdown_content_list">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-gear-wide dropdown_content_icon" viewBox="0 0 16 16">
+                        <path d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 1 0-9.995 4.998 4.998 0 0 1 0 9.996z"/>
+                    </svg>
+                    <span class="dropdown_text">설정</span>
+                </a>
+                <a th:if="${session.loginId eq null}" href="hjoinForm" class="dropdown_content_list">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-person-plus dropdown_content_icon" viewBox="0 0 16 16">
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        <path fill-rule="evenodd"
+                              d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                    <span class="dropdown_text">회원가입</span>
+                </a>
+                <a th:if="${session.loginId eq null}" href="hLoginForm" class="dropdown_content_list">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-box-arrow-in-right dropdown_content_icon" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                        <path fill-rule="evenodd"
+                              d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                    </svg>
+                    <span class="dropdown_text">로그인</span>
+                </a>
+                <a th:if="${session.loginId ne null}" href="hLogout" class="dropdown_content_list">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-x-circle dropdown_content_icon" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                    <span class="dropdown_text">로그아웃</span>
+                </a>
+            </div>
+        </div>
     </div>
 
-</table>
-
-
-<span>======================================</span>
-
-<h2>여기서 부터 댓글</h2>
-
-<div>
-    <textarea rows="5" cols="20" id="CContent" name="CContent"></textarea>
-    <button id="cmtBtn">댓글 입력</button>
 </div>
+<br/>
+<br/>
+<hr/>
+<div class="middle">
+    <!--<span th:text="${post.Pnum}"></span>-->
+    <input type="hidden" th:value="${post.Pnum}" th:id="Pnum">
+
+    <div class="top">
+        <div class="hid">
+
+            <a th:href="@{hView(Hid=${post.Hid})}"><h3><span th:text="${post.Hid}"></span>&nbsp;<img src="/default/blue.png" width="20px" height="20px"></h3></a>
+            <h6><span th:text="${post.Pstyle}"></span></h6>
+            <input type="hidden" th:value="${post.Hid}" th:id="Hid">
+        </div>
+        <div class="delete">
+            <a th:href="@{pDelete(Pnum=${post.Pnum})}"><img src="/default/xx.png" width="20px" height="20px"></a>
+        </div>
+    </div>
+
+    <br/>
+    <span><img th:src="@{photo/{PfileName}(PfileName=${post.PfileName})}" width="880px" > </span>
+    <br/>
 
 
-<div id ="commentArea"></div>
+    <div >
+        <div class="heart">
+            <div th:if="${session.loginId ne post.Hid}" class="like2">
+                <p th:text="${like}" style="font-weight: bold;"></p>
+            </div>
+            <div class="heart2">
+                <div th:if="${likeId ne session.loginId}">
+                    <a th:if="${session.loginId ne post.Hid}" th:href="@{postLike(Pnum=${post.Pnum})}"><img src="/photo/like.png" width="30px" height="30px"></a>
+                </div>
+
+                <div th:if="${likeId eq session.loginId}">
+                    <a th:if="${session.loginId ne post.Hid}" th:href="@{postLikeDelete(Pnum=${post.Pnum})}"><img src="/photo/unlike.png" width="30px" height="30px"></a>
+                </div>
+            </div>
+
+            <div class="comm">
+                <a href="#text"><img src="/default/comm.png" width="40px" height="40px"></a>
+            </div>
+        </div>
+
+        <div class="content">
+            <h5>| <span th:text="${post.Ptitle}"></span></h5>
+            <h5>| <span th:text="${post.Pcontent}"></span></h5>
+        </div>
+        <br/><br/>
 
 
-<a th:if="${session.loginId eq post.Hid}" th:href="@{postModifyForm(Pnum=${post.Pnum})}"><button>게시글 수정</button></a>
-<a th:if="${session.loginId eq post.Hid}" th:href="@{postDelete(Pnum=${post.Pnum})}"><button>게시글 삭제</button></a>
+        <h4>| Product</h4>
+        <table class="table2">
+            <div th:if="${cap ne null}">
+                <tr  th:each="cap : ${cap}" >
+                    <td>  <img th:src="@{/cap/{fileName}(fileName=${cap.CfileName})}" width="100px" height="100px"></td>
+                    <td th:text="${cap.Cbrand}" class="brand" > </td>
+                    <td th:text="${cap.Cproduct}" class="product" > </td>
+                    <td th:text="${cap.Cprice}" class="price" > </td>
+                </tr>
+            </div>
+
+            <div th:if="${outer ne null}">
+                <tr  th:each="outer : ${outer}" >
+                    <td>  <img th:src="@{/outer/{fileName}(fileName=${outer.OfileName})}" width="100px" height="100px"></td>
+                    <td th:text="${outer.Obrand}" class="brand"> </td>
+                    <td th:text="${outer.Oproduct}" class="product"> </td>
+                    <td th:text="${outer.Oprice}" class="price"></td>
+                </tr>
+
+            </div>
+            <div th:if="${top ne null}" >
+                <tr th:each="top : ${top}" >
+                    <td>   <img th:src="@{/top/{fileName}(fileName=${top.TfileName})}" width="100px" height="100px"></td>
+                    <td th:text="${top.Tbrand}" class="brand"> </td>
+                    <td th:text="${top.Tproduct}" class="product"> </td>
+                    <td th:text="${top.Tprice}" class="price"> </td>
+                </tr>
+            </div>
+
+            <div th:if="${bottom ne null}">
+                <tr  th:each="bottom : ${bottom}" >
+                    <td> <img th:src="@{/bottom/{fileName}(fileName=${bottom.BfileName})}" width="100px" height="100px"></td>
+                    <td th:text="${bottom.Bbrand}" class="brand"> </td>
+                    <td th:text="${bottom.Bproduct}" class="product"> </td>
+                    <td th:text="${bottom.Bprice}" class="price"> </td>
+                </tr>
+            </div>
+
+            <div th:if="${shoes ne null}">
+                <tr  th:each="shoes : ${shoes}" >
+                    <td>  <img th:src="@{/shoes/{fileName}(fileName=${shoes.SfileName})}" width="100px" height="100px"></td>
+                    <td th:text="${shoes.Sbrand}" class="brand"> </td>
+                    <td th:text="${shoes.Sproduct}" class="product"> </td>
+                    <td th:text="${shoes.Sprice}" class="price"> </td>
+                </tr>
+            </div>
+
+            <div th:if="${accessories ne null}">
+                <tr   th:each="accessories : ${accessories}">
+                    <td> <img th:src="@{/accessories/{fileName}(fileName=${accessories.AfileName})}" width="100px" height="100px"></td>
+                    <td th:text="${accessories.Abrand}" class="brand"> </td>
+                    <td th:text="${accessories.Aproduct}" class="product"> </td>
+                    <td th:text="${accessories.Aprice}" class="price"> </td>
+                </tr>
+            </div>
+
+        </table>
+
+        <br/>
+
+
+        <h4>| Comment</h4>
+
+        <a name="text">
+            <div>
+                <textarea rows="5" cols="20" id="CContent" class="CContent" name="CContent" placeholder="댓글을 입력해주세요!"></textarea>
+                <span class="count"></span>
+                <span id="cmtBtn" class="cmtBtn" onclick="checking()"><img src="/default/a.png" width="40px" height="40px" style="color: white"></span>
+            </div>
+            <br/><br/>
+
+            <div id ="commentArea" style="width: 600px; color: black; position: relative; left: 90px;">
+            </div>
+        </a>
+    </div>
+
+</div>
 
 
 </body>
+
+
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     // M_View.jsp 로딩시 댓글 목록 조회
@@ -133,7 +386,7 @@
         });
 
 
-       $("#cmtBtn").click(function(){
+        $("#cmtBtn").click(function(){
             let Cwriter =  document.getElementById("Hid").value
             let Ccontent = $("#CContent").val();
             let Pnum = document.getElementById("Pnum").value;
@@ -151,7 +404,7 @@
                     commentList(result);
                     $("#CContent").val("");
                 },
-                error : function(){
+                error : function checking(){
                     alert("댓글 입력 실패!");
                 }
             });
@@ -163,12 +416,12 @@
         // 스프링에 입력하는 값을 추가
 
         output +="<table>";
-        output +="<caption>댓글 목록</caption>";
+        output +="<caption></caption>";
         output +="<thead>";
         output +="<tr>";
-        output +="<th>작성자</th>";
-        output +="<th>내용</th>";
-        output +="<th>댓글삭제</th>";
+        output +="<th>Writer</th>";
+        output +="<th>Content</th>";
+        output +="<th>X</th>";
         output +="</tr>";
         output +="</thead>";
 
@@ -176,7 +429,7 @@
             output +="<tr>";
             output +="<td>"+result[i].cwriter+"</td>";
             output +="<td>"+result[i].ccontent+"</td>";
-            output +="<td><button onclick='cmtDelete("+result[i].cnum+")'>삭제</button></td>";
+            output +="<td><button style='color: red;' onclick='cmtDelete("+result[i].cnum+")'><img src=\"/default/xx.png\" width='16px' height='20px'></button></td>";
             output +="</tr>";
         }
         output +="</table>";
@@ -207,7 +460,21 @@
         });
     }
 
+    $(document).ready(function() {
+        $('#CContent').on('keyup', function() {
+            $('.count').html("("+$(this).val().length+" / 100)");
+
+            if($(this).val().length > 100) {
+                $(this).val($(this).val().substring(0, 100));
+                $('.count').html("(100 / 100)");
+            }
+        });
+    });
+
+
 
 
 </script>
+
+
 </html>

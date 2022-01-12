@@ -78,9 +78,9 @@ public class PService {
             if(PproductFileImg.size() != 0 && pproductFile.size() != 0) {
                 if (pproductFile.get(i).getOriginalFilename().equals("") && !PproductFileImg.get(i).equals("")) {
                     ProductfileNameImg = UUID.randomUUID().toString().substring(1, 7);
-                    ProductfileName = uuid2 + "_" + ProductfileNameImg;
+                    ProductfileName = uuid2 + "_" + ProductfileNameImg+".jpg";
                     fileUrl = PproductFileImg.get(i);
-                    Path target = Paths.get(savePath2, ProductfileName + ".jpg");
+                    Path target = Paths.get(savePath2, ProductfileName);
 
                     URL url = new URL(fileUrl);
 
@@ -125,9 +125,9 @@ public class PService {
             }
             else{
                 ProductfileNameImg = UUID.randomUUID().toString().substring(1, 7);
-                ProductfileName = uuid2 + "_" + ProductfileNameImg;
+                ProductfileName = uuid2 + "_" + ProductfileNameImg+".jpg";
                 fileUrl = PproductFileImg.get(i);
-                Path target = Paths.get(savePath2, ProductfileName + ".jpg");
+                Path target = Paths.get(savePath2, ProductfileName);
 
                 URL url = new URL(fileUrl);
 
