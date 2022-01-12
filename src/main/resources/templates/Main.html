@@ -25,180 +25,193 @@
 </head>
 
 <body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
-<header class="site-header" style="margin: 0 auto;">
-    <div class="site_branding">
-        <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
+<div class="wrap">
+    <header class="site-header" style="margin: 0 auto; padding: 0; height: 80px; background-color: #fff">
+        <div class="site_branding">
+            <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
 
-        <form action="Search" method="GET">
-            <div class="search_input_wrap">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-search bi_search" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                </svg>
-                <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
-                       style="border: 0; padding-left: 16px;" autocomplete="off">
-            </div>
-
-        </form>
-
-        <div class="header_menu">
-
-            <div id="header_menu_post_wrap">
-                <div id="header_menu_post" style="width: 26px; height: 26px">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                         class="bi bi-plus-circle header_menu_icon" viewBox="0 0 16 16"
-                         onclick="location.href='PostForm'">
-                        <path id="header_menu_post_1"
-                              d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                        <path id="header_menu_post_2"
-                              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            <form action="Search" method="GET">
+                <div class="search_input_wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-search bi_search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
+                    <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
+                           style="border: 0; padding-left: 16px;" autocomplete="off">
                 </div>
-                <div id="header_menu_post_on" style="width: 26px; height: 26px">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                         class="bi bi-plus-circle-fill header_menu_icon" viewBox="0 0 16 16"
-                         onclick="location.href='PostForm'">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-                    </svg>
-                </div>
-            </div>
 
+            </form>
 
-            <div class="dropdown">
-                <div class="header_menu_account_wrap">
-                    <div id="header_menu_account" style="width: 26px; height: 30px">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
-                             class="bi bi-house header_menu_icon header_dropdown_menu_icon" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                            <path fill-rule="evenodd"
-                                  d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+            <div class="header_menu">
+
+                <div id="header_menu_post_wrap">
+                    <div id="header_menu_post" style="width: 26px; height: 26px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             class="bi bi-plus-circle header_menu_icon" viewBox="0 0 16 16"
+                             onclick="location.href='PostForm'">
+                            <path id="header_menu_post_1"
+                                  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path id="header_menu_post_2"
+                                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>
                     </div>
-                    <div id="header_menu_account_on" style="width: 26px; height: 30px">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
-                             class="bi bi-house-fill" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                            <path fill-rule="evenodd"
-                                  d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    <div id="header_menu_post_on" style="width: 26px; height: 26px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             class="bi bi-plus-circle-fill header_menu_icon" viewBox="0 0 16 16"
+                             onclick="location.href='PostForm'">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                         </svg>
                     </div>
                 </div>
 
-                <div class="dropdown-content">
-                    <a th:if="${session.loginId ne null}" th:href="@{hView(Hid=${session.loginId})}"
-                       class="dropdown_content_list">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-person-circle dropdown_content_icon" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            <path fill-rule="evenodd"
-                                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>
-                        <span class="dropdown_text">프로필</span>
-                    </a>
-                    <a th:if="${session.loginId ne null}" th:href="@{hModifyForm(Hid=${session.loginId})}"
-                       class="dropdown_content_list">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-gear-wide dropdown_content_icon" viewBox="0 0 16 16">
-                            <path d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 1 0-9.995 4.998 4.998 0 0 1 0 9.996z"/>
-                        </svg>
-                        <span class="dropdown_text">설정</span>
-                    </a>
-                    <a th:if="${session.loginId eq null}" href="hjoinForm" class="dropdown_content_list">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-person-plus dropdown_content_icon" viewBox="0 0 16 16">
-                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                            <path fill-rule="evenodd"
-                                  d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                        </svg>
-                        <span class="dropdown_text">회원가입</span>
-                    </a>
-                    <a th:if="${session.loginId eq null}" href="hLoginForm" class="dropdown_content_list">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-box-arrow-in-right dropdown_content_icon" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd"
-                                  d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
-                            <path fill-rule="evenodd"
-                                  d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                        </svg>
-                        <span class="dropdown_text">로그인</span>
-                    </a>
-                    <a th:if="${session.loginId ne null}" href="hLogout" class="dropdown_content_list">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                             class="bi bi-x-circle dropdown_content_icon" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                        <span class="dropdown_text">로그아웃</span>
-                    </a>
+
+                <div class="dropdown">
+                    <div class="header_menu_account_wrap">
+                        <div id="header_menu_account" style="width: 26px; height: 30px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                 class="bi bi-house header_menu_icon header_dropdown_menu_icon" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fill-rule="evenodd"
+                                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg>
+                        </div>
+                        <div id="header_menu_account_on" style="width: 26px; height: 30px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                 class="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fill-rule="evenodd"
+                                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-content">
+                        <a th:if="${session.loginId ne null}" th:href="@{hView(Hid=${session.loginId})}"
+                           class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-person-circle dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd"
+                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                            <span class="dropdown_text">프로필</span>
+                        </a>
+                        <a th:if="${session.loginId ne null}" th:href="@{hModifyForm(Hid=${session.loginId})}"
+                           class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-gear-wide dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 1 0-9.995 4.998 4.998 0 0 1 0 9.996z"/>
+                            </svg>
+                            <span class="dropdown_text">설정</span>
+                        </a>
+                        <a th:if="${session.loginId eq null}" href="hjoinForm" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-person-plus dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                <path fill-rule="evenodd"
+                                      d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            <span class="dropdown_text">회원가입</span>
+                        </a>
+                        <a th:if="${session.loginId eq null}" href="hLoginForm" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-box-arrow-in-right dropdown_content_icon" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                            <span class="dropdown_text">로그인</span>
+                        </a>
+                        <a th:if="${session.loginId ne null}" href="hLogout" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-x-circle dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                            <span class="dropdown_text">로그아웃</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div style="border-bottom: 1px solid #888888; background-color: #fff;">
+            <nav id="site-navigation" class="main-navigation"
+                 style="margin: 80px auto 0 auto; width: 980px; border: 0; background-color: #fff;">
+
+                <div class="nav_main_list">
+                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
+                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
+                    <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn">녀</button>
+                    <button onclick="location.href='pCategoryList?Pcategory=cap'" class="nav_main_list_btn">모자</button>
+                    <button onclick="location.href='pCategoryList?Pcategory=outer'" class="nav_main_list_btn">아우터
+                    </button>
+                    <button onclick="location.href='pCategoryList?Pcategory=top'" class="nav_main_list_btn">상의</button>
+                    <button onclick="location.href='pCategoryList?Pcategory=bottom'" class="nav_main_list_btn">하의
+                    </button>
+                    <button onclick="location.href='pCategoryList?Pcategory=shoes'" class="nav_main_list_btn">신발
+                    </button>
+                    <button onclick="location.href='pCategoryList?Pcategory=accessories'" class="nav_main_list_btn">
+                        악세서리
+                    </button>
+                </div>
+                <div class="nav_main_list">
+                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">캐주얼</button>
+                    <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn">미니멀</button>
+                    <button onclick="location.href='pStyleList?Pstyle=street'" class="nav_main_list_btn">스트릿</button>
+                    <button onclick="location.href='pStyleList?Pstyle=amekaji'" class="nav_main_list_btn">아메카지</button>
+                    <button onclick="location.href='pStyleList?Pstyle=cityboy'" class="nav_main_list_btn">시티보이</button>
+                    <button onclick="location.href='pStyleList?Pstyle=classic'" class="nav_main_list_btn">클래식</button>
+                    <button onclick="location.href='pStyleList?Pstyle=other'" class="nav_main_list_btn">기타</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!--<a th:href="@{pView(Pnum='41')}">41번게시물</a>
+
+    <button onclick="location.href='hList'" value="회원목록">회원목록</button>
+
+    <<<<<<< HEAD
+    <div th:text="${session.loginId}" id="loginId"></div>!-->
+
+    <div class="post_list_wrap" id="post_list_wrap">
+        <div th:each="list : ${postList}" class="post_list fadein" style="text-align: center">
+            <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" class="post_list_image">
+
+            <a th:href="@{pView(Pnum=${list.Pnum})}" class="post_list_grey">
+                <div class="post_list_grey_text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-suit-heart-fill post_list_grey_heart" viewBox="0 0 16 16">
+                        <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                    </svg>
+                    <span th:each="like : ${postLike}">
+                        <span th:if="${list.Pnum eq like.Pnum}" th:text="${like.LikeNum}"></span>
+                    </span>
+                </div>
+            </a>
+        </div>
     </div>
 
-    <nav id="site-navigation" class="main-navigation" style="margin: 60px auto 0 auto; width: 980px; border-top: 0;">
-
-        <div class="nav_main_list">
-            <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
-            <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
-            <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn">녀</button>
-            <button onclick="location.href='pCategoryList?Pcategory=cap'" class="nav_main_list_btn">모자</button>
-            <button onclick="location.href='pCategoryList?Pcategory=outer'" class="nav_main_list_btn">아우터</button>
-            <button onclick="location.href='pCategoryList?Pcategory=top'" class="nav_main_list_btn">상의</button>
-            <button onclick="location.href='pCategoryList?Pcategory=bottom'" class="nav_main_list_btn">하의</button>
-            <button onclick="location.href='pCategoryList?Pcategory=shoes'" class="nav_main_list_btn">신발</button>
-            <button onclick="location.href='pCategoryList?Pcategory=accessories'" class="nav_main_list_btn">악세서리</button>
+    <footer class="footer">
+        <div class="footer_list">
+            <a href="#" class="footer_text">김효섭</a>
+            <a href="#" class="footer_text">김현민</a>
+            <a href="#" class="footer_text">차해성</a>
+            <a href="#" class="footer_text">박은빈</a>
+            <a href="#" class="footer_text">ICIA</a>
+            <a href="#" class="footer_text">위치</a>
         </div>
-        <div class="nav_main_list">
-            <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">캐주얼</button>
-            <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn">미니멀</button>
-            <button onclick="location.href='pStyleList?Pstyle=street'" class="nav_main_list_btn">스트릿</button>
-            <button onclick="location.href='pStyleList?Pstyle=amekaji'" class="nav_main_list_btn">아메카지</button>
-            <button onclick="location.href='pStyleList?Pstyle=cityboy'" class="nav_main_list_btn">시티보이</button>
-            <button onclick="location.href='pStyleList?Pstyle=classic'" class="nav_main_list_btn">클래식</button>
-            <button onclick="location.href='pStyleList?Pstyle=other'" class="nav_main_list_btn">기타</button>
+        <div class="footer_list_2">
+            <span class="footer_text">reference by <a href="https://www.instagram.com"
+                                                      target="_blank">Instagram</a></span>
         </div>
-    </nav>
-</header>
-
-
-<!--<a th:href="@{pView(Pnum='41')}">41번게시물</a>
-
-<button onclick="location.href='hList'" value="회원목록">회원목록</button>
-
-<<<<<<< HEAD
-<div th:text="${session.loginId}" id="loginId"></div>!-->
-
-<div class="post_list_wrap" id="post_list_wrap">
-    <div th:each="list : ${postList}" class="post_list fadein" style="text-align: center">
-        <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" class="post_list_image">
-
-        <a th:href="@{pView(Pnum=${list.Pnum})}" class="post_list_grey">
-            <div class="post_list_grey_text">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                     class="bi bi-suit-heart-fill post_list_grey_heart" viewBox="0 0 16 16">
-                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
-                </svg>
-                <span>1</span>
-            </div>
-        </a>
-    </div>
+    </footer>
 </div>
 
-<footer class="footer">
-    <div class="footer_list">
-        <a href="#" class="footer_text">김효섭</a>
-        <a href="#" class="footer_text">김현민</a>
-        <a href="#" class="footer_text">차해성</a>
-        <a href="#" class="footer_text">박은빈</a>
-        <a href="#" class="footer_text">ICIA</a>
-        <a href="#" class="footer_text">위치</a>
-    </div>
-    <div class="footer_list_2">
-        <span class="footer_text">reference by <a href="https://www.instagram.com" target="_blank">Instagram</a></span>
-    </div>
-</footer>
 </body>
 <script type="text/javascript" src="/js/OTQQU.js"></script>
 <script type="text/javascript" src="/js/Main.js"></script>

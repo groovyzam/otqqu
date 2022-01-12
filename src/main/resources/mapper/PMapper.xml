@@ -93,4 +93,12 @@
     <delete id="postLikeDelete" parameterType="like">
         DELETE FROM POSTLIKE WHERE PNUM=#{Pnum} AND HID=#{Hid}
     </delete>
+
+    <select id="PostForm" parameterType="String" resultType="String">
+        SELECT HFILE FROM HUMAN WHERE HID=#{id}
+    </select>
+
+    <select id="mainPostLike" parameterType="int" resultType="mainPostlike">
+        SELECT ROWNUM, A.* FROM (SELECT PNUM, COUNT(*) AS LIKENUM FROM POSTLIKE GROUP BY PNUM ORDER BY PNUM DESC) A WHERE ROWNUM BETWEEN #{startPnum} AND #{lastPnum}
+    </select>
 </mapper>

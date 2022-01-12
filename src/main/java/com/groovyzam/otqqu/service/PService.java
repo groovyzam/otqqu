@@ -287,8 +287,10 @@ public class PService {
 
         int StartPnum = 1;
         int LastPnum = 12;
+        List<MainPostLike> postLike = pdao.mainPostLike(StartPnum,LastPnum);
         List<PDTO> postList = pdao.mainPost(StartPnum,LastPnum);
 
+        mav.addObject("postLike", postLike);
         mav.addObject("postList", postList);
         mav.setViewName("Main");
 
@@ -435,6 +437,14 @@ public class PService {
         if (result>0){
             mav.setViewName("redirect:pView?Pnum="+pnum+"");
         }
+        return mav;
+    }
+
+    public ModelAndView PostForm(String id) {
+
+        String profileName = pdao.PostForm(id);
+        mav.addObject("Hfile",profileName);
+        mav.setViewName("Post");
         return mav;
     }
 }

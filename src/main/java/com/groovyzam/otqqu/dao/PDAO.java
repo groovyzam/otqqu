@@ -55,4 +55,8 @@ public interface PDAO {
     String postLikeId(POSTLIKE like);
 
     int postLikeDelete(POSTLIKE like);
+
+    String PostForm(String id);
+
+    List<MainPostLike> mainPostLike(int startPnum, int lastPnum);
 }

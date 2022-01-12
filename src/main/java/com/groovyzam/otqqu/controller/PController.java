@@ -27,10 +27,12 @@ public class PController {
 
     // PostForm : 게시글 등록 페이지로 이동
     @RequestMapping(value="PostForm", method = RequestMethod.GET)
-    public String PostForm(){
+    public ModelAndView PostForm(){
+        String id = (String)session.getAttribute("loginId");
+        mav = psvc.PostForm(id);
 
 
-        return "Post";
+        return mav;
     }
 
     //pUpload

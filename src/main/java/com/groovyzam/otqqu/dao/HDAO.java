@@ -35,7 +35,7 @@ public interface HDAO {
 
     List<HDTO> Search(String keyword);
 
-    List<HDTO> autocomplete(String result);
+    List<HDTO> iautocomplete(String result);
 
     //팔로우
     int hFollow(String Hid, String sessionId);
@@ -61,4 +61,6 @@ public interface HDAO {
     int HpwModify(String sessionId, String hpw);
 
     String mainProfile(String HID);
+
+    List<HDTO> autocomplete(String result);
 }
