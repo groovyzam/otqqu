@@ -329,6 +329,22 @@ public class HService {
         mav.setViewName("mainPost");
         return mav;
     }
+    // Search : 검색어 입력
+    public List<HDTO> search(String keyword) {
+        List<HDTO> hList=new ArrayList<HDTO>();
+        if(keyword != "") {
+            hList = hdao.Search(keyword);
+            return hList;
+
+        }
+        return hList;
+
+    }
+
+    public ModelAndView searchInfo(String hid) {
+        mav.setViewName("redirect:hView?Hid="+hid+"");
+        return mav;
+    }
 }
 
 

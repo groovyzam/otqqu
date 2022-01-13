@@ -22,18 +22,12 @@
         .join {
             background-color: white;
             border: 1px solid rgba(61,64,88,0.65);
-            width: 450px;
-            height: 900px;
+            width: 350px;
+            height: 600px;
             text-align: center;
-            position: relative;
-            margin-bottom: 22px;
-            margin-top: 22px;
-            margin-left: 700px;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
+            border-radius: 10px;
             text-align: center;
+            margin: 170px auto;
         }
 
         input {
@@ -84,13 +78,7 @@
         }
 
         table {
-            margin-top: 120px;
 
-        }
-
-        caption {
-            position: relative;
-            bottom: 40px;
         }
 
 
@@ -171,7 +159,7 @@
             </tr>
 
             <tr>
-                <input type="hidden" name="Hfile" th:value="기본프로필.PNG"/>
+                <input type="hidden" name="Hfile" th:value="defaultProfile.png"/>
 
                 <td colspan="2"><input type="submit" value="가입" onclick="hJoin()" id="join1" class="join1" disabled="true"></td>
             </tr>

@@ -40,10 +40,6 @@
         SELECT * FROM POST WHERE HID = #{Hid}
     </select>
 
-    <select id="Search" parameterType="String" resultType="human">
-        SELECT * FROM HUMAN WHERE HID LIKE '%'||#{keyword}||'%'
-    </select>
-
     <select id="autocomplete" parameterType="String" resultType="human">
         select HID from HUMAN where HID like concat('%',concat(UPPER(#{b}),'%')) or
             HID like concat('%',concat(LOWER(#{b}),'%'))
@@ -79,5 +75,11 @@
 
     <select id="mainProfile" parameterType="String">
         SELECT HFILE FROM HUMAN WHERE HID = #{HID}
+    </select>
+
+    <select id="Search" parameterType="String" resultType="human">
+        SELECT * FROM HUMAN WHERE HID IN (
+            SELECT FOLLOWERID FROM FOLLOW_VIEW WHERE FOLLOWERID LIKE '%'||#{keyword}||'%' AND 6>ROWNUM
+        )ORDER BY HID ASC
     </select>
 </mapper>

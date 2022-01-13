@@ -30,14 +30,20 @@
         <div class="site_branding">
             <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
 
-            <form action="Search" method="GET">
+            <form action="searchInfo" method="GET">
                 <div class="search_input_wrap">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-search bi_search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                     <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
-                           style="border: 0; padding-left: 16px;" autocomplete="off">
+                           style="border: 0; padding-left: 16px;" autocomplete="off" onkeyup="search()">
+                    <div style="border-radius: 100px;">
+                        <div id="searchDIV" class="search_list">
+
+                        </div>
+                    </div>
+
                 </div>
 
             </form>
@@ -171,13 +177,6 @@
         </div>
     </header>
 
-    <!--<a th:href="@{pView(Pnum='41')}">41번게시물</a>
-
-    <button onclick="location.href='hList'" value="회원목록">회원목록</button>
-
-    <<<<<<< HEAD
-    <div th:text="${session.loginId}" id="loginId"></div>!-->
-
     <div class="post_list_wrap" id="post_list_wrap">
         <div th:each="list : ${postList}" class="post_list fadein" style="text-align: center">
             <img th:src="@{/photo/{PfileName}(PfileName=${list.PfileName})}" class="post_list_image">
@@ -189,7 +188,7 @@
                         <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
                     </svg>
                     <span th:each="like : ${postLike}">
-                        <span th:if="${list.Pnum eq like.Pnum}" th:text="${like.LikeNum}">0</span>
+                        <span th:if="${list.Pnum eq like.Pnum}" th:text="${like.LikeNum}" class="post_list_text"></span>
                     </span>
                 </div>
             </a>
@@ -213,12 +212,18 @@
 </div>
 
 </body>
+<script>
+    $('.post_list_text').text();
+</script>
 <script type="text/javascript" src="/js/OTQQU.js"></script>
 <script type="text/javascript" src="/js/Main.js"></script>
 <script src='/js/jquery.js'></script>
 <script src='/js/plugins.js'></script>
 <script src='/js/scripts.js'></script>
 <script src='/js/masonry.pkgd.min.js'></script>
+<script>
+
+</script>
 </html>
 
 
