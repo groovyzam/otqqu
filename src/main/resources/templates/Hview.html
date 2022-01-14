@@ -1,77 +1,362 @@
+
 <!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="author" content="KIMAH"/>
-    <meta name="description" content="SpringBoot Thymeleaf">
-    <title>Spring Boot Test</title>
+    <meta name="description" content="OTQQU"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel='stylesheet' href='css/woocommerce-layout.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/woocommerce-smallscreen.css' type='text/css'
+          media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' href='css/woocommerce.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/style.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+    <link rel="stylesheet" href="css/OTQQU1.css">
+    <link rel="stylesheet" href="css/OTQQU.css">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
+
+
+
+    <title>옷:꾸</title>
+
 </head>
 
-<body>
 
-<button type="button" id="modal_show1">
-    팔로잉
-</button>
+<style>
+    .test_image {
+        object-fit: cover;
+    }
+    #modal {
+        display: none;
+        position:relative;
+        width:100%;
+        height:100%;
+        z-index:1;
+    }
 
-<button type="button" id="modal_show2">
-    팔로워
-</button>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3> 팔로잉 </h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+    #modal h2 {
+        margin:0;
+    }
 
-                </button>
+    #modal button {
+        display:inline-block;
+        width:100px;
+        margin-left:calc(100% - 100px - 10px);
+    }
+
+    #modal .modal_content {
+        position:absolute;
+        float: inside;
+        bottom: 2px;
+        left: 130%;
+        width:300px;
+        margin:100px auto;
+        padding:20px 10px;
+        background:#fff;
+        border:2px solid #666;
+        z-index: 4;
+    }
+
+    #modal .modal_layer {
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:rgba(0, 0, 0, 0.5);
+        z-index:3;
+    }
+    .follow_btn{
+        display: inline-block;
+        width: 78px;
+        height: 35px;
+        line-height: 35px;
+        cursor: pointer;
+        text-align: center;
+    }
+    .follow_btn:first-child{
+        margin-left: 5px;
+    }
+    .img_upload_label{
+        background-color: #0095F6;
+        width: 110px;
+        height: 36px;
+        color: #fff;
+        line-height: 36px;
+        border-radius: 10px;
+        font-weight: 400;
+        cursor: pointer;
+    }
+</style>
+
+<body class="home page page-template page-template-template-portfolio page-template-template-portfolio-php">
+<div class="wrap">
+    <header class="site-header" style="margin: 0 auto; padding: 0; background-color: #fff; height: 296px">
+        <div class="site_branding" style="border: 0">
+            <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
+
+            <form action="searchInfo" method="GET">
+                <div class="search_input_wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-search bi_search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                    <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
+                           style="border: 0; padding-left: 16px;" autocomplete="off" onkeyup="search()">
+                    <div style="border-radius: 100px;">
+                        <div id="searchDIV" class="search_list">
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+
+            <div class="header_menu">
+
+                <div id="header_menu_post_wrap">
+                    <div id="header_menu_post" style="width: 26px; height: 26px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             class="bi bi-plus-circle header_menu_icon" viewBox="0 0 16 16"
+                             onclick="location.href='PostForm'">
+                            <path id="header_menu_post_1"
+                                  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path id="header_menu_post_2"
+                                  d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </div>
+                    <div id="header_menu_post_on" style="width: 26px; height: 26px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             class="bi bi-plus-circle-fill header_menu_icon" viewBox="0 0 16 16"
+                             onclick="location.href='PostForm'">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                        </svg>
+                    </div>
+                </div>
+
+
+                <div class="dropdown">
+                    <div class="header_menu_account_wrap">
+                        <div id="header_menu_account" style="width: 26px; height: 30px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                 class="bi bi-house header_menu_icon header_dropdown_menu_icon" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fill-rule="evenodd"
+                                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg>
+                        </div>
+                        <div id="header_menu_account_on" style="width: 26px; height: 30px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                 class="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fill-rule="evenodd"
+                                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-content">
+                        <a th:if="${session.loginId ne null}" th:href="@{hView(Hid=${session.loginId})}"
+                           class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-person-circle dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd"
+                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                            <span class="dropdown_text">프로필</span>
+                        </a>
+                        <a th:if="${session.loginId ne null}" th:href="@{hModifyForm(Hid=${session.loginId})}"
+                           class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-gear-wide dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 1 0-9.995 4.998 4.998 0 0 1 0 9.996z"/>
+                            </svg>
+                            <span class="dropdown_text">설정</span>
+                        </a>
+                        <a th:if="${session.loginId eq null}" href="hjoinForm" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-person-plus dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                <path fill-rule="evenodd"
+                                      d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            <span class="dropdown_text">회원가입</span>
+                        </a>
+                        <a th:if="${session.loginId eq null}" href="hLoginForm" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-box-arrow-in-right dropdown_content_icon" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                            <span class="dropdown_text">로그인</span>
+                        </a>
+                        <a th:if="${session.loginId ne null}" href="hLogout" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-x-circle dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                            <span class="dropdown_text">로그아웃</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
 
-                <table>
-                    <tr th:each="i : ${following}">
-
-                        <td><a th:href="@{hView(Hid=${i.Hid})}"><img th:src="@{/profile/{Hfile}(Hfile=${i.Hfile})}" width="50px" height="50px" style="border-radius: 70%;"></a></td>
-                        <td th:text="${i.Hname}"></td>
-                        <td th:text="${i.Hid}"></td>
-                    </tr>
-                </table>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="close_modal1">닫기</button>
-            </div>
         </div>
+<div style="margin: 80px auto 0 auto; background-color: #FAFAFA; border-top: 1px solid #888888">
+    <div id="site-navigation" class="main-navigation" style="margin: 0 auto; width: 980px; border: 0; padding-top: 30px; background-color: #FAFAFA; border-bottom: 1px solid #888888">
+        <div class="parent">
+            <div class="profile_box">
+
+                <img id="img" th:src="@{/profile/{Hfile}(Hfile=${member.Hfile})}" th:onclick="modal_open_btn()" width="150px"  height="150px" style="border-radius: 100%; margin: auto; border: 1px solid #888888">
+
+                <div id="modal" style="border-radius: 80%; width: 300px; height: 200px;">
+
+                    <div class="modal_content">
+                        <h2 style="text-align: center;">수정하기</h2>
+
+                        <div>
+                            <form method="POST" enctype="multipart/form-data" action="uPloadFile">
+                                <label class="img_upload_label">
+                                    프로필 선택
+                                    <input type="file" id="HProfile" name="HProfile" style="display: none"/>
+                                </label>
+                                <input type="hidden" name="Hid" th:value="${member.Hid}">
+                                <input type="submit" value="사진업로드">
+                                <!--<button type="button" id="btn-add">사진업로드</button>-->
+                                <button style="display: none;"></button>
+                            </form>
+
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <form method="POST" enctype="multipart/form-data" action="uPdelete">
+                                <input type="hidden" name="Hid" th:value="${member.Hid}">
+                                <input type="hidden" name="Hfile" th:value="defaultProfile.png">
+                                <input type="submit" value="현재사진삭제">
+                            </form>
+
+                        </div>
+                        <div style=" margin-right: 82px; margin-top: 15px;">
+                            <button type="button" id="modal_close_btn">닫기</button>
+                        </div>
+                    </div>
+
+                    <div class="modal_layer"></div>
+
+                </div>
+
+
+
+
+            </div>
+            <div class="profile_content_box">
+                <label  th:text="${member.Hid}"></label><a th:href="@{hModifyForm(Hid=${member.Hid})}"  th:if="${member.Hid == session.loginId}"> <input  type="button" value="프로필편집" style="color: black ;  text-align: center; margin-left: 20px;  font-size: 14px; border: 1px solid gray; background: white; font-weight: bolder; border-radius: 3px;"></a>
+                <label th:if="${session.loginId ne member.Hid}">
+                    <div th:if="${followList eq null}"><a th:href="@{hFollow(Hid=${member.Hid})}"><img src="./img/빈하트.png" width="30px;"height="20px;" style="margin-bottom: 5px;"></a></div>
+                    <div th:if="${followList ne null}"><a th:href="@{hUnFollow(Hid=${member.Hid})}"><img src="./img/하트.png" width="30px;"height="20px;" style="margin-bottom: 5px;"></a></div>
+                </label>
+            </div>
+
+
+
+
+
+            <div style="margin-left: 378px; font-size: 15px; ">
+                <ul class="user_info">
+                    <li style="display: inline-block; line-height: 35px; height: 35px">게시물 <span th:text="${count}"></span></li>
+
+
+                    <span class="follow_btn" id="modal_show2">팔로워<span th:text="${follower.size()}"></span></span>
+                    <span class="follow_btn" id="modal_show1">팔로잉<span th:text="${following.size()}"></span></span>
+                </ul>
+            </div>
+            <div style="margin-left: 394px; margin-bottom: 38px; font-size: 15px; color: #0a0700"th:text="${member.Hname}"></div>
+
+        </div>
+
+
+
+
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3> 팔로워 </h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
+    </header>
+
+
+    <div th:if="${count ne 0}" class="post_list_wrap" id="post_list_wrap" style="margin-top: 80px">
+        <div th:each="pmylist : ${pmylist}" class="post_list fadein" style="text-align: center">
+            <img th:src="@{/photo/{PfileName}(PfileName=${pmylist.PfileName})}" class="post_list_image">
+
+            <a th:href="@{pView(Pnum=${pmylist.Pnum})}" class="post_list_grey">
+                <div class="post_list_grey_text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-suit-heart-fill post_list_grey_heart" viewBox="0 0 16 16">
+                        <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"/>
+                    </svg>
+                    <span><!--좋아요!--></span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div th:if="${count eq 0}"  class="post_list_wrap" style="height: 600px; text-align: center">
+        게시글 없음
+    </div>
+
+    <footer class="footer">
+        <div class="footer_list">
+            <a href="#" class="footer_text">김효섭</a>
+            <a href="#" class="footer_text">김현민</a>
+            <a href="#" class="footer_text">차해성</a>
+            <a href="#" class="footer_text">박은빈</a>
+            <a href="#" class="footer_text">ICIA</a>
+            <a href="#" class="footer_text">위치</a>
+        </div>
+        <div class="footer_list_2">
+            <span class="footer_text">reference by <a href="https://www.instagram.com" target="_blank">Instagram</a></span>
+        </div>
+    </footer>
+
+
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3> 팔로잉 </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+
+                    </button>
+                </div>
                 <div class="modal-body">
+
                     <table>
-                        <tr th:each="i : ${follower}">
+                        <tr th:each="i : ${following}">
+
                             <td><a th:href="@{hView(Hid=${i.Hid})}"><img th:src="@{/profile/{Hfile}(Hfile=${i.Hfile})}" width="50px" height="50px" style="border-radius: 70%;"></a></td>
                             <td th:text="${i.Hname}"></td>
                             <td th:text="${i.Hid}"></td>
@@ -79,72 +364,79 @@
                     </table>
 
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="close_modal2">닫기</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="close_modal1">닫기</button>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3> 팔로워 </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <table>
+                            <tr th:each="i : ${follower}">
+                                <td><a th:href="@{hView(Hid=${i.Hid})}"><img th:src="@{/profile/{Hfile}(Hfile=${i.Hfile})}" width="50px" height="50px" style="border-radius: 70%;"></a></td>
+                                <td th:text="${i.Hname}"></td>
+                                <td th:text="${i.Hid}"></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="close_modal2">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
-
-
-<h1>내 회원 정보보기</h1>
-
-<table>
-    <tr>
-        <th>아이디</th>
-        <td th:text="${member.Hid}"></td>
-    </tr>
-    <tr>
-        <th>게시글 수</th>
-        <td th:text="${pmylist.size()}"></td>
-    </tr>
-    <tr>
-        <th>팔로잉</th>
-        <td th:text="${following.size()}"></td>
-    </tr>
-    <tr>
-        <th>팔로워</th>
-        <td th:text="${follower.size()}"></td>
-    </tr>
-
-
-    <img id="img" th:src="@{/profile/{Hfile}(Hfile=${member.Hfile})}" width="150px" height="150px"
-         style="border-radius: 70%;">
-
-    <tr th:if="${session.loginId ne member.Hid}">
-        <td th:if="${followList eq null}"><a th:href="@{hFollow(Hid=${member.Hid})}">팔로우</a></td>
-        <td th:if="${followList ne null}"><a th:href="@{hUnFollow(Hid=${member.Hid})}">팔로우 취소</a></td>
-        <br>
-    </tr>
-
-
-    <a th:if="${session.loginId eq member.Hid}" th:href="@{hModifyForm(Hid=${member.Hid})}">프로필 수정</a></td>
-
-
-</table>
-
-
-<table>
-    <caption><h2>내 게시글</h2></caption>
-
-    <tr th:each="pmylist : ${pmylist}">
-        <td th:text="${pmylist.Ptitle}"></td>
-        <td th:text="${pmylist.Pcontent}"></td>
-        <td th:text="${pmylist.Pstyle}"></td>
-        <td>
-            <a th:href="@{pView(Pnum=${pmylist.Pnum})}">
-                <img th:src="@{photo/{PfileName}(PfileName=${pmylist.PfileName})}">
-            </a>
-        </td>
-    </tr>
-
-</table>
-
 </body>
-
-
 <script>
+    $('#header_menu_post').mouseenter(function () {
+        $('#header_menu_post').css('display', 'none');
+        $('#header_menu_post_on').css('display', 'block');
+    });
+    $('#header_menu_post_on').mouseleave(function () {
+        $('#header_menu_post_on').css('display', 'none');
+        $('#header_menu_post').css('display', 'block');
+    });
+
+    $('#header_menu_account').mouseenter(function () {
+        $('#header_menu_account').css('display', 'none');
+        $('#header_menu_account_on').css('display', 'block');
+    });
+    $('#header_menu_account_on').mouseleave(function () {
+        $('#header_menu_account_on').css('display', 'none');
+        $('#header_menu_account').css('display', 'block');
+    });
+    $('.dropdown-content').mouseenter(function () {
+        $('#header_menu_account').css('display', 'none');
+        $('#header_menu_account_on').css('display', 'block');
+    });
+    $('.dropdown-content').mouseleave(function () {
+        $('#header_menu_account_on').css('display', 'none');
+        $('#header_menu_account').css('display', 'block');
+    });
+    function modal_open_btn() {
+        document.getElementById("modal").style.display="block";
+    }
+
+    document.getElementById("modal_close_btn").onclick = function() {
+        document.getElementById("modal").style.display="none";
+    }
+
 
     $(document).ready(function () {
         $("#modal_show1").click(function () {
@@ -166,4 +458,19 @@
 
 
 </script>
+<!--<script type="text/javascript">
+    $('#btn-add').click(function (e){
+        e.preventDefault();
+        $('#HProfile').click();
+    });
+    function uploadFile(e){
+        console.log("Filename ; ", e.value);
+    }
+</script>-->
+<script type="text/javascript" src="/js/Main.js"></script>
+<script src='/js/jquery.js'></script>
+<script src='/js/plugins.js'></script>
+<script src='/js/scripts.js'></script>
+<script src='/js/masonry.pkgd.min.js'></script>
+
 </html>

@@ -87,17 +87,24 @@ public class HService {
         HDTO secu1 = hdao.hLogin(human);
 
         // pwEnc.matches() 타입은 boolean => true or false
-        if(pwEnc.matches(human.getHpw(),secu1.getHpw())){
-            System.out.println("비밀번호 일치!");
-            mav.setViewName("redirect:/mainPost");
-            session.setAttribute("loginId", secu1.getHid());
+        if(secu1 != null){
+            // pwEnc.matches() 타입은 boolean => true or false
+            if(pwEnc.matches(human.getHpw(),secu1.getHpw())){
+                System.out.println("비밀번호 일치!");
+                mav.setViewName("redirect:/mainPost");
+                session.setAttribute("loginId", secu1.getHid());
 
-        } else {
-            System.out.println("비밀번호 불일치");
-            mav.setViewName("Main");
+            } else {
+                System.out.println("비밀번호 불일치");
+                mav.setViewName("redirect:/hLoginForm");
 
+            }
+            // pwEnc.matches() 타입은 boolean => true or false
+        }else{
+            System.out.println("아이디 불일치");
+            mav.setViewName("redirect:/hLoginForm");
         }
-        // pwEnc.matches() 타입은 boolean => true or false
+
 
         return mav;
     }
@@ -208,6 +215,9 @@ public class HService {
 
        //  팔로워 회원 목록
         List<HDTO> follower = hdao.follower(Hid);
+
+
+        int count = hdao.postcount(Hid);
 
 
         if (human != null) {

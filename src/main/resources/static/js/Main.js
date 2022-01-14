@@ -90,13 +90,13 @@ function search(){
 
             for(i=0; i<data.length;i++) {
                 console.log("성공");
-                append_node+= `<a href='hView?Hid="+data[i].hid+"'>`;
+                append_node+= `<a href='hView?Hid=${data[i].hid}'>`;
                 append_node += `<div  class="search_box_wrap">`;
                 if(data[i].hfile == null){
                     append_node += "<img width='28px' height='28px' class='search_image' src='/profile/defaultProfile.png' style='border-radius: 100%'>";
                 }
                 else{
-                    append_node += "<img width='28px' height='28px' class='search_image' src='/profile/"+data[i].hfile+"' style='border-radius: 100%'>";
+                    append_node += `<img width='28px' height='28px' class='search_image' src='/profile/${data[i].hfile}' style='border-radius: 100%'>`;
                 }
 
                 append_node += "<span>"+data[i].hid+"</span>";

@@ -45,10 +45,11 @@
     left: 0;
     width: inherit;
     height: inherit;
-    z-index: 100;
+    z-index: 1;
 }
 .post_list_grey:hover{
     background-color: rgba(38, 38, 38, 0.4);
+    z-index: 1;
 }
 .post_list_grey:hover .post_list_grey_text{
     display: block;

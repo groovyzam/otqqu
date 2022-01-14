@@ -37,7 +37,7 @@
 
     <!--내 정보보기에서 게시글 불러오기 -->
     <select id="pMylist" parameterType="String" resultType="post">
-        SELECT * FROM POST WHERE HID = #{Hid}
+        SELECT * FROM POST WHERE HID = #{Hid} ORDER BY PNUM DESC
     </select>
 
     <select id="autocomplete" parameterType="String" resultType="human">
@@ -82,4 +82,9 @@
             SELECT FOLLOWERID FROM FOLLOW_VIEW WHERE FOLLOWERID LIKE '%'||#{keyword}||'%' AND 6>ROWNUM
         )ORDER BY HID ASC
     </select>
+
+    <select parameterType="String" id="postcount" resultType="int">
+        SELECT COUNT(*) FROM POST WHERE HID =#{Hid}
+    </select>
+
 </mapper>

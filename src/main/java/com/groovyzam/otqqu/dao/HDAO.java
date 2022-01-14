@@ -63,4 +63,6 @@ public interface HDAO {
     String mainProfile(String HID);
 
     List<HDTO> autocomplete(String result);
+
+    int postcount(String hid);
 }

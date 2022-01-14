@@ -59,4 +59,6 @@ public interface PDAO {
     String PostForm(String id);
 
     List<MainPostLike> mainPostLike(int startPnum, int lastPnum);
+
+    PimgRatioDTO imgRatio(int Pnum);
 }

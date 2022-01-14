@@ -22,23 +22,28 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 </style>
-<body style="background-color: #FAFAFA">
+<body class="wrap">
 
 <header class="site-header" style="margin: 0 auto; padding:0; height: 80px; background-color: #fff">
     <div style="height: 80px; border-bottom: 1px solid #888888;">
         <div class="site_branding">
             <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
 
-            <form action="Search" method="GET">
+            <form action="searchInfo" method="GET">
                 <div class="search_input_wrap">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-search bi_search" viewBox="0 0 16 16">
                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                     <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
-                           style="border: 0; padding-left: 16px;" autocomplete="off">
-                </div>
+                           style="border: 0; padding-left: 16px;" autocomplete="off" onkeyup="search()">
+                    <div class="search_list_wrap" style="border-radius: 100px;">
+                        <div id="searchDIV" class="search_list">
 
+                        </div>
+                    </div>
+
+                </div>
             </form>
 
             <div class="header_menu">
@@ -167,6 +172,7 @@
                 <input type="hidden" name="imgRatioHeight" id="imgRatioHeight" value="">
                 <input type="hidden" name="imgTop" id="imgTop" value="">
                 <input type="hidden" name="imgLeft" id="imgLeft" value="">
+                <input type="hidden" name="Ratio" id="imgRatio" value="1">
             </div>
 
 
@@ -181,7 +187,7 @@
                 <textarea name="Pcontent" placeholder="내용을 입력하세요" class="post_main_id_content" autocomplete="off"></textarea>
 
                 <select name="Pstyle" class="post_main_style">
-                    <option value="none"selected>스타일</option>
+                    <option value="ohter"selected>스타일</option>
                     <option value="casual">캐주얼</option>
                     <option value="minimal">미니멀</option>
                     <option value="street">스트릿</option>
@@ -191,49 +197,52 @@
                     <option value="other">기타</option>
                 </select>
 
-                <div id="product_box_wrap">
-                    <div class="product_box" id="product_box1" onclick="productBox('1')">
-                        <span id="product_box_text_1">착용상품 정보</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down product_box_arrow" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                    </div>
-                    <div class="product1 product" style="display: none">
-                        <div class="product_img_brand">
-                            <div class="selectedImg">
-                                <img src="default/default_product.png" class="product_selected_img1" id="product_selected_img" width="80px" height="80px">
+                <div class="product_box_wrap_wrap">
+                    <div id="product_box_wrap">
+                        <div class="product_box" id="product_box1" onclick="productToggle(1)">
+                            <span id="product_box_text_1">착용상품 정보</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down product_box_arrow" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="product1 product" style="display: none">
+                            <div class="product_img_brand">
+                                <div class="selectedImg">
+                                    <img src="default/default_product.png" class="product_selected_img1" id="product_selected_img" width="80px" height="80px">
+                                </div>
+                                <select name="Pcategory" id="product_category1" class="product_category" onclick="selectClick('1')">
+                                    <option value="cap" selected>모자</option>
+                                    <option value="outer">아우터</option>
+                                    <option value="top">상의</option>
+                                    <option value="bottom">하의</option>
+                                    <option value="shoes">신발</option>
+                                    <option value="accessories">악세서리</option>
+                                </select>
+                                <input type="text" name="Pbrand" id="Pbrand1" placeholder="브랜드" class="product_brand" style="border: 0; border-bottom: 1px solid #888888;">
+                                <input type="text" name="PproductName" id="Pproduct1" placeholder="상품명" class="product_name" style="border: 0; border-bottom: 1px solid #888888;">
+                                <input type="number" name="Pprice" id="Pprice1" placeholder="상품 가격" class="product_price" style="border: 0; border-bottom: 1px solid #888888;">
+                                <div class="product_search_box">
+                                    <label class="product_local_file" onclick="ProductFileView('1')">
+                                        컴퓨터 이미지 선택
+                                        <input type="file" class="PproductFile" id="ProductFile1" name="PproductFile" placeholder="상품 사진">
+                                    </label>
+                                    <div type="button" class="img_btn_class" id="imgBtn'+imgNum+'" onclick="searchImg('1')">이미지 검색</div>
+                                </div>
+                                <div class="select_list">
+                                    <img class="select_img" src="" width="96px" height="96px">
+                                    <img class="select_img" src="" width="96px" height="96px">
+                                    <img class="select_img" src="" width="96px" height="96px">
+                                </div>
+                                <input type="hidden" value="" class="PproductFileImg1" name="PproductFileImg"></td>
                             </div>
-                            <select name="Pcategory" id="product_category1" class="product_category" onclick="selectClick('1')">
-                                <option value="cap" selected>모자</option>
-                                <option value="outer">아우터</option>
-                                <option value="top">상의</option>
-                                <option value="bottom">하의</option>
-                                <option value="shoes">신발</option>
-                                <option value="accessories">악세서리</option>
-                            </select>
-                            <input type="text" name="Pbrand" id="Pbrand1" placeholder="브랜드" class="product_brand" style="border: 0; border-bottom: 1px solid #888888;">
-                            <input type="text" name="PproductName" id="Pproduct1" placeholder="상품명" class="product_name" style="border: 0; border-bottom: 1px solid #888888;">
-                            <input type="text" name="Pprice" placeholder="상품 가격" class="product_price" style="border: 0; border-bottom: 1px solid #888888;">
-                            <div class="product_search_box">
-                                <label class="product_local_file">
-                                    컴퓨터 이미지 선택
-                                    <input type="file" class="PproductFile" id="ProductFile" name="PproductFile" placeholder="상품 사진">
-                                </label>
-                                <div type="button" class="img_btn_class" id="imgBtn'+imgNum+'" onclick="searchImg('1')">이미지 검색</div>
-                            </div>
-                            <div class="select_list">
-                                <img class="select_img" src="" width="96px" height="96px">
-                                <img class="select_img" src="" width="96px" height="96px">
-                                <img class="select_img" src="" width="96px" height="96px">
-                            </div>
-                            <input type="hidden" value="" class="PproductFileImg1" name="PproductFileImg"></td>
                         </div>
                     </div>
+                    <div class="product_plus_btn">
+                        <div id="btn-add-row" class="product_btn">상품추가</div>
+                        <div id="btn-delete-row" class="product_btn">상품삭제</div>
+                    </div>
                 </div>
-                <div class="product_plus_btn">
-                    <div id="btn-add-row" class="product_btn">상품추가</div>
-                    <div id="btn-delete-row" class="product_btn">상품삭제</div>
-                </div>
+
             </div>
         </form>
     </div>
@@ -255,35 +264,20 @@
 </body>
 
 
-
+<script type="text/javascript" src="/js/Main.js"></script>
 <script>
-    let productBoxNum = 2;
-
-    function productBox(num){
-        $(`.product${num}`).toggle();
-
-        console.log($(`#product_box${num}`).css('border-bottom'));
-        productBoxNum++;
-
-
-
-        if(productBoxNum%2 == 1) {
-            $(`#product_box${num}`).css('border-bottom','0');
-            $(`.product${num}`).css('border-bottom','1px solid #888888');
-            for (let i=0; i<num-1; i++) {
-                $(`#product_box${i+1}`).css('display','none');
-            }
+    $('.product').hide();
+    function productToggle(num){
+        let box = $(`#product_box${num}`);
+        for (i=1; i<num; i++){
+            $(`#product_box${i}`).slideToggle(300);
         }
-
-        else if(productBoxNum%2 == 0){
-            $(`#product_box${num}`).css('border-bottom','1px solid #888888');
-            $(`.product${num}`).css('border-bottom','0');
-            for (let i=0; i<num-1; i++) {
-                $(`#product_box${i+1}`).css('display','flex');
-            }
-        }
+        $(".product").not($(box).next(".product").slideToggle(300)).slideUp();
     }
 
+    function boxBorder(num){
+        $(`#product_box${num}`).css('border-bottom', '1px solid #888888');
+    }
 
     function selectClick(num){
         let categorySelect = $(`#product_category${num} option:selected`).text();
@@ -297,7 +291,6 @@
     $("#u_file").change(function(){
         $('.post_main_img_area').css('display','none');
         $('.imgRatioBox').css('display','block');
-        $('.post_main_imgfile').css('background-color','#000');
     });
 </script>
 
@@ -313,10 +306,14 @@
         console.log(imageNaturalWidth - imageNaturalHeight)
         if(imageNaturalWidth - imageNaturalHeight > 0) {
             $('#imgArea').attr('width', `${(640*imageNaturalWidth)/imageNaturalHeight}px`);
+            $('#imgArea').css('width', `${(640*imageNaturalWidth)/imageNaturalHeight}px`);
+            $('#imgArea').css('min-width', `${(640*imageNaturalWidth)/imageNaturalHeight}px`);
             console.log($('#imgArea').attr('width'));
         }
         else{
             $('#imgArea').attr('height', `${(640*imageNaturalHeight)/imageNaturalWidth}px`);
+            $('#imgArea').css('height', `${(640*imageNaturalHeight)/imageNaturalWidth}px`);
+            $('#imgArea').css('min-height', `${(640*imageNaturalHeight)/imageNaturalWidth}px`);
             console.log($('#imgArea').attr('height'));
         }
     },{once:true});
@@ -327,15 +324,15 @@
 
         imgArea.style.zIndex = 1000;
 
-        moveAt(event.pageX - imgViewArea.getBoundingClientRect().left, event.pageY - imgViewArea.getBoundingClientRect().top);
+        moveAt(event.clientX - imgViewArea.getBoundingClientRect().left, event.clientY - imgViewArea.getBoundingClientRect().top);
 
         function moveAt(pageX, pageY) {
-            imgArea.style.left = pageX - shiftX + 'px';
-            imgArea.style.top = pageY - shiftY + 'px';
+            imgArea.style.left = pageX - shiftX + (-1) +'px';
+            imgArea.style.top = pageY - shiftY + (-1) +'px';
         }
 
         function onMouseMove(event) {
-            moveAt(event.pageX - imgViewArea.getBoundingClientRect().left, event.pageY - imgViewArea.getBoundingClientRect().top);
+            moveAt(event.clientX - imgViewArea.getBoundingClientRect().left, event.clientY - imgViewArea.getBoundingClientRect().top);
         }
 
         document.addEventListener('mousemove', onMouseMove);
@@ -382,17 +379,61 @@
     };
 
     function ratio(num) {
+        let imageNaturalWidth = document.getElementById("imgArea").naturalWidth;
+        let imageNaturalHeight = document.getElementById("imgArea").naturalHeight;
+        let size = imageNaturalWidth-imageNaturalHeight;
+        console.log(imageNaturalWidth);
+        console.log(imageNaturalHeight);
+        console.log(size)
         if(num == 1) {
             $('#imgViewArea').css('width','640px');
             $('#imgViewArea').css('height','640px');
+            $('#imgRatio').attr('value','');
+            $('#imgRatio').attr('value',1);
+            if(imageNaturalWidth - imageNaturalHeight > 0) {
+                $('#imgArea').attr('width', `${(640*imageNaturalWidth)/imageNaturalHeight}px`);
+                $('#imgArea').css('width', `${(640*imageNaturalWidth)/imageNaturalHeight}px`);
+                $('#imgArea').css('min-width', `${(640*imageNaturalWidth)/imageNaturalHeight}px`);
+                console.log($('#imgArea').attr('width'));
+            }
+            else{
+                $('#imgArea').attr('height', `${(640*imageNaturalHeight)/imageNaturalWidth}px`);
+                $('#imgArea').css('height', `${(640*imageNaturalHeight)/imageNaturalWidth}px`);
+                $('#imgArea').css('min-height', `${(640*imageNaturalHeight)/imageNaturalWidth}px`);
+                console.log($('#imgArea').attr('height'));
+            }
         }
         else if(num == 2){
             $('#imgViewArea').css('width','512px');
             $('#imgViewArea').css('height','640px');
+            if (size < 0){
+                $('#imgArea').css('min-width','512px');
+                $('#imgArea').css('min-height','auto');
+                $('#imgArea').css('height','auto');
+            }else if (size > 0){
+                $('#imgArea').css('min-height','640px');
+                $('#imgArea').css('height','640px');
+                $('#imgArea').css('min-width',`${(640*imageNaturalWidth)/imageNaturalHeight}`);
+                $('#imgArea').css('width',`${(640*imageNaturalWidth)/imageNaturalHeight}`);
+            }
+            $('#imgRatio').attr('value','');
+            $('#imgRatio').attr('value',2);
         }
-        else{
+        else if(num ==3){
             $('#imgViewArea').css('width','640px');
             $('#imgViewArea').css('height','360px');
+            if (size < 0){
+                $('#imgArea').css('min-width','640px');
+                $('#imgArea').css('height','auto');
+            }else if (size > 0){
+                $('#imgArea').css('min-height','auto');
+                $('#imgArea').css('height','auto');
+                $('#imgArea').css('min-width','640px');
+                $('#imgArea').css('width','640px');
+            }
+
+            $('#imgRatio').attr('value','');
+            $('#imgRatio').attr('value',3);
         }
     }
 </script>
@@ -405,7 +446,7 @@
     $('#btn-add-row').click(function () {
         ++imgNum;
         $('#product_box_wrap').append(`
-            <div class="product_box" id="product_box${imgNum}" onclick="productBox(${imgNum})">
+            <div class="product_box" id="product_box${imgNum}" onclick="productToggle(${imgNum})">
                         <span id="product_box_text_${imgNum}">착용상품 정보</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down product_box_arrow" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
@@ -414,9 +455,9 @@
                     <div class="product${imgNum} product" style="display: none">
                         <div class="product_img_brand">
                             <div class="selectedImg">
-                                <img src="default/default_product.png" class="product_selected_img${imgNum}" id="product_selected_img" width="80px" height="80px">
+                                <img src="default/default_product.png" class="product_selected_img${imgNum}" id="product_selected_img${imgNum}" width="80px" height="80px">
                             </div>
-                            <select name="Pcategory" id="product_category${imgNum}" class="product_category" onclick="selectClick(${imgNum})">
+                            <select name="Pcategory" id="product_category${imgNum}" class="product_category" onclick="selectClick(${imgNum})" required>
                                 <option value="cap" selected>모자</option>
                                 <option value="outer">아우터</option>
                                 <option value="top">상의</option>
@@ -424,13 +465,13 @@
                                 <option value="shoes">신발</option>
                                 <option value="accessories">악세서리</option>
                             </select>
-                            <input type="text" name="Pbrand" id="Pbrand${imgNum}" placeholder="브랜드" class="product_brand" style="border: 0; border-bottom: 1px solid #888888;">
-                            <input type="text" name="PproductName" id="Pproduct${imgNum}" placeholder="상품명" class="product_name" style="border: 0; border-bottom: 1px solid #888888;">
-                            <input type="text" name="Pprice" placeholder="상품 가격" class="product_price" style="border: 0; border-bottom: 1px solid #888888;">
+                            <input type="text" name="Pbrand" id="Pbrand${imgNum}" placeholder="브랜드" class="product_brand" style="border: 0; border-bottom: 1px solid #888888;" required>
+                            <input type="text" name="PproductName" id="Pproduct${imgNum}" placeholder="상품명" class="product_name" style="border: 0; border-bottom: 1px solid #888888;" required>
+                            <input type="number" name="Pprice" id="Pprice${imgNum}" placeholder="상품 가격" class="product_price" style="border: 0; border-bottom: 1px solid #888888;" required>
                             <div class="product_search_box">
-                                <label class="product_local_file">
+                                <label class="product_local_file" onclick="ProductFileView(${imgNum})">
                                     컴퓨터 이미지 선택
-                                    <input type="file" class="PproductFile" id="ProductFile" name="PproductFile" placeholder="상품 사진">
+                                    <input type="file" class="PproductFile" id="ProductFile${imgNum}" name="PproductFile" placeholder="상품 사진">
                                 </label>
                                 <div type="button" class="img_btn_class" id="imgBtn'+imgNum+'" onclick="searchImg('${imgNum}')">이미지 검색</div>
                             </div>
@@ -523,7 +564,39 @@
         $('#imgLeft').attr('value',$('#imgArea').css('left'));
 
         let postForm = document.getElementById('postForm');
-        postForm.submit();
+        let title = $('.post_main_id_title').val();
+        let content = $('.post_main_id_content').val();
+        if(title == ''){
+            alert("제목을 입력하세요");
+            return;
+        }else if(content == ''){
+            alert("내용을 입력하세요");
+            return;
+        }
+
+        for (var i=1; i<=imgNum ;i++){
+
+            let Pbrand = $(`#Pbrand${i}`).val();
+            let Pproduct = $(`#Pproduct${i}`).val();
+            let Pprice = $(`#Pprice${i}`).val();
+
+            if(Pbrand == "") {
+                alert("브랜드를 입력하세요");
+                break;
+            }else if(Pproduct == ""){
+                alert("상품명을 입력하세요");
+                break;
+            }else if(Pprice == ""){
+                alert("가격을 입력하세요");
+                break;
+            }
+
+
+            if(i == imgNum){
+                postForm.submit();
+
+            }
+        }
     }
 </script>
 
@@ -552,24 +625,28 @@
 
     });
 
-    function readURL2(input) {
+    function readURL2(input,num) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
             reader.onload = function(e) {
-                $('#product_selected_img').attr('src', e.target.result);
+                $(`.product_selected_img${num}`).attr('src', e.target.result);
             }
             reader.readAsDataURL(input.files[0]);
         }
     }
 
-    $(":input[name='PproductFile']").change(function() {
-        if( $(":input[name='PproductFile']").val() == '' ) {
-            $('#product_selected_img').attr('src' , '');
-        }
-        readURL2(this);
+    function ProductFileView(num){
+        $(`#ProductFile${num}`).change(function() {
+            console.log('number'+num)
+            if( $(`#ProductFile${num}`).val() == '' ) {
+                $(`.product_selected_img${num}`).attr('src' , '');
+            }
+            readURL2(this,num);
 
-    });
+        });
+    }
+
 </script>
 
 <script type="text/javascript">

@@ -73,6 +73,7 @@
     overflow: hidden;
     transition: 0.3s;
     background-color: black;
+    border: 1px solid #888888;
 }
 .post_img_preview {
     position: relative;
@@ -150,9 +151,11 @@
 #product_box_wrap{
     width: 100%;
     height: auto;
+    border-bottom: 1px solid #888888;
+}
+.product_box_wrap_wrap{
 }
 .product_box{
-    border-bottom: 1px solid #888888;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
     padding-left: 18px;
     box-sizing: border-box;
@@ -214,6 +217,11 @@
 .product_price{
     grid-column: 1/4;
     grid-row: 4/5;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 .product_price:focus{
     outline: none;

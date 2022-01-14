@@ -1,164 +1,249 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE-edge"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="author" content="KIMAH"/>
-    <meta name="description" content="SpringBoot Thymeleaf">
-    <title>Spring Boot Test</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="OTQQU"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel='stylesheet' href='css/woocommerce-layout.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/woocommerce-smallscreen.css' type='text/css' media='only screen and (max-width: 768px)'/>
+    <link rel='stylesheet' href='css/woocommerce.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/font-awesome.min.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/style.css' type='text/css' media='all'/>
+    <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
+    <link rel="stylesheet" href="css/OTQQU.css">
+    <title>옷:꾸</title>
 </head>
-<style>
-    #modal {
-        display: none;
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-        position:relative;
-        width:100%;
-        height:100%;
-        z-index:1;
-    }
+<body class="wrap">
 
-    #modal h2 {
-        margin:0;
-    }
+<header class="site-header" style="margin: 0 auto; padding:0; height: 80px; background-color: #fff">
+    <div style="height: 80px; border-bottom: 1px solid #888888;">
+        <div class="site_branding">
+            <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
 
-    #modal button {
-        display:inline-block;
-        width:100px;
-        margin-left:calc(100% - 100px - 10px);
-    }
+            <form action="searchInfo" method="GET">
+                <div class="search_input_wrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-search bi_search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                    </svg>
+                    <input type="text" name="keyword" id="searchInput" class="search_input" placeholder="검색"
+                           style="border: 0; padding-left: 16px;" autocomplete="off" onkeyup="search()">
+                    <div class="search_list_wrap" style="border-radius: 100px;">
+                        <div id="searchDIV" class="search_list">
 
-    #modal .modal_content {
+                        </div>
+                    </div>
 
-        width:300px;
-        margin:100px auto;
-        padding:20px 10px;
-        background:#fff;
-        border:2px solid #666;
-    }
+                </div>
+            </form>
 
-    #modal .modal_layer {
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background:rgba(0, 0, 0, 0.5);
-        z-index:-1;
-    }
-</style>
-<body>
+            <div class="header_menu">
+                <div id="header_menu_post_wrap">
+                    <div style="width: 26px; height: 26px; display: block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                             class="bi bi-plus-circle-fill header_menu_icon" viewBox="0 0 16 16"
+                             onclick="location.href='PostForm'">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                        </svg>
+                    </div>
+                </div>
 
 
-<img id="img" th:src="@{/profile/{Hfile}(Hfile=${human.Hfile})}" th:onclick="modal_opne_btn()" width="150px" height="150px" style="border-radius: 70%;">
+                <div class="dropdown">
+                    <div class="header_menu_account_wrap">
+                        <div id="header_menu_account" style="width: 26px; height: 30px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                 class="bi bi-house header_menu_icon header_dropdown_menu_icon" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fill-rule="evenodd"
+                                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg>
+                        </div>
+                        <div id="header_menu_account_on" style="width: 26px; height: 30px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                                 class="bi bi-house-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                <path fill-rule="evenodd"
+                                      d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                            </svg>
+                        </div>
+                    </div>
 
-<div id="modal">
+                    <div class="dropdown-content">
+                        <a th:if="${session.loginId ne null}" th:href="@{hView(Hid=${session.loginId})}"
+                           class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-person-circle dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                <path fill-rule="evenodd"
+                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                            </svg>
+                            <span class="dropdown_text">프로필</span>
+                        </a>
+                        <a th:if="${session.loginId ne null}" th:href="@{hModifyForm(Hid=${session.loginId})}"
+                           class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-gear-wide dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M8.932.727c-.243-.97-1.62-.97-1.864 0l-.071.286a.96.96 0 0 1-1.622.434l-.205-.211c-.695-.719-1.888-.03-1.613.931l.08.284a.96.96 0 0 1-1.186 1.187l-.284-.081c-.96-.275-1.65.918-.931 1.613l.211.205a.96.96 0 0 1-.434 1.622l-.286.071c-.97.243-.97 1.62 0 1.864l.286.071a.96.96 0 0 1 .434 1.622l-.211.205c-.719.695-.03 1.888.931 1.613l.284-.08a.96.96 0 0 1 1.187 1.187l-.081.283c-.275.96.918 1.65 1.613.931l.205-.211a.96.96 0 0 1 1.622.434l.071.286c.243.97 1.62.97 1.864 0l.071-.286a.96.96 0 0 1 1.622-.434l.205.211c.695.719 1.888.03 1.613-.931l-.08-.284a.96.96 0 0 1 1.187-1.187l.283.081c.96.275 1.65-.918.931-1.613l-.211-.205a.96.96 0 0 1 .434-1.622l.286-.071c.97-.243.97-1.62 0-1.864l-.286-.071a.96.96 0 0 1-.434-1.622l.211-.205c.719-.695.03-1.888-.931-1.613l-.284.08a.96.96 0 0 1-1.187-1.186l.081-.284c.275-.96-.918-1.65-1.613-.931l-.205.211a.96.96 0 0 1-1.622-.434L8.932.727zM8 12.997a4.998 4.998 0 1 1 0-9.995 4.998 4.998 0 0 1 0 9.996z"/>
+                            </svg>
+                            <span class="dropdown_text">설정</span>
+                        </a>
+                        <a th:if="${session.loginId eq null}" href="hjoinForm" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-person-plus dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                <path fill-rule="evenodd"
+                                      d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                            <span class="dropdown_text">회원가입</span>
+                        </a>
+                        <a th:if="${session.loginId eq null}" href="hLoginForm" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-box-arrow-in-right dropdown_content_icon" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                      d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+                                <path fill-rule="evenodd"
+                                      d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                            <span class="dropdown_text">로그인</span>
+                        </a>
+                        <a th:if="${session.loginId ne null}" href="hLogout" class="dropdown_content_list">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-x-circle dropdown_content_icon" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                            <span class="dropdown_text">로그아웃</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="profile_modi" style="border: 1px solid gray;">
 
-    <div class="modal_content">
-        <h2>수정하기</h2>
+    <!-- 프로필 편집 및 등등 -->
+    <div class="item" style="background-color: white;" >
 
-        <p>모달 창 입니다.</p>
+        <div style="font-size: 20px; text-align:left; color: black; margin-left: 20px;">
+            <p style="margin-top: 20px; border-bottom: 1px solid black; width: 117px;"><a th:href="@{hModifyForm(Hid=${human.Hid})}">프로필 편집</a></p>
+            <p><a style="color: black;" th:href="@{HpwModifyForm(Hid=${human.Hid})}">비밀번호 변경</a></p>
+            <p>이메일 및 SMS</p>
+            <p>개인정보 및 보안</p>
+            <p>도움말</p>
+        </div>
+        <!--<ul style="margin-top:15px; font-size: 25px; list-style:none;">
+        <li>프로필 편집</li>
+        <li>비밀번호 변경</li>
+        <li>개인정보 및 보안</li>
+    </ul>-->
+    </div>
 
-        <form method="POST" enctype="multipart/form-data" action="uPloadFile">
-            <input type="file"  name="HProfile"/>
-            <input type="hidden" name="Hid" th:value="${human.Hid}">
-            <input type="submit" value="수정하기">
+    <div class="item" style="border-left:1px solid #888888; text-align: center; background-color: white; border-right: 1px solid gray;">
+
+
+        <form style="margin-top: 10px;" action="hModify" method="post" onsubmit=" return checkNull()">
+            <div style="margin-top: 10px;"><img width="40px" height="40px" style="border-radius: 100%; text-align: right; margin-right: 30px;"  th:src="@{/default/{Hfile}(Hfile=${human.Hfile})}"><label style="font-size: 30px; color: black;" th:text="${human.Hid}"></label></div>
+            <input type="hidden" name="Hid"  th:value="${human.Hid}">
+            <aside  class="profile_aside_modi" >이름</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hname" id="Hname" th:value="${human.Hname}"></div>
+            <aside  class="profile_aside_modi" >나이</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hage" id="Hage" th:value="${human.Hage}"> 세</div>
+            <aside  class="profile_aside_modi" >키</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hheight" id="Hheight" th:value="${human.Hheight}"> cm</div>
+            <aside  class="profile_aside_modi" >몸무게</aside><div class="profile_modi22"> <input  style="border-radius: 8px; width: 275px;" type="text" name="Hweight" id="Hweight" th:value="${human.Hweight}"> kg</div>
+            <aside  class="profile_aside_modi" ></aside> <div style="margin-top: 5px;" class="profile_modi22"> <span style="font-size: 10px;">※키와 뭄무게 작성부탁드립니다. 다른 유저에게 도움이 됩니다.</span></div>
+            <aside  class="profile_aside_modi" >성별</aside>
+            <div style="text-align: left; margin-top: 30px; margin-left: 210px;">
+                <td th:if="${human.Hgender eq 'm'}">
+                    <input type="radio" name="Hgender" value="m" checked>남
+                    <input type="radio" name="Hgender" value="w" >여
+                </td>
+                <td th:if="${human.Hgender eq 'w'}">
+                    <input type="radio" name="Hgender" value="m" >남
+                    <input type="radio" name="Hgender" value="w" checked >여
+                </td>
+                <td th:if="${human.Hgender == null}">
+                    <input type="radio" name="Hgender" value="m" >남
+                    <input type="radio" name="Hgender" value="w" >여
+                </td>
+
+            </div>
+
+            <aside  class="profile_aside_modi">핸드폰</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hphone" id="Hphone" th:value="${human.Hphone}"></div>
+            <aside  class="profile_aside_modi"></aside></aside><div  class="profile_modi22"><input type="submit" value="제출"></div>
+
         </form>
-
-        <form method="POST" enctype="multipart/form-data" action="uPdelete">
-            <input type="hidden" name="Hid" th:value="${human.Hid}">
-            <input type="hidden" name="Hfile" th:value="기본프로필.PNG">
-            <input type="submit" value="삭제하기">
-        </form>
-
-        <button type="button" id="modal_close_btn">x</button>
 
     </div>
 
-    <div class="modal_layer"></div>
+    <div class="item" style="text-align:left; background-color: white; border-top: 1px solid gray; border-bottom: 1px solid gray;">
+        <h3 style="margin-left: 20px">Otqqu.</h3>
+        <p style="margin-left: 20px">로그인, 프로필 환경에 대한 설정을 관리하세요
+        </p>
+    </div>
+
+    <div class="item" style="border-left:1px solid gray; border-bottom: 1px solid gray; background-color: white; border-right: 1px solid gray;"></div>
+
+
+
 </div>
 
-<form action="hModify" method="post">
-
-    <table>
-        <caption>회원 수정</caption>
-
-        <tr>
-            <th>아이디</th>
-            <td>
-                <input type="hidden" th:value="${human.Hid}" name="Hid">
-                <span th:text="${human.Hid}"></span></td>
-        </tr>
-
-        <tr>
-            <th>이름</th>
-            <td><input type="text" name="Hname" th:placeholder="${human.Hname}"></td>
-        </tr>
-
-
-        <tr>
-            <th>이메일</th>
-            <td>
-
-                <span th:text="${human.Hemail}"></span>
-            </td>
-        </tr>
-
-
-        <tr>
-            <th>나이</th>
-            <td><input type="text" name="Hage" th:placeholder="${human.Hage}"/></td>
-        </tr>
-
-        <tr>
-            <th>키</th>
-            <td><input type="text" name="Hheight" th:placeholder="${human.Hheight}"/></td>
-        </tr>
-
-        <tr>
-            <th>몸무게</th>
-            <td><input type="text" name="Hweight" th:placeholder="${human.Hweight}"/></td>
-        </tr>
-
-        <tr>
-            <th>성별</th>
-            <td th:if="${human.Hgender eq 'm'}">
-                <input type="radio" name="Hgender" value="m"  checked>남
-                <input type="radio" name="Hgender" value="w">여
-            </td>
-            <td th:if="${human.Hgender eq 'w'}">
-                <input type="radio" name="Hgender" value="m" >남
-                <input type="radio" name="Hgender" value="w" checked>여
-            </td>
-        </tr>
-
-        <tr>
-            <th>전화번호</th>
-            <td><input type="text" name="Hphone" th:placeholder="${human.Hphone}"/></td>
-        </tr>
-
-        <tr>
-            <td><input type="submit" value="수정"></td>
-        </tr>
-    </table>
-
-
-</form>
-
-<button onclick="location.href='HpwModifyForm'" >비밀번호 변경</button>
+<footer class="footer">
+    <div class="footer_list">
+        <a href="#" class="footer_text">김효섭</a>
+        <a href="#" class="footer_text">김현민</a>
+        <a href="#" class="footer_text">차해성</a>
+        <a href="#" class="footer_text">박은빈</a>
+        <a href="#" class="footer_text">ICIA</a>
+        <a href="#" class="footer_text">위치</a>
+    </div>
+    <div class="footer_list_2">
+        <span class="footer_text">reference by <a href="https://www.instagram.com" target="_blank">Instagram</a></span>
+    </div>
+</footer>
 
 </body>
+<script type="text/javascript">
+    function checkNull(){
+        let Hname = $('#Hname').val();
+        let Hage = $('#Hage').val();
+        let Hheight = $('#Hheight').val();
+        let Hweight = $('#Hweight').val();
+        let Hphone = $('#Hphone').val();
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        if(Hname==null || Hname ==''){
+            alert('이름을 입력해주세요')
+            return false;
+        }
+        if(Hage==null || Hage ==''){
+            alert('나이을 입력해주세요')
+            return false;
+        }
+        if(Hheight==null || Hheight ==''){
+            alert('키를 입력해주세요')
+            return false;
+        }
+        if(Hweight==null || Hweight ==''){
+            alert('몸무게을 입력해주세요')
+            return false;
+        }
+        if(Hphone==null || Hphone==''){
+            alert('핸드폰번호를 입력해주세요')
+            return false;
+        }
 
-<script>
-    function modal_opne_btn() {
-        document.getElementById("modal").style.display="block";
-    }
 
-    document.getElementById("modal_close_btn").onclick = function() {
-        document.getElementById("modal").style.display="none";
     }
 </script>
+
+
+<script type="text/javascript" src="/js/Main.js"></script>
 </html>
+

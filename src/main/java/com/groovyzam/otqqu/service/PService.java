@@ -186,7 +186,7 @@ public class PService {
         List<ACCESSORIES> accessories = pdao.accessories(Pnum);
         int like = pdao.postLikeNum(Pnum);
         String likeId = pdao.postLikeId(postlike);
-
+        PimgRatioDTO ratioDTO = pdao.imgRatio(Pnum);
 
         if (post != null) {
             mav.addObject("cap", cap);
@@ -198,6 +198,7 @@ public class PService {
             mav.addObject("post", post);
             mav.addObject("like", like);
             mav.addObject("likeId", likeId);
+            mav.addObject("ratio",ratioDTO);
             mav.setViewName("Pview");
         } else {
             mav.setViewName("Main");

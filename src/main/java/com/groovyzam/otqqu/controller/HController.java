@@ -52,8 +52,9 @@ public class HController {
             return "Login";
         }
 
-        return "Main";
+        return "redirect:/mainPost";
     }
+
 
     @RequestMapping(value = "Main", method = RequestMethod.GET)
     public String MainPage() {
@@ -323,6 +324,12 @@ public class HController {
         mav=hsvc.mainProfile(HID);
 
         return mav;
+    }
+
+    @RequestMapping(value = "pview2", method = RequestMethod.GET)
+    public String pview2() {
+
+        return "redirect:/Pview2";
     }
 }
 

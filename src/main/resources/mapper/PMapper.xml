@@ -34,16 +34,17 @@
         INSERT INTO PCOMMENT VALUES (PCMT_SEQ.NEXTVAL,#{Pnum},#{Cwriter},#{Ccontent})
     </insert>
     <insert id="imgRatioUpload" parameterType="imgRatio">
-        INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft})
+        INSERT INTO IMGRATIO VALUES (POST_SEQ.CURRVAL,#{imgRatioWidth},#{imgRatioHeight},#{imgTop},#{imgLeft},#{Ratio})
     </insert>
 
     <select id="PstyleList" parameterType="String" resultType="post">
-        SELECT * FROM POST WHERE PSTYLE=#{pstyle}
+        SELECT * FROM POST WHERE PSTYLE=#{pstyle} ORDER BY PNUM DESC
     </select>
 
     <select id="PcategoryList" parameterType="String" resultType="post">
-        SELECT * FROM POST A,(SELECT PNUM FROM ${Pcategory})B WHERE A.PNUM=B.PNUM
+        SELECT * FROM POST A,(SELECT PNUM FROM ${Pcategory})B WHERE A.PNUM=B.PNUM ORDER BY A.PNUM DESC
     </select>
+
     <delete id="cDelete" parameterType="comment">
         DELETE FROM PCOMMENT WHERE CNUM = #{Cnum}
     </delete>
@@ -100,5 +101,9 @@
 
     <select id="mainPostLike" parameterType="int" resultType="mainPostlike">
         SELECT ROWNUM, A.* FROM (SELECT PNUM, COUNT(*) AS LIKENUM FROM POSTLIKE GROUP BY PNUM ORDER BY PNUM DESC) A WHERE ROWNUM BETWEEN #{startPnum} AND #{lastPnum}
+    </select>
+
+    <select id="imgRatio" parameterType="int" resultType="imgRatio">
+        SELECT * FROM IMGRATIO WHERE PNUM = #{Pnum}
     </select>
 </mapper>

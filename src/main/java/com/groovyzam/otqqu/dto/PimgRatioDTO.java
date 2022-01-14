@@ -7,4 +7,5 @@ import org.apache.ibatis.type.Alias;
 @Alias("imgRatio")
 public class PimgRatioDTO {
     private String imgRatioWidth, imgRatioHeight, imgTop, imgLeft;
+    private int Ratio;
 }
