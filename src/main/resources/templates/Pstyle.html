@@ -20,6 +20,7 @@
     <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
     <link rel="stylesheet" href="css/OTQQU.css">
     <link rel="stylesheet" href="css/Main.css">
+    <link rel="shortcut icon" href="default/favi.ico">
     <title>옷:꾸</title>
 
 </head>
@@ -164,18 +165,18 @@
                     </button>
                 </div>
                 <div class="nav_main_list">
-                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">캐주얼</button>
-                    <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn">미니멀</button>
-                    <button onclick="location.href='pStyleList?Pstyle=street'" class="nav_main_list_btn">스트릿</button>
-                    <button onclick="location.href='pStyleList?Pstyle=amekaji'" class="nav_main_list_btn">아메카지</button>
-                    <button onclick="location.href='pStyleList?Pstyle=cityboy'" class="nav_main_list_btn">시티보이</button>
-                    <button onclick="location.href='pStyleList?Pstyle=classic'" class="nav_main_list_btn">클래식</button>
-                    <button onclick="location.href='pStyleList?Pstyle=other'" class="nav_main_list_btn">기타</button>
+                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn" id="casual">캐주얼</button>
+                    <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn" id="minimal">미니멀</button>
+                    <button onclick="location.href='pStyleList?Pstyle=street'" class="nav_main_list_btn" id="street">스트릿</button>
+                    <button onclick="location.href='pStyleList?Pstyle=amekaji'" class="nav_main_list_btn" id="amekaji">아메카지</button>
+                    <button onclick="location.href='pStyleList?Pstyle=cityboy'" class="nav_main_list_btn" id="cityboy">시티보이</button>
+                    <button onclick="location.href='pStyleList?Pstyle=classic'" class="nav_main_list_btn" id="classic">클래식</button>
+                    <button onclick="location.href='pStyleList?Pstyle=other'" class="nav_main_list_btn" id="other">기타</button>
                 </div>
             </nav>
         </div>
     </header>
-
+    <input type="hidden" th:value="${Pstyle}" id="Pstyle">
 
     <div class="post_list_wrap" id="post_list_wrap">
         <input type="hidden" name="Pstyle" value="${StyleList.Pstyle}">
@@ -219,13 +220,22 @@
     $('.post_list_text').text();
 </script>
 <script type="text/javascript" src="/js/OTQQU.js"></script>
-<script type="text/javascript" src="/js/Main.js"></script>
 <script src='/js/jquery.js'></script>
 <script src='/js/plugins.js'></script>
 <script src='/js/scripts.js'></script>
 <script src='/js/masonry.pkgd.min.js'></script>
 <script>
+    $(document).ready(function() {
 
+        let Pstyle = document.getElementById("Pstyle").value;
+
+        $("#" + Pstyle + "").css({
+            "backgroundColor": "#282828",
+            "color" : "white"
+        });
+
+
+    });
 </script>
 
 

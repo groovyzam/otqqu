@@ -17,6 +17,7 @@
     <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
     <link rel="stylesheet" href="css/OTQQU.css">
     <link rel="stylesheet" href="css/Main.css">
+    <link rel="shortcut icon" href="default/favi.ico">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>옷:꾸</title>
     <style>
@@ -71,35 +72,7 @@
 
         .table2 {
             width: 600px;
-            position: relative;
-            left: 60px;
-        }
-
-        .brand {
-            position: relative;
-            font-weight: bolder;
-            vertical-align:top;
-            display: table;
-            right: 260px;
-            bottom: 25px;
-        }
-
-        .product {
-            position: relative;
-            font-weight: bold;
-            vertical-align:middle;
-            display: table;
-            right: 260px;
-            bottom: 25px;
-        }
-
-        .price {
-            position: relative;
-            font-weight: lighter;
-            vertical-align:bottom;
-            display: table;
-            right: 260px;
-            bottom: 25px;
+            margin: 0 auto;
         }
 
         h3 {
@@ -110,6 +83,39 @@
             width: 100px;
             height: 100px;
             object-fit: cover;
+        }
+        .brand_img_wrap{
+            height: 100px;
+            padding: 0;
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 4;
+        }
+        .brand{
+            padding: 0;
+            grid-column-start: 2;
+            grid-column-end: 5;
+            grid-row-start: 1;
+            grid-row-end: 2;
+        }
+        .product_wrap{
+            height: 120px;
+            padding: 10px 0;
+        }
+        .product{
+            padding: 0;
+            grid-column-start: 2;
+            grid-column-end: 5;
+            grid-row-start: 2;
+            grid-row-end: 3;
+        }
+        .price{
+            padding: 0;
+            grid-column-start: 2;
+            grid-column-end: 5;
+            grid-row-start: 3;
+            grid-row-end: 4;
         }
         #post_img_wrap{
             width: 698px;
@@ -129,6 +135,10 @@
             justify-content: space-between;
             padding: 0 18px;
             box-sizing: border-box;
+        }
+        .product_wrap{
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
         }
     </style>
 </head>
@@ -258,6 +268,7 @@
     <div class="middle">
         <!--<span th:text="${post.Pnum}"></span>-->
         <input type="hidden" th:value="${post.Pnum}" th:id="Pnum">
+        <input type="hidden" th:value="${session.loginId}" id="Sid">
 
         <div class="top">
             <div class="hid">
@@ -267,7 +278,7 @@
                 <input type="hidden" th:value="${post.Hid}" th:id="Hid">
             </div>
             <div class="delete">
-                <a th:href="@{postDelete(Pnum=${post.Pnum})}"><img src="/default/xx.png" width="20px" height="20px"></a>
+                <a th:if="${post.Hid eq session.loginId}" th:href="@{postDelete(Pnum=${post.Pnum})}"><img src="/default/xx.png" width="20px" height="20px"></a>
             </div>
         </div>
 
@@ -385,56 +396,56 @@
             <h4>| Product</h4>
             <table class="table2">
                 <div th:if="${cap ne null}">
-                    <tr  th:each="cap : ${cap}" >
-                        <td>  <img th:src="@{/cap/{fileName}(fileName=${cap.CfileName})}" class="brand_img"></td>
-                        <td th:text="${cap.Cbrand}" class="brand" > </td>
-                        <td th:text="${cap.Cproduct}" class="product" > </td>
-                        <td th:text="${cap.Cprice}" class="price" > </td>
+                    <tr  th:each="cap : ${cap}" class="product_wrap">
+                        <td class="brand_img_wrap">  <img th:src="@{/cap/{fileName}(fileName=${cap.CfileName})}" class="brand_img"></td>
+                            <td th:text="${cap.Cbrand}" class="brand" > </td>
+                            <td th:text="${cap.Cproduct}" class="product" > </td>
+                            <td th:text="${cap.Cprice}" class="price" > </td>
                     </tr>
                 </div>
 
                 <div th:if="${outer ne null}">
-                    <tr  th:each="outer : ${outer}" >
-                        <td>  <img th:src="@{/outer/{fileName}(fileName=${outer.OfileName})}" class="brand_img"></td>
-                        <td th:text="${outer.Obrand}" class="brand"> </td>
-                        <td th:text="${outer.Oproduct}" class="product"> </td>
-                        <td th:text="${outer.Oprice}" class="price"></td>
+                    <tr  th:each="outer : ${outer}" class="product_wrap">
+                        <td class="brand_img_wrap">  <img th:src="@{/outer/{fileName}(fileName=${outer.OfileName})}" class="brand_img"></td>
+                            <td th:text="${outer.Obrand}" class="brand"> </td>
+                            <td th:text="${outer.Oproduct}" class="product"> </td>
+                            <td th:text="${outer.Oprice}" class="price"></td>
                     </tr>
 
                 </div>
                 <div th:if="${top ne null}" >
-                    <tr th:each="top : ${top}" >
-                        <td>   <img th:src="@{/top/{fileName}(fileName=${top.TfileName})}" class="brand_img"></td>
-                        <td th:text="${top.Tbrand}" class="brand"> </td>
-                        <td th:text="${top.Tproduct}" class="product"> </td>
-                        <td th:text="${top.Tprice}" class="price"> </td>
+                    <tr th:each="top : ${top}" class="product_wrap">
+                        <td class="brand_img_wrap">   <img th:src="@{/top/{fileName}(fileName=${top.TfileName})}" class="brand_img"></td>
+                            <td th:text="${top.Tbrand}" class="brand"> </td>
+                            <td th:text="${top.Tproduct}" class="product"> </td>
+                            <td th:text="${top.Tprice}" class="price"> </td>
                     </tr>
                 </div>
 
                 <div th:if="${bottom ne null}">
-                    <tr  th:each="bottom : ${bottom}" >
-                        <td> <img th:src="@{/bottom/{fileName}(fileName=${bottom.BfileName})}" class="brand_img"></td>
-                        <td th:text="${bottom.Bbrand}" class="brand"> </td>
-                        <td th:text="${bottom.Bproduct}" class="product"> </td>
-                        <td th:text="${bottom.Bprice}" class="price"> </td>
+                    <tr  th:each="bottom : ${bottom}" class="product_wrap" >
+                        <td class="brand_img_wrap"> <img th:src="@{/bottom/{fileName}(fileName=${bottom.BfileName})}" class="brand_img"></td>
+                            <td th:text="${bottom.Bbrand}" class="brand"> </td>
+                            <td th:text="${bottom.Bproduct}" class="product"> </td>
+                            <td th:text="${bottom.Bprice}" class="price"> </td>
                     </tr>
                 </div>
 
                 <div th:if="${shoes ne null}">
-                    <tr  th:each="shoes : ${shoes}" >
-                        <td>  <img th:src="@{/shoes/{fileName}(fileName=${shoes.SfileName})}" class="brand_img"></td>
-                        <td th:text="${shoes.Sbrand}" class="brand"> </td>
-                        <td th:text="${shoes.Sproduct}" class="product"> </td>
-                        <td th:text="${shoes.Sprice}" class="price"> </td>
+                    <tr  th:each="shoes : ${shoes}" class="product_wrap">
+                        <td class="brand_img_wrap">  <img th:src="@{/shoes/{fileName}(fileName=${shoes.SfileName})}" class="brand_img"></td>
+                            <td th:text="${shoes.Sbrand}" class="brand"> </td>
+                            <td th:text="${shoes.Sproduct}" class="product"> </td>
+                            <td th:text="${shoes.Sprice}" class="price"> </td>
                     </tr>
                 </div>
 
                 <div th:if="${accessories ne null}">
-                    <tr   th:each="accessories : ${accessories}">
-                        <td> <img th:src="@{/accessories/{fileName}(fileName=${accessories.AfileName})}" class="brand_img"></td>
-                        <td th:text="${accessories.Abrand}" class="brand"> </td>
-                        <td th:text="${accessories.Aproduct}" class="product"> </td>
-                        <td th:text="${accessories.Aprice}" class="price"> </td>
+                    <tr   th:each="accessories : ${accessories}"class="product_wrap">
+                            <td class="brand_img_wrap"> <img th:src="@{/accessories/{fileName}(fileName=${accessories.AfileName})}" class="brand_img"></td>
+                            <td th:text="${accessories.Abrand}" class="brand"> </td>
+                            <td th:text="${accessories.Aproduct}" class="product"> </td>
+                            <td th:text="${accessories.Aprice}" class="price"> </td>
                     </tr>
                 </div>
 
@@ -456,6 +467,7 @@
                 <div id ="commentArea" style="width: 600px; color: black; position: relative; left: 50px;">
                 </div>
             </a>
+            <input type="hidden" th:value="${session.loginId}" th:id="Hid2">
         </div>
 
     </div>
@@ -489,7 +501,8 @@
 
 
         $("#cmtBtn").click(function(){
-            let Cwriter =  document.getElementById("Hid").value
+
+            let Cwriter =  document.getElementById("Hid2").value;
             let Ccontent = $("#CContent").val();
             let Pnum = document.getElementById("Pnum").value;
 
@@ -513,8 +526,10 @@
         });
     });
 
+
     function commentList(result){
         let output = "";
+        let sid = $('#Sid').val();
         // 스프링에 입력하는 값을 추가
 
         output +="<table>";
@@ -531,7 +546,9 @@
             output +="<tr>";
             output +="<td>"+result[i].cwriter+"</td>";
             output +="<td>"+result[i].ccontent+"</td>";
-            output +="<td><button style='color: red;' onclick='cmtDelete("+result[i].cnum+")'><img src=\"/default/xx.png\" width='16px' height='20px'></button></td>";
+            if(result[i].cwriter == sid){
+                output +="<td><button style='color: red;' onclick='cmtDelete("+result[i].cnum+")'><img src=\"/default/xx.png\" width='16px' height='20px'></button></td>";
+            }
             output +="</tr>";
         }
         output +="</table>";

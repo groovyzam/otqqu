@@ -13,6 +13,7 @@
     <link rel='stylesheet' href="/css/style.css" type='text/css' media='all'/>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Oswald:400,500,700%7CRoboto:400,500,700%7CHerr+Von+Muellerhoff:400,500,700%7CQuattrocento+Sans:400,500,700' type='text/css' media='all'/>
     <link rel='stylesheet' href="/css/easy-responsive-shortcodes.css" type='text/css' media='all'/>
+    <link rel="shortcut icon" href="default/favi.ico">
     <style>
 
         body {
@@ -80,7 +81,7 @@
             width: 348px;
             height: 650px;
             position: absolute;
-            top: 60px;
+            top: 10px;
             opacity:0;
             transition:all 0.3s ;
         }
@@ -89,7 +90,9 @@
             opacity: 1;
             transition: all 0.3s;
         }
-
+        .login_img{
+            object-fit: cover;
+        }
 
 
 
@@ -101,8 +104,8 @@
         <br/><br/><br/>
         <h2 class="site-title">Otqqu</h2>
         <form action="hLogin" method="POST" id="loginForm">
-            <input type="text" placeholder="ID" name="Hid" class="inputid" id="inputid"><br/>
-            <input type="password" placeholder="PW" name="Hpw" class="inputpw" id="inputpw"><br/>
+            <input type="text" placeholder="ID" name="Hid" class="inputid" id="inputid" onkeyup="enterkey()"><br/>
+            <input type="password" placeholder="PW" name="Hpw" class="inputpw" id="inputpw"onkeyup="enterkey()"><br/>
             <input type="button" value="Login" class="buttonlogin" id="buttonlogin" onclick="checking()">
             <hr>
         </form>
@@ -112,10 +115,10 @@
     </div>
     <div class="image1">
         <div class="slide">
-            <div class="item"><img src="/login/1.jpg" ></div>
-            <div class="item"><img src="/login/2.jpg" ></div>
-            <div class="item"><img src="/login/3.jpg" ></div>
-            <div class="item"><img src="/login/4.jpg" ></div>
+            <div class="item"><img src="/login/login1.jpg" class="login_img" ></div>
+            <div class="item"><img src="/login/login2.jpg" class="login_img"  ></div>
+            <div class="item"><img src="/login/login3.jpg" class="login_img"  ></div>
+            <div class="item"><img src="/login/login4.jpg" class="login_img"  ></div>
         </div>
     </div>
 </div>
@@ -184,6 +187,12 @@
             loginForm.submit();
         }
 
+    }
+
+    function enterkey() {
+        if (window.event.keyCode === 13) {
+            checking();
+        }
     }
 </script>
 

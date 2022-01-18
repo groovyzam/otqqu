@@ -20,6 +20,7 @@
     <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
     <link rel="stylesheet" href="css/OTQQU.css">
     <link rel="stylesheet" href="css/Main.css">
+    <link rel="shortcut icon" href="default/favi.ico">
     <title>옷:꾸</title>
 
 </head>
@@ -149,18 +150,18 @@
                  style="margin: 80px auto 0 auto; width: 980px; border: 0; background-color: #fff;">
 
                 <div class="nav_main_list">
-                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
-                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
-                    <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn">녀</button>
-                    <button onclick="location.href='pCategoryList?Pcategory=cap'" class="nav_main_list_btn">모자</button>
-                    <button onclick="location.href='pCategoryList?Pcategory=outer'" class="nav_main_list_btn">아우터
+                    <button onclick="location.href='pGender?HGender=m'" class="nav_main_list_btn">남</button>
+                    <button onclick="location.href='pGender?HGender=m'" class="nav_main_list_btn">남</button>
+                    <button onclick="location.href='pGender?HGender=w'" class="nav_main_list_btn">녀</button>
+                    <button onclick="location.href='pCategoryList?Pcategory=cap'" class="nav_main_list_btn" id="cap">모자</button>
+                    <button onclick="location.href='pCategoryList?Pcategory=outer'" class="nav_main_list_btn" id="outer">아우터
                     </button>
-                    <button onclick="location.href='pCategoryList?Pcategory=top'" class="nav_main_list_btn">상의</button>
-                    <button onclick="location.href='pCategoryList?Pcategory=bottom'" class="nav_main_list_btn">하의
+                    <button onclick="location.href='pCategoryList?Pcategory=top'" class="nav_main_list_btn" id="top">상의</button>
+                    <button onclick="location.href='pCategoryList?Pcategory=bottom'" class="nav_main_list_btn" id="bottom">하의
                     </button>
-                    <button onclick="location.href='pCategoryList?Pcategory=shoes'" class="nav_main_list_btn">신발
+                    <button onclick="location.href='pCategoryList?Pcategory=shoes'" class="nav_main_list_btn" id="shoes">신발
                     </button>
-                    <button onclick="location.href='pCategoryList?Pcategory=accessories'" class="nav_main_list_btn">
+                    <button onclick="location.href='pCategoryList?Pcategory=accessories'" class="nav_main_list_btn" id="accessories">
                         악세서리
                     </button>
                 </div>
@@ -176,6 +177,7 @@
             </nav>
         </div>
     </header>
+    <input type="hidden" id="Pcategory" class="Pcategory" th:value="${Pcategory}" >
 
     <div class="post_list_wrap" id="post_list_wrap">
 
@@ -215,9 +217,20 @@
 </body>
 <script>
     $('.post_list_text').text();
+
+    $(document).ready(function() {
+
+        let Pcategory = document.getElementById("Pcategory").value;
+
+
+        $("#" + Pcategory + "").css({
+            "backgroundColor": "#282828",
+            "color" : "white"
+        });
+
+    });
 </script>
 <script type="text/javascript" src="/js/OTQQU.js"></script>
-<script type="text/javascript" src="/js/Main.js"></script>
 <script src='/js/jquery.js'></script>
 <script src='/js/plugins.js'></script>
 <script src='/js/scripts.js'></script>

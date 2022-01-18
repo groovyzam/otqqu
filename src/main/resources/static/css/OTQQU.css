@@ -239,6 +239,9 @@
     grid-template-columns: 250px 600px;
     grid-template-rows: 550px 150px;
     place-items: inherit;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid grey;
 }
 .profile_aside_modi{
     width: 160px;

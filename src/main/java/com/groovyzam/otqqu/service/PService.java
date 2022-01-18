@@ -104,7 +104,7 @@ public class PService {
                     System.out.println(i + "번 : " + ProductfileName);
                     productDTO.setPproductFileName(ProductfileName);
                 } else {
-                    productDTO.setPproductFileName("default.png");
+                    productDTO.setPproductFileName("default_product.png");
                 }
             }
             else if(PproductFileImg.size() == 0){
@@ -120,7 +120,7 @@ public class PService {
                     System.out.println(i + "번 : " + ProductfileName);
                     productDTO.setPproductFileName(ProductfileName);
                 } else {
-                    productDTO.setPproductFileName("default.png");
+                    productDTO.setPproductFileName("default_product.png");
                 }
             }
             else{
@@ -141,7 +141,7 @@ public class PService {
                     System.out.println(i + "번 : " + ProductfileName);
                     productDTO.setPproductFileName(ProductfileName);
                 } else {
-                    productDTO.setPproductFileName("default.png");
+                    productDTO.setPproductFileName("default_product.png");
                 }
             }
 
@@ -159,10 +159,10 @@ public class PService {
 
         if (result1 > 0 && result2 > 0 && result3 > 0) {
 
-            mav.setViewName("Main");
+            mav.setViewName("redirect:/mainPost");
             System.out.println("게시글 등록 성공");
         } else {
-            mav.setViewName("Main");
+            mav.setViewName("redirect:/mainPost");
             System.out.println("게시글 실패");
         }
 
@@ -320,6 +320,7 @@ public class PService {
         System.out.println(list);
 
         mav.addObject("StyleList",list);
+        mav.addObject("Pstyle" ,pstyle);
         mav.setViewName("Pstyle");
 
         return mav;
@@ -333,6 +334,7 @@ public class PService {
 
         System.out.println(Pcategory);
         mav.addObject("CategoryList",list);
+        mav.addObject("Pcategory", Pcategory);
         mav.setViewName("Pcategory");
         return mav;
     }

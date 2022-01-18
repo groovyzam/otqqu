@@ -227,6 +227,8 @@ public class HService {
             mav.addObject("followList",followList);
             mav.addObject("pmylist", pmylist);
             mav.addObject("member", human);
+            mav.addObject("count",count);
+
 
             mav.setViewName("Hview");
         } else {

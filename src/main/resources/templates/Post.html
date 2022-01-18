@@ -17,6 +17,7 @@
     <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
     <link rel="stylesheet" href="css/OTQQU.css">
     <link rel="stylesheet" href="css/Post.css">
+    <link rel="shortcut icon" href="default/favi.ico">
     <title>옷:꾸-게시글 작성</title>
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -567,6 +568,11 @@
         let postForm = document.getElementById('postForm');
         let title = $('.post_main_id_title').val();
         let content = $('.post_main_id_content').val();
+        let uFile = $('#u_file').val();
+        if(uFile == ''){
+            alert("게시물 이미지를 넣어주세요");
+            return;
+        }
         if(title == ''){
             alert("제목을 입력하세요");
             return;
@@ -576,7 +582,6 @@
         }
 
         for (var i=1; i<=imgNum ;i++){
-
             let Pbrand = $(`#Pbrand${i}`).val();
             let Pproduct = $(`#Pproduct${i}`).val();
             let Pprice = $(`#Pprice${i}`).val();
