@@ -331,5 +331,10 @@ public class HController {
 
         return "redirect:/Pview2";
     }
+
+    @RequestMapping(value = "hModifyHelp", method = RequestMethod.GET)
+    public String help(){
+        return "HmodifyHelp";
+    }
 }
 

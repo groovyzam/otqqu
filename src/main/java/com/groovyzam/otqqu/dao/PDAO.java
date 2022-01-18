@@ -61,4 +61,6 @@ public interface PDAO {
     List<MainPostLike> mainPostLike(int startPnum, int lastPnum);
 
     PimgRatioDTO imgRatio(int Pnum);
+
+    List<PDTO> pGender(String hGender);
 }

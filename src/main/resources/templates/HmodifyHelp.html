@@ -16,6 +16,7 @@
     <link rel='stylesheet' href='css/easy-responsive-shortcodes.css' type='text/css' media='all'/>
     <link rel="stylesheet" href="css/OTQQU.css">
     <link rel="stylesheet" href="css/OTQQU1.css">
+    <link rel="stylesheet" href="css/help.css">
     <title>옷:꾸</title>
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -23,7 +24,7 @@
 <body class="wrap">
 
 <header class="site-header" style="margin: 0 auto; padding: 0; height: 80px; background-color: #fff; border-bottom: 1px solid #888888;">
-    <div class="site_branding" style="border-bottom: 0">
+    <div class="site_branding" style=" border-bottom: 1px solid 0;">
         <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
 
         <form action="searchInfo" method="GET">
@@ -145,11 +146,11 @@
     <div class="item" style="background-color: white;" >
 
         <div style="font-size: 20px; text-align:left; color: black; margin-left: 20px;">
-            <p style="margin-top: 20px; border-bottom: 1px solid black; width: 117px;"><a th:href="@{hModifyForm(Hid=${human.Hid})}">프로필 편집</a></p>
-            <p><a style="color: black;" th:href="@{HpwModifyForm(Hid=${human.Hid})}">비밀번호 변경</a></p>
+            <p style="margin-top: 20px;  width: 117px; "><a style="color: black;" th:href="@{hModifyForm(Hid=${session.loginId})}">프로필 편집</a></p>
+            <p><a th:href="@{HpwModifyForm(Hid=${session.loginId})}">비밀번호 변경</a></p>
             <p>이메일 및 SMS</p>
             <p>개인정보 및 보안</p>
-            <p><a th:href="@{hModifyHelp(Hid=${human.Hid})}">도움말</a></p>
+            <p><span style="border-bottom: 1px solid black;">도움말</span></p>
         </div>
         <!--<ul style="margin-top:15px; font-size: 25px; list-style:none;">
         <li>프로필 편집</li>
@@ -160,36 +161,40 @@
 
     <div class="item" style="border-left:1px solid #888888; text-align: center; background-color: white; border-right: 1px solid gray;">
 
+        <div class="help_wrap">
+            <span style="font-size: 18px">개발자</span>
+            <div class="help_img">
+                <div class="help_img_box">
+                    <img src="#" width="100px" height="100px">
+                    <span style="font-size: 18px">김효섭</span>
+                </div>
+                <div class="help_img_box">
+                    <img src="#" width="100px" height="100px">
+                    <span style="font-size: 18px">김현민</span>
+                </div>
+                <div class="help_img_box">
+                    <img src="#" width="100px" height="100px">
+                    <span style="font-size: 18px">차해성</span>
+                </div>
+                <div class="help_img_box">
+                    <img src="#" width="100px" height="100px">
+                    <span style="font-size: 18px">박은빈</span>
+                </div>
+            </div>
 
-        <form style="margin-top: 10px;" action="hModify" method="post" onsubmit=" return checkNull()">
-            <div style="margin-top: 10px;"><img width="50px" height="50px" style="border-radius: 100%; text-align: right; margin-right: 20px;"  th:src="@{/profile/{Hfile}(Hfile=${human.Hfile})}"><label style="font-size: 30px; line-height: 50px; height: 50px; color: black;" th:text="${human.Hid}"></label></div>
-            <input type="hidden" name="Hid"  th:value="${human.Hid}">
-            <aside  class="profile_aside_modi" >이름</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hname" id="Hname" th:value="${human.Hname}"></div>
-            <aside  class="profile_aside_modi" >나이</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hage" id="Hage" th:value="${human.Hage}"> 세</div>
-            <aside  class="profile_aside_modi" >키</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hheight" id="Hheight" th:value="${human.Hheight}"> cm</div>
-            <aside  class="profile_aside_modi" >몸무게</aside><div class="profile_modi22"> <input  style="border-radius: 8px; width: 275px;" type="text" name="Hweight" id="Hweight" th:value="${human.Hweight}"> kg</div>
-            <aside  class="profile_aside_modi" ></aside> <div style="margin-top: 5px;" class="profile_modi22"> <span style="font-size: 10px;">※키와 뭄무게 작성부탁드립니다. 다른 유저에게 도움이 됩니다.</span></div>
-            <aside  class="profile_aside_modi" >성별</aside>
-            <div style="text-align: left; margin-top: 30px; margin-left: 210px;">
-                <td th:if="${human.Hgender eq 'm'}">
-                    <input type="radio" name="Hgender" value="m" checked>남
-                    <input type="radio" name="Hgender" value="w" >여
-                </td>
-                <td th:if="${human.Hgender eq 'w'}">
-                    <input type="radio" name="Hgender" value="m" >남
-                    <input type="radio" name="Hgender" value="w" checked >여
-                </td>
-                <td th:if="${human.Hgender == null}">
-                    <input type="radio" name="Hgender" value="m" >남
-                    <input type="radio" name="Hgender" value="w" >여
-                </td>
+            <div class="help_wrap">
+                <span style="font-size: 18px">참고사이트</span>
+                <div style="display: flex; justify-content: space-around">
+                    <a href="https://www.instagram.com/" style="font-size: 18px">Instagram</a>
+                    <a href="https://onthelook.co.kr/" style="font-size: 18px">On The Look</a>
+                </div>
 
             </div>
 
-            <aside  class="profile_aside_modi">핸드폰</aside><div class="profile_modi22"> <input style="border-radius: 8px; width: 275px;" type="text" name="Hphone" id="Hphone" th:value="${human.Hphone}"></div>
-            <aside  class="profile_aside_modi"></aside></aside><div  class="profile_modi22"><input type="submit" value="제출" style="background-color: #0095F6; border: 0; border-radius: 10px; transition: 0.3s"></div>
-
-        </form>
+            <div style="margin-top: 60px">
+                <span style="font-size: 18px">이 프로젝트는 어떠한 상업적 용도로도 사용하지 않는<br/>연습 프로젝트입니다.</span>
+            </div>
+        </div>
 
     </div>
 

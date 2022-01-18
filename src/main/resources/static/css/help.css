@@ -1,0 +1,13 @@
+.help_wrap{
+    margin-top: 50px;
+    color: #0a0700;
+    text-align: center;
+}
+.help_img{
+    display: flex;
+    justify-content: space-around;
+}
+.help_img_box{
+    width: 100px;
+    height: 150px;
+}

@@ -448,4 +448,15 @@ public class PService {
         mav.setViewName("Post");
         return mav;
     }
+
+    public ModelAndView pGender(String hGender) {
+
+        List<PDTO> genderList = pdao.pGender(hGender);
+
+        mav.addObject("genderList", genderList);
+        mav.setViewName("Pgender");
+
+        return mav;
+
+    }
 }

@@ -148,9 +148,9 @@
                  style="margin: 80px auto 0 auto; width: 980px; border: 0; background-color: #fff;">
 
                 <div class="nav_main_list">
-                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
-                    <button onclick="location.href='pStyleList?Pstyle=casual'" class="nav_main_list_btn">남</button>
-                    <button onclick="location.href='pStyleList?Pstyle=minimal'" class="nav_main_list_btn">녀</button>
+                    <button onclick="location.href='pGender?HGender=m'" class="nav_main_list_btn">남</button>
+                    <button onclick="location.href='pGender?HGender=m'" class="nav_main_list_btn">남</button>
+                    <button onclick="location.href='pGender?HGender=w'" class="nav_main_list_btn">녀</button>
                     <button onclick="location.href='pCategoryList?Pcategory=cap'" class="nav_main_list_btn">모자</button>
                     <button onclick="location.href='pCategoryList?Pcategory=outer'" class="nav_main_list_btn">아우터
                     </button>
@@ -194,6 +194,13 @@
         </div>
     </div>
 
+    <button id="go-top"><svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor"
+                             class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+    </svg></button>
+
+
     <footer class="footer">
         <div class="footer_list">
             <a href="#" class="footer_text">김효섭</a>
@@ -204,6 +211,7 @@
             <a href="#" class="footer_text">위치</a>
         </div>
         <div class="footer_list_2">
+            <span>이 프로젝트는 상업적으로 이용하지 않는 연습 프로젝트입니다</span><br/>
             <span class="footer_text">reference by <a href="https://www.instagram.com"
                                                       target="_blank">Instagram</a></span>
         </div>
@@ -213,6 +221,40 @@
 </body>
 <script>
     $('.post_list_text').text();
+
+    var backToTop = () => {
+        // Scroll | button show/hide
+        window.addEventListener('scroll', () => {
+            if (document.querySelector('html').scrollTop > 100) {
+                document.getElementById('go-top').style.display = "block";
+            } else {
+                document.getElementById('go-top').style.display = "none";
+            }
+        });
+        // back to top
+        document.getElementById('go-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+        })
+    };
+    backToTop();
+
+    jQuery(document).ready(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#go-top').fadeIn(500);
+            } else {
+                $('#go-top').fadeOut('slow');
+            }
+        });
+        $('#go-top').click(function (e) {
+            e.preventDefault();
+            $('html, body').animate({scrollTop: 0}, 200);
+        });
+    });
 </script>
 <script type="text/javascript" src="/js/OTQQU.js"></script>
 <script type="text/javascript" src="/js/Main.js"></script>

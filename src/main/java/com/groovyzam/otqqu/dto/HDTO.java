@@ -14,15 +14,11 @@ import javax.validation.constraints.*;
 public class HDTO {
 
     private String Hname;
-
     private String Hid;
-
     private String Hpw;
-
     @NotBlank(message = "핸드폰을 입력해주세요")
     private String Hphone;
-
     private String Hfile;
     MultipartFile HProfile;
-
+    private String Hage, Hheight, Hweight, Hgender;
 }

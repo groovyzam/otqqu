@@ -174,6 +174,14 @@ public class PController {
         return mav;
     }
 
+
+    @RequestMapping(value = "pGender", method = RequestMethod.GET)
+    public ModelAndView  pGender(@RequestParam("HGender") String HGender){
+
+        mav = psvc.pGender(HGender);
+
+        return mav;
+    }
 }
 
 

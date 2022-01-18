@@ -21,8 +21,8 @@
 
 <body class="wrap">
 
-<header class="site-header" style="margin: 0 auto; padding:0; height: 80px; background-color: #fff">
-    <div style="height: 80px; border-bottom: 1px solid #888888;">
+<header class="site-header" style="margin: 0 auto; padding:0; height: 80px; background-color: #fff; border-bottom: 1px solid #888888;">
+    <div style="height: 80px; border-bottom: 1px solid 0;">
         <div class="site_branding">
             <h1 class="site_title"><a href="Main" rel="home">Otqqu</a></h1>
 
@@ -139,7 +139,7 @@
             <p><a style="border-bottom: 1px solid black;" th:href="@{HpwModifyForm(Hid=${session.loginId})}">비밀번호 변경</a></p>
             <p>이메일 및 SMS</p>
             <p>개인정보 및 보안</p>
-            <p>도움말</p>
+            <p><a th:href="@{hModifyHelp(Hid=${session.loginId})}">도움말</a></p>
         </div>
         <!--<ul style="margin-top:15px; font-size: 25px; list-style:none;">
         <li>프로필 편집</li>
@@ -159,7 +159,7 @@
                 <span class="section_pw_check_text"></span>
                 <aside  style="width: 200px; float: left;text-align: right; color: black; margin-top: 30px; font-size: 17px; font-weight: bolder;">새 비밀번호 확인</aside><div style="text-align: left; margin-top: 30px;margin-left: 235px;"><input style="border-radius: 8px; width: 275px;" type="password" required id="pwConfirm" onkeyup="pwEqual()"></div>
                 <span class="section_pw_check_text"></span>
-                <aside  style="width: 200px; float: left;text-align: right; color: black; margin-top: 30px; font-size: 17px; font-weight: bolder;"></aside></aside><div style="text-align: left; margin-top: 30px;margin-left: 235px;"><input type="submit" value="제출"></div>
+                <aside  style="width: 200px; float: left;text-align: right; color: black; margin-top: 30px; font-size: 17px; font-weight: bolder;"></aside></aside><div style="text-align: left; margin-top: 30px;margin-left: 235px;"><input type="submit" value="제출" style="background-color: #0095F6; border: 0; border-radius: 10px; transition: 0.3s"></div>
 
 
 
@@ -194,6 +194,7 @@
         <a href="#" class="footer_text">위치</a>
     </div>
     <div class="footer_list_2">
+        <span>이 프로젝트는 상업적으로 이용하지 않는 연습 프로젝트입니다</span><br/>
         <span class="footer_text">reference by <a href="https://www.instagram.com" target="_blank">Instagram</a></span>
     </div>
 </footer>

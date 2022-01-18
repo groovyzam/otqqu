@@ -106,4 +106,8 @@
     <select id="imgRatio" parameterType="int" resultType="imgRatio">
         SELECT * FROM IMGRATIO WHERE PNUM = #{Pnum}
     </select>
+
+    <select id="pGender" parameterType="String" resultType="post">
+        SELECT * FROM POST WHERE HID IN (SELECT HID FROM HUMAN WHERE HGENDER=#{HGender}) ORDER BY PNUM DESC
+    </select>
 </mapper>
