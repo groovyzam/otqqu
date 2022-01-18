@@ -182,6 +182,15 @@ public class PController {
 
         return mav;
     }
+
+    // pView : 게시글 정보보기
+    @RequestMapping(value = "pView2", method = RequestMethod.GET)
+    public ModelAndView pView2(@RequestParam("Pnum") int Pnum){
+
+
+        mav = psvc.pView2(Pnum);
+        return mav;
+    }
 }
 
 

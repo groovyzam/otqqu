@@ -459,4 +459,41 @@ public class PService {
         return mav;
 
     }
+
+    public ModelAndView pView2(int Pnum) {
+        String sessionId = (String) session.getAttribute("loginId");
+
+        POSTLIKE postlike = new POSTLIKE();
+        postlike.setHid(sessionId);
+        postlike.setPnum(Pnum);
+
+        PDTO post = pdao.pView(Pnum);
+        List<CAP> cap = pdao.cap(Pnum);
+        List<OUTER> outer = pdao.outer(Pnum);
+        List<TOP> top = pdao.top(Pnum);
+        List<BOTTOM> bottom = pdao.bottom(Pnum);
+        List<SHOES> shoes = pdao.shoes(Pnum);
+        List<ACCESSORIES> accessories = pdao.accessories(Pnum);
+        int like = pdao.postLikeNum(Pnum);
+        String likeId = pdao.postLikeId(postlike);
+        PimgRatioDTO ratioDTO = pdao.imgRatio(Pnum);
+
+        if (post != null) {
+            mav.addObject("cap", cap);
+            mav.addObject("outer", outer);
+            mav.addObject("top", top);
+            mav.addObject("bottom", bottom);
+            mav.addObject("shoes", shoes);
+            mav.addObject("accessories", accessories);
+            mav.addObject("post", post);
+            mav.addObject("like", like);
+            mav.addObject("likeId", likeId);
+            mav.addObject("ratio",ratioDTO);
+            mav.setViewName("Pview2");
+        } else {
+            mav.setViewName("Main");
+        }
+
+        return mav;
+    }
 }
